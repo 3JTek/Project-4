@@ -11,11 +11,17 @@ class App extends React.Component{
   constructor(){
     super()
     this.state = {
-      data: {
-        lat: '',
-        lng: ''
+      latlngReversed: [51.509865, -0.118092].reverse(),
+      customers: {
+        customer1: {
+          lat: 51.509864,
+          lng: -0.121092
+        },
+        customer2: {
+          lat: 51.52,
+          lng: -0.128092
+        }
       },
-      latlng: [-0.118092, 51.509865],
       saleRadius: 0.5
     }
     this.changeSaleRadius = this.changeSaleRadius.bind(this)
