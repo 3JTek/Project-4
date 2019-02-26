@@ -1,6 +1,6 @@
 import React from 'react'
-import mapboxgl from 'mapbox-gl'
 
+import mapboxgl from 'mapbox-gl'
 
 class MiniMap extends React.Component {
   constructor(props){
@@ -14,7 +14,7 @@ class MiniMap extends React.Component {
       this.map = new mapboxgl.Map({
         container: this.mapDOMElement,
         style: 'mapbox://styles/mapbox/streets-v10',
-        center: [this.props.latlng[0], this.props.latlng[1]],
+        center: [this.props.latlngReversed[0], this.props.latlngReversed[1]],
         scrollZoom: true,
         zoom: 12
       })
@@ -24,7 +24,7 @@ class MiniMap extends React.Component {
 
   addSource(){
     this.map.addSource('polygon', this.createGeoJSONCircle(
-      this.props.latlng,
+      this.props.latlngReversed,
       this.props.saleRadius
     ))
 
@@ -43,19 +43,19 @@ class MiniMap extends React.Component {
   createGeoJSONCircle (center, radiusInKm, points) {
     if(!points) points = 64
 
-    var coords = {
+    const coords = {
       latitude: center[1],
       longitude: center[0]
     }
 
-    var km = radiusInKm
+    const km = radiusInKm
 
-    var ret = []
-    var distanceX = km/(111.320*Math.cos(coords.latitude*Math.PI/180))
-    var distanceY = km/110.574
+    const ret = []
+    const distanceX = km/(111.320*Math.cos(coords.latitude*Math.PI/180))
+    const distanceY = km/110.574
 
-    var theta, x, y
-    for(var i=0; i<points; i++) {
+    let theta, x, y
+    for(let i=0; i<points; i++) {
       theta = (i/points)*(2*Math.PI)
       x = distanceX*Math.cos(theta)
       y = distanceY*Math.sin(theta)
@@ -79,8 +79,20 @@ class MiniMap extends React.Component {
     }
   }
 
+  createMarkups(){
+    Object.keys(this.props.customers).map(customer => {
+      const {lat, lng} = this.props.customers[customer]
+      const markerDOM = document.createElement('div')
+      markerDOM.className = 'custom-marker'
+      return new mapboxgl.Marker({element: markerDOM, anchor: 'center'})
+        .setLngLat([String(lng), String(lat)])
+        .addTo(this.map)
+    })
+  }
+
   componentDidMount(){
     this.createMap()
+      .then(() => this.createMarkups())
       .then(() => this.map.on('load', () => this.addSource()))
   }
 
