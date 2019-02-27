@@ -20,7 +20,7 @@ class Sale(db.Model, BaseModel):
 
 class SaleSchema(ma.ModelSchema, BaseSchema):
 
-    user = fields.Nested('UserSchema', only=('business_name', 'logo', 'hero_image', 'id'))
+    user = fields.Nested('UserSchema', only=('business_name', 'location', 'logo', 'hero_image', 'id'))
     category = fields.Nested('CategorySchema', only=('type', 'id', 'users'))
     expiry_date = fields.DateTime(format='%Y-%m-%d %H:%M:%S')
 

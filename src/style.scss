@@ -58,6 +58,7 @@ $wheel-color: #6e94cc !default;
   }
 }
 
+
 //Map
 
 #map {
@@ -65,9 +66,17 @@ $wheel-color: #6e94cc !default;
   width: 300px;
 }
 
-.custom-marker {
+.customer-marker {
   background-color: orange;
   height: 10px;
   width: 10px;
   border-radius: 50%;
+}
+
+.business-marker{
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 30px;
+  width: 30px;
+  background-image: url("https://s1.qwant.com/thumbr/0x380/9/3/956b158d13001c1f57346b9fa0932fa2bc0aba7071bdc679d34e390524c1da/2000px-Map_marker.svg.png?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F8%2F88%2FMap_marker.svg%2F2000px-Map_marker.svg.png&q=0&b=1&p=0&a=1")
 }
