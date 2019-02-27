@@ -1,14 +1,16 @@
-#map{
+@import "~bulma/bulma";
+
+#map {
   height: 300px;
   width: 300px;
 }
 
-main{
+main {
   display: flex;
   justify-content: space-around;
 }
 
-.custom-marker{
+.custom-marker {
   background-color: orange;
   height: 10px;
   width: 10px;

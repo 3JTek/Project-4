@@ -1,8 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import 'bulma'
+
 import './style.scss'
+
+import Home from './components/Home'
+import FlashMessages from './components/common/FlashMessages'
+import RegisterMerchant from './components/auth/RegisterMerchant'
+import RegisterCustomer from './components/auth/RegisterCustomer'
 
 class App extends React.Component{
   constructor(){
@@ -12,9 +18,18 @@ class App extends React.Component{
 
   render(){
     return(
-      <main>
-        <h1>Welcome</h1>
-      </main>
+      <BrowserRouter>
+
+        <main>
+          <FlashMessages />
+          <Switch>
+            <Route path="/signup" component={RegisterCustomer} />
+            <Route path="/register" component={RegisterMerchant} />
+            <Route path="/" component={Home} />
+          </Switch>
+
+        </main>
+      </BrowserRouter>
     )
   }
 }

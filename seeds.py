@@ -48,7 +48,7 @@ with app.app_context():
         'location': '1234, test Lane, Test, SE1 1ER',
         'business_name': 'Zara',
         'logo': 'zaralogo.png',
-        'hero_image': 'zarahero.png',
+        'image': 'zarahero.png',
         'is_merchant': 'True'
     })
     if errors:
@@ -63,7 +63,7 @@ with app.app_context():
         'location': '5, merchant Lane, merchant, SW4 1GA',
         'business_name': 'Joe & the Juice',
         'logo': 'jatjlogo.png',
-        'hero_image': 'jatjhero.png',
+        'image': 'jatjhero.png',
         'is_merchant': 'True'
     })
     if errors:
