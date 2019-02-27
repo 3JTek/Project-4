@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //Loading spinning wheel
 @keyframes spin {
   from { transform: rotate(0deg); }
@@ -28,6 +29,16 @@ $speed: 800ms !default;
   display: flex;
   height: 500px;
   background-size:cover;
+=======
+@import "~bulma/bulma";
+
+#map {
+  height: 300px;
+  width: 300px;
+}
+
+main {
+>>>>>>> dev
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -61,7 +72,7 @@ $speed: 800ms !default;
   width: 300px;
 }
 
-.custom-marker{
+.custom-marker {
   background-color: orange;
   height: 10px;
   width: 10px;
