@@ -1,8 +1,9 @@
-from app import db
 from datetime import datetime
+from app import db
 from marshmallow import fields
+# pylint: disable=C1001,W0232
 
-class Basemodel:
+class BaseModel:
 
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -17,7 +18,6 @@ class Basemodel:
     def remove(self):
         db.session.delete(self)
         db.session.commit()
-
 
 class BaseSchema:
 
