@@ -15,7 +15,7 @@ class RegisterMerchant extends React.Component {
         location: '',
         business_name: '',
         logo: '',
-        image: '',
+        hero_image: '',
         is_merchant: true
       },
       errors: {}
@@ -51,7 +51,7 @@ class RegisterMerchant extends React.Component {
       location,
       business_name,
       logo,
-      image
+      hero_image
     } = this.state.data
     const errors = this.state.errors
 
@@ -137,9 +137,9 @@ class RegisterMerchant extends React.Component {
             <input
               className="input"
               type="text"
-              name="image"
+              name="hero_image"
               placeholder="Enter an image to display on your profile"
-              value={image}
+              value={hero_image}
               onChange={this.handleChange}
             />
           </div>

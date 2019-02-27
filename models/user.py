@@ -22,7 +22,7 @@ class User(db.Model, BaseModel):
     #merchants
     business_name = db.Column(db.String(50), nullable=True)
     logo = db.Column(db.String(80), nullable=True)
-    image = db.Column(db.String(80), nullable=True)
+    hero_image = db.Column(db.String(80), nullable=True)
 
     #Customer
     phone_number = db.Column(db.String(30), nullable=True)
