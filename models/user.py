@@ -4,8 +4,8 @@ import jwt
 from config.environment import secret
 from sqlalchemy.ext.hybrid import hybrid_property
 from marshmallow import validates_schema, ValidationError, fields
-from .base import BaseModel, BaseSchema
 from .category import Category, CategorySchema
+from .base import BaseModel, BaseSchema
 # pylint: disable=R0201,C1001,W0232
 
 class User(db.Model, BaseModel):
