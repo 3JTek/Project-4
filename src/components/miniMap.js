@@ -2,10 +2,33 @@ import React from 'react'
 
 import mapboxgl from 'mapbox-gl'
 
+import MapControls from './MapControls'
+
 class MiniMap extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = ''
+  constructor(){
+    super()
+    this.state = {
+      latlngReversed: [51.509865, -0.118092].reverse(),
+      customers: {
+        customer1: {
+          lat: 51.509864,
+          lng: -0.121092
+        },
+        customer2: {
+          lat: 51.52,
+          lng: -0.128092
+        }
+      },
+      saleRadius: 0.5
+    }
+    this.changeSaleRadius = this.changeSaleRadius.bind(this)
+  }
+
+  changeSaleRadius({ target: { name }}){
+    const newSaleRadius = name === 'increase-radius' ?
+      this.state.saleRadius + 0.2:
+      this.state.saleRadius - 0.2
+    this.setState({saleRadius: newSaleRadius})
   }
 
   createMap(){
@@ -14,7 +37,7 @@ class MiniMap extends React.Component {
       this.map = new mapboxgl.Map({
         container: this.mapDOMElement,
         style: 'mapbox://styles/mapbox/streets-v10',
-        center: [this.props.latlngReversed[0], this.props.latlngReversed[1]],
+        center: [this.state.latlngReversed[0], this.state.latlngReversed[1]],
         scrollZoom: true,
         zoom: 12
       })
@@ -24,8 +47,8 @@ class MiniMap extends React.Component {
 
   addSource(){
     this.map.addSource('polygon', this.createGeoJSONCircle(
-      this.props.latlngReversed,
-      this.props.saleRadius
+      this.state.latlngReversed,
+      this.state.saleRadius
     ))
 
     this.map.addLayer({
@@ -80,8 +103,8 @@ class MiniMap extends React.Component {
   }
 
   createMarkups(){
-    Object.keys(this.props.customers).map(customer => {
-      const {lat, lng} = this.props.customers[customer]
+    Object.keys(this.state.customers).map(customer => {
+      const {lat, lng} = this.state.customers[customer]
       const markerDOM = document.createElement('div')
       markerDOM.className = 'custom-marker'
       return new mapboxgl.Marker({element: markerDOM, anchor: 'center'})
@@ -104,7 +127,14 @@ class MiniMap extends React.Component {
 
   render(){
     return(
-      <div id='map' ref={element => this.mapDOMElement = element}/>
+      <main>
+        <div id='map' ref={element => this.mapDOMElement = element}/>
+        <MapControls
+          handleChange={this.handleChange}
+          changeSaleRadius={this.changeSaleRadius}
+          handleSubmit={this.handleSubmit}
+        />
+      </main>
     )
   }
 }
