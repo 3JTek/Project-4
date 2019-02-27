@@ -5,6 +5,7 @@ from config.environment import secret
 from sqlalchemy.ext.hybrid import hybrid_property
 from marshmallow import validates_schema, ValidationError, fields
 from .base import BaseModel, BaseSchema
+from .category import Category, CategorySchema
 # pylint: disable=R0201,C1001,W0232
 
 class User(db.Model, BaseModel):
@@ -20,13 +21,13 @@ class User(db.Model, BaseModel):
 
     #merchants
     business_name = db.Column(db.String(50), nullable=True)
-    business_type = db.Column(db.String(40), nullable=True)
     logo = db.Column(db.String(80), nullable=True)
     hero_image = db.Column(db.String(80), nullable=True)
 
     #Customer
     phone_number = db.Column(db.String(30), nullable=True)
-    category_of_interest = db.Column(db.String(30), nullable=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    category = db.relationship('Category', backref='users')
 
     is_merchant = db.Column(db.Boolean, nullable=False)
 
@@ -34,7 +35,6 @@ class User(db.Model, BaseModel):
     def password(self):
         pass
 
-    #function must be named after hybrid
     @password.setter
     def password(self, plaintext):
         self.password_hash = bcrypt.generate_password_hash(plaintext).decode('utf-8')
@@ -59,6 +59,8 @@ class User(db.Model, BaseModel):
 
 
 class UserSchema(ma.ModelSchema, BaseSchema):
+
+    category = fields.Nested('CategorySchema', only=('type', 'id'))
 
     @validates_schema
     def check_passwords_match(self, data):
