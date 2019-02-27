@@ -1,11 +1,64 @@
+//Loading spinning wheel
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}
+
+$size: 100px !default;
+$thickness: 6px !default;
+$base-color: #fff !default;
+$wheel-color: #6e94cc !default;
+$speed: 800ms !default;
+
+#loading {
+  margin: 5% auto;
+	height: $size;
+	width: $size;
+  border: $thickness solid $base-color;
+	border: {
+    right-color: $wheel-color;
+    top-color: $wheel-color;
+    radius: 100%;
+  }
+  animation: spin $speed infinite linear;
+}
+
+//Sale show page
+.business-hero{
+  display: flex;
+  height: 500px;
+  background-size:cover;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.business-logo{
+  background-color: white;
+  border-radius: 50%;
+  margin: 100px;
+    > img{
+      border-radius: 50%;
+
+    height: 200px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .business-hero{
+    justify-content: center;
+    max-height: 200px;
+  }
+  .business-logo{
+    > img {
+      height: 150px;
+    }
+  }
+}
+//mini map
 #map{
   height: 300px;
   width: 300px;
-}
-
-main{
-  display: flex;
-  justify-content: space-around;
 }
 
 .custom-marker{

@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import 'bulma'
 import './style.scss'
+
+import SalesShow from './components/SalesShow'
 
 class App extends React.Component{
   constructor(){
@@ -12,9 +15,13 @@ class App extends React.Component{
 
   render(){
     return(
-      <main>
-        <h1>Welcome</h1>
-      </main>
+      <BrowserRouter>
+
+        <Switch>
+          <Route path="/sales/:id" component={SalesShow} />
+        </Switch>
+
+      </BrowserRouter>
     )
   }
 }

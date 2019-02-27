@@ -18,7 +18,7 @@ class Sale(db.Model, BaseModel):
 
 class SaleSchema(ma.ModelSchema, BaseSchema):
 
-    user = fields.Nested('UserSchema', only=('business_name', 'id'))
+    user = fields.Nested('UserSchema', only=('business_name','logo', 'hero_image', 'id'))
     category = fields.Nested('CategorySchema', only=('type', 'id', 'users'))
 
     class Meta:

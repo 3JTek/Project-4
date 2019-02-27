@@ -6,7 +6,6 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from marshmallow import validates_schema, ValidationError, fields
 from .category import Category, CategorySchema
 from .base import BaseModel, BaseSchema
-# pylint: disable=R0201,C1001,W0232
 
 class User(db.Model, BaseModel):
 
@@ -21,8 +20,8 @@ class User(db.Model, BaseModel):
 
     #merchants
     business_name = db.Column(db.String(50), nullable=True)
-    logo = db.Column(db.String(80), nullable=True)
-    hero_image = db.Column(db.String(80), nullable=True)
+    logo = db.Column(db.String(512), nullable=True)
+    hero_image = db.Column(db.String(512), nullable=True)
 
     #Customer
     phone_number = db.Column(db.String(30), nullable=True)
