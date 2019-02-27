@@ -12,22 +12,32 @@ def sale_index():
     sales = Sale.query.all()
     return sales_schema.jsonify(sales)
 
-@api.route('/sales/<int:sale_id>', methods=['GET'])
+@api.route('/sales/<string:sale_id>', methods=['GET'])
 def sale_show(sale_id):
-    sale = Sale.query.get(sale_id)
+
+    #Can get a sale parsing the sales id
+    if sale_id.isdigit():
+        sale = Sale.query.get(sale_id)
+    #...or parsing the sale's title since this is what we will present to the customer (nicer url)
+    else:
+        sale_title = sale_id.replace('-', ' ')
+        print(sale_title)
+        sale = Sale.query.filter_by(title=sale_title).first()
+
     return sale_schema.jsonify(sale)
 
 @api.route('/sales', methods=['POST'])
 def sale_create():
     sale, errors = sale_schema.load(request.get_json())
-    # sale.creator = g.current_user
 
     if errors:
         return jsonify(errors), 422
 
     sale.save()
 
-    sale_title = sale.title.replace(' ', '-')
+    #turning the sale's tile in a more URL style before sending text message
+    sale_title = sale.title.replace(' ', '-').replace('%', '%25')
+
     #Use Twillion API to send a text Message
     send_text_message(sale_title)
 

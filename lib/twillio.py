@@ -10,7 +10,7 @@ def send_text_message(sale_title):
     auth_token = os.getenv('TWILLIO_TOKEN')
 
     client = Client(account_sid, auth_token)
-    
+
     message = client.messages.create(
         to="+33752755762",
         from_="+33644642413",
