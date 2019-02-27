@@ -1,6 +1,7 @@
 from app import app, db
 from models.user import UserSchema
 from models.category import Category
+from models.sale import Sale
 
 user_schema = UserSchema()
 
@@ -55,6 +56,21 @@ with app.app_context():
 
     zara.save()
 
+    joe_and_the_juice, errors = user_schema.load({
+        'email': 'jatj@test.com',
+        'password': 'password',
+        'password_confirmation': 'password',
+        'location': '5, merchant Lane, merchant, SW4 1GA',
+        'business_name': 'Joe & the Juice',
+        'logo': 'jatjlogo.png',
+        'hero_image': 'jatjhero.png',
+        'is_merchant': 'True'
+    })
+    if errors:
+        raise Exception(errors)
+
+    joe_and_the_juice.save()
+
     test_user, errors = user_schema.load({
         'email': 'test1@test.com',
         'password': 'password',
@@ -62,8 +78,8 @@ with app.app_context():
         'location': '1 test avenue, Test, EN5 1ER',
         'phone_number': '+447 000 111 22',
         'category': {
-            'id': '1',
-            'type': 'Fashion'
+            'id': '14',
+            'type': 'Coffee'
         },
 
         'is_merchant': 'False'
@@ -126,3 +142,14 @@ with app.app_context():
         raise Exception(errors)
 
     test_user4.save()
+
+    flash_sale_1 = Sale(
+    user=joe_and_the_juice,
+    title='Half price coffee',
+    expiry_date='30 March 2019',
+    content='For three hours only, we will be serving the best coffee for half price',
+    sale_fees=300,
+    category=coffee
+    )
+
+    flash_sale_1.save()
