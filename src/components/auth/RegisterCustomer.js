@@ -54,7 +54,7 @@ class RegisterCustomer extends React.Component {
     const errors = this.state.errors
 
     return (
-      <main className="section">
+      <div className="section">
         <form onSubmit={this.handleSubmit}>
           <h2 className="title">Register as a Customer</h2>
           <div className="field">
@@ -130,7 +130,7 @@ class RegisterCustomer extends React.Component {
             <button className="button is-info">Submit</button>
           </div>
         </form>
-      </main>
+      </div>
     )
   }
 }

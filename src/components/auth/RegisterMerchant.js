@@ -56,7 +56,7 @@ class RegisterMerchant extends React.Component {
     const errors = this.state.errors
 
     return (
-      <main className="section">
+      <section className="section">
         <form onSubmit={this.handleSubmit}>
           <h2 className="title">Register as a merchant</h2>
           <div className="field">
@@ -149,7 +149,7 @@ class RegisterMerchant extends React.Component {
           </div>
 
         </form>
-      </main>
+      </section>
     )
   }
 }
