@@ -23,6 +23,11 @@ class RegisterCustomer extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount(){
+    axios.get('/api/categories')
+      .then(res => this.setState({ categories: res.data }))
+  }
+
   handleChange({target: { name, value }}) {
     if (name === 'email' && value.includes(' ')) return
     const data = { ...this.state.data, [name]: value }
@@ -42,17 +47,17 @@ class RegisterCustomer extends React.Component {
   }
 
   render() {
-    console.log(this.state.data)
     const {
       email,
       password,
       password_confirmation,
       location,
       phone_number,
-      category,
+      category
     } = this.state.data
     const errors = this.state.errors
-
+    if (!this.state.categories) return <p> Loading.. </p>
+    console.log(this.state)
     return (
       <div className="section">
         <form onSubmit={this.handleSubmit}>
@@ -104,7 +109,7 @@ class RegisterCustomer extends React.Component {
               value={location}
               onChange={this.handleChange}
             />
-            {errors.location && <small className="help is-danger">Please write a small bio about yourself</small>}
+            {errors.location && <small className="help is-danger">Please enter an address</small>}
           </div>
           <div className="field">
             <label className="label">Phone number</label>
@@ -118,13 +123,21 @@ class RegisterCustomer extends React.Component {
           </div>
           <div className="field">
             <label className="label">Category</label>
-            <input
-              className="input"
-              name="category"
-              placeholder="Select your category"
-              value={category}
-              onChange={this.handleChange}
-            />
+            <span
+              className="select is-fullwidth"
+              onChange={this.handleSelect}
+            >
+              <select>
+                {this.state.categories.map(category =>
+                  <option
+                    key={category.id}
+                    value={category}
+                  >{category.type}
+                  </option>
+                )}
+              </select>
+            </span>
+            {errors.category && <small className="help is-danger">Please select a category</small>}
           </div>
           <div className="regButton">
             <button className="button is-info">Submit</button>
