@@ -13,7 +13,6 @@ $size: 100px !default;
 $thickness: 6px !default;
 $base-color: #fff !default;
 $wheel-color: #6e94cc !default;
-$speed: 800ms !default;
 
 #loading {
   margin: 5% auto;
@@ -25,30 +24,26 @@ $speed: 800ms !default;
     top-color: $wheel-color;
     radius: 100%;
   }
-  animation: spin $speed infinite linear;
+  animation: spin 800ms infinite linear;
 }
+
 //Sale show page
 
 .business-hero {
   display: flex;
+  justify-content: flex-end;
   height: 500px;
   background-size: cover;
-}
-
-#map {
-  height: 300px;
-  width: 300px;
+  margin-bottom: 50px;
 }
 
 .business-logo {
   background-color: white;
   border-radius: 50%;
   margin: 100px;
-
-  > img {
-    border-radius: 50%;
-    height: 200px;
-  }
+  width:200px;
+  height: 200px;
+  background-size: contain;
 }
 @media screen and (max-width: 480px) {
   .business-hero {
@@ -57,10 +52,17 @@ $speed: 800ms !default;
   }
 
   .business-logo {
-    > img {
-      height: 150px;
-    }
+    height: 150px;
+    width: 150px;
+    margin: 125px 100px;
   }
+}
+
+//Map
+
+#map {
+  height: 300px;
+  width: 300px;
 }
 
 .custom-marker {

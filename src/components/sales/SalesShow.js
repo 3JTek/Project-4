@@ -17,17 +17,16 @@ class SaleShow extends React.Component{
 
   render(){
     if(this.state === '') return <Loading/>
-    const {category, content, expiry_date, title, user} = this.state
+    const {content, expiry_date, title, user} = this.state
     console.log(this.state)
     return(
-      <main>
+      <section>
         <section>
           <div
             className="business-hero"
             style={{backgroundImage: `url(${user.hero_image})`}}
             alt={user.business_name}>
-            <div className="business-logo">
-              <img className="logo" src={user.logo}/>
+            <div className="business-logo" style={{backgroundImage: `url(${user.logo})`}}>
             </div>
           </div>
         </section>
@@ -37,10 +36,10 @@ class SaleShow extends React.Component{
             <hr />
             <p>{content}</p>
             <hr />
-            <p>{expiry_date}</p>              
+            <p>{expiry_date}</p>
           </div>
         </section>
-      </main>
+      </section>
     )
   }
 }

@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import './style.scss'
 
-import SalesShow from './components/SalesShow'
+import SalesShow from './components/sales/SalesShow'
 import Home from './components/Home'
 import FlashMessages from './components/common/FlashMessages'
 import RegisterMerchant from './components/auth/RegisterMerchant'
