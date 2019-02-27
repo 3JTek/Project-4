@@ -146,7 +146,7 @@ with app.app_context():
     flash_sale_1 = Sale(
     user=joe_and_the_juice,
     title='Half price coffee',
-    expiry_date='30 March 2019',
+    expiry_date='2019-05-01 9:22:54',
     content='For three hours only, we will be serving the best coffee for half price',
     sale_fees=300,
     category=coffee
@@ -157,7 +157,7 @@ with app.app_context():
     flash_sale_2 = Sale(
     user=zara,
     title='Winter collection 50% Off',
-    expiry_date='28 February 2019',
+    expiry_date='2019-03-03 18:25:27',
     content='Come and enjoy the latest winter collection at a ridiculous price!!! ',
     sale_fees=213,
     category=womens_clothes

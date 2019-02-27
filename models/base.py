@@ -1,7 +1,6 @@
 from datetime import datetime
 from app import db
 from marshmallow import fields
-# pylint: disable=C1001,W0232
 
 class BaseModel:
 

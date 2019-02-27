@@ -18,6 +18,9 @@ class SaleShow extends React.Component{
   render(){
     if(this.state === '') return <Loading/>
     const {content, expiry_date, title, user} = this.state
+    const hoursBeforeSaleEnd = Math.floor(
+      (new Date(expiry_date)- Date.now()) / 1000 / 3600
+    )
     console.log(this.state)
     return(
       <section>
@@ -36,7 +39,7 @@ class SaleShow extends React.Component{
             <hr />
             <p>{content}</p>
             <hr />
-            <p>{expiry_date}</p>
+            <p><strong>{hoursBeforeSaleEnd}</strong> hours before sale ends</p>
           </div>
         </section>
       </section>

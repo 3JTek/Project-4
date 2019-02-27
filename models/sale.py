@@ -1,3 +1,5 @@
+# pylint: disable=W0611,W0232
+from datetime import datetime
 from app import db, ma
 from marshmallow import fields
 from .base import BaseModel, BaseSchema
@@ -9,7 +11,7 @@ class Sale(db.Model, BaseModel):
 
     title = db.Column(db.String(40), nullable=False)
     content = db.Column(db.String(512), nullable=False)
-    expiry_date = db.Column(db.String(40), nullable=False)
+    expiry_date = db.Column(db.DateTime, nullable=False)
     sale_fees = db.Column(db.Integer, nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     category = db.relationship('Category', backref='sales')
@@ -18,8 +20,9 @@ class Sale(db.Model, BaseModel):
 
 class SaleSchema(ma.ModelSchema, BaseSchema):
 
-    user = fields.Nested('UserSchema', only=('business_name','logo', 'hero_image', 'id'))
+    user = fields.Nested('UserSchema', only=('business_name', 'logo', 'hero_image', 'id'))
     category = fields.Nested('CategorySchema', only=('type', 'id', 'users'))
+    expiry_date = fields.DateTime(format='%Y-%m-%d %H:%M:%S')
 
     class Meta:
         model = Sale

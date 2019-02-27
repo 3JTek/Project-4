@@ -1,7 +1,6 @@
 from app import db, ma
 from marshmallow import fields
 from .base import BaseModel, BaseSchema
-# pylint: disable=C1001,W0232
 
 class Category(db.Model, BaseModel):
 
