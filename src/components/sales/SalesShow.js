@@ -50,6 +50,8 @@ class SaleShow extends React.Component{
                 <address>{user.location}</address>
                 <hr />
                 <SaleMiniMap businessAddress={this.state.user.location}/>
+                <hr />
+
               </div>
             </div>
           </div>
