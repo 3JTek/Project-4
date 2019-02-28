@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import MapboxAutocomplete from 'react-mapbox-autocomplete'
-
+import Loading from '../common/Loading'
 import Flash from '../../lib/Flash'
 
 class RegisterMerchant extends React.Component {
@@ -70,7 +70,7 @@ class RegisterMerchant extends React.Component {
       hero_image
     } = this.state.data
     const errors = this.state.errors
-
+    if (!this.state) return <Loading />
     return (
       <section className="section">
         <form onSubmit={this.handleSubmit}>

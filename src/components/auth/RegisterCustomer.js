@@ -3,6 +3,7 @@ import axios from 'axios'
 import MapboxAutocomplete from 'react-mapbox-autocomplete'
 
 import Flash from '../../lib/Flash'
+import Loading from '../common/Loading'
 
 class RegisterCustomer extends React.Component {
   constructor() {
@@ -87,7 +88,7 @@ class RegisterCustomer extends React.Component {
       category
     } = this.state.data
     const errors = this.state.errors
-    if (!this.state.categories) return <p> Loading.. </p>
+    if (!this.state.categories) return <Loading />
     console.log(this.state)
     return (
       <div className="section">
