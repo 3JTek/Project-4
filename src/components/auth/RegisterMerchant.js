@@ -72,7 +72,7 @@ class RegisterMerchant extends React.Component {
     const errors = this.state.errors
     if (!this.state) return <Loading />
     return (
-      <section className="section">
+      <section className="container">
         <form onSubmit={this.handleSubmit}>
           <h2 className="title">Register as a merchant</h2>
           <div className="field">
@@ -129,13 +129,15 @@ class RegisterMerchant extends React.Component {
           <div className="field">
             <label className="label">Please select a location</label>
             <div className="control is-expanded">
-              <MapboxAutocomplete
-                publicKey={process.env.MAPBOX_KEY}
-                inputClass='form-control search'
-                onSuggestionSelect={this.suggestionSelect}
-                resetSearch={false}
-                name="location"
-              />
+              <div className="input">
+                <MapboxAutocomplete
+                  publicKey={process.env.MAPBOX_KEY}
+                  inputClass='form-control search'
+                  onSuggestionSelect={this.suggestionSelect}
+                  resetSearch={false}
+                  name="location"
+                />
+              </div>
             </div>
           </div>
           <div className="field">
