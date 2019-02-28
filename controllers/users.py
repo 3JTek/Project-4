@@ -1,9 +1,11 @@
-from flask import Blueprint, jsonify, g
+from flask import Blueprint, request, jsonify, g
 from models.user import User, UserSchema
+from marshmallow import ValidationError
 from lib.secure_route import secure_route
 
 users_schema = UserSchema(many=True)
 user_schema = UserSchema()
+partial_schema = UserSchema(partial=True)
 
 api = Blueprint('users', __name__)
 
@@ -25,3 +27,19 @@ def show_secure(user_id):
     if user is None:
         return jsonify({'message': 'User doesn\'t seem to exist'}), 404
     return user_schema.jsonify(user)
+
+@api.route('/users/<int:user_id>', methods=['PUT'])
+@secure_route
+def show_edit(user_id):
+
+    user = User.query.get(user_id)
+    user, errors = partial_schema.load(request.get_json(), instance=user)
+
+    if errors:
+        return jsonify(errors), 422
+
+    user.save()
+
+    print('RES',partial_schema.jsonify(user))
+
+    return partial_schema.jsonify(user)

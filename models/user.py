@@ -58,6 +58,11 @@ class User(db.Model, BaseModel):
 
         return token
 
+    def update(self, data):
+        for key, item in data.items():
+            setattr(self, key, item)
+        db.session.commit()
+
 
 class UserSchema(ma.ModelSchema, BaseSchema):
 
@@ -77,4 +82,5 @@ class UserSchema(ma.ModelSchema, BaseSchema):
 
     class Meta:
         model = User
-        exclude = ('password_hash',)
+        exclude = ('password_hash', )
+        load_only = ('password', )

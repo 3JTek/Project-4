@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import MapboxAutocomplete from 'react-mapbox-autocomplete'
-
+import Loading from '../common/Loading'
 import Flash from '../../lib/Flash'
 
 class RegisterMerchant extends React.Component {
@@ -70,9 +70,9 @@ class RegisterMerchant extends React.Component {
       hero_image
     } = this.state.data
     const errors = this.state.errors
-
+    if (!this.state) return <Loading />
     return (
-      <section className="section">
+      <section className="container">
         <form onSubmit={this.handleSubmit}>
           <h2 className="title">Register as a merchant</h2>
           <div className="field">
@@ -129,13 +129,15 @@ class RegisterMerchant extends React.Component {
           <div className="field">
             <label className="label">Please select a location</label>
             <div className="control is-expanded">
-              <MapboxAutocomplete
-                publicKey={process.env.MAPBOX_KEY}
-                inputClass='form-control search'
-                onSuggestionSelect={this.suggestionSelect}
-                resetSearch={false}
-                name="location"
-              />
+              <div className="input">
+                <MapboxAutocomplete
+                  publicKey={process.env.MAPBOX_KEY}
+                  inputClass='form-control search'
+                  onSuggestionSelect={this.suggestionSelect}
+                  resetSearch={false}
+                  name="location"
+                />
+              </div>
             </div>
           </div>
           <div className="field">

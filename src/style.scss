@@ -26,16 +26,15 @@ $wheel-color: #6e94cc !default;
   }
   animation: spin 800ms infinite linear;
 }
-
 //Page not found
-.page-not-found{
+
+.page-not-found {
   height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 //Sale show page
 
 .business-hero {
@@ -50,7 +49,7 @@ $wheel-color: #6e94cc !default;
   background-color: white;
   border-radius: 50%;
   margin: 50px;
-  width:200px;
+  width: 200px;
   height: 200px;
   background-size: contain;
 }
@@ -66,8 +65,14 @@ $wheel-color: #6e94cc !default;
     margin: 125px 100px;
   }
 }
+//======================= Customer Show page ============
 
-
+.customer-profile-select {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin-top: 5rem;
+}
 //Map
 
 #map {
@@ -82,7 +87,7 @@ $wheel-color: #6e94cc !default;
   border-radius: 50%;
 }
 
-.business-marker{
+.business-marker {
   background-repeat: no-repeat;
   background-size: contain;
   height: 30px;

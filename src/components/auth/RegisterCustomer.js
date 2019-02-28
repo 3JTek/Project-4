@@ -3,6 +3,7 @@ import axios from 'axios'
 import MapboxAutocomplete from 'react-mapbox-autocomplete'
 
 import Flash from '../../lib/Flash'
+import Loading from '../common/Loading'
 
 class RegisterCustomer extends React.Component {
   constructor() {
@@ -87,100 +88,104 @@ class RegisterCustomer extends React.Component {
       category
     } = this.state.data
     const errors = this.state.errors
-    if (!this.state.categories) return <p> Loading.. </p>
+    if (!this.state.categories) return <Loading />
     console.log(this.state)
     return (
-      <div className="section">
-        <form onSubmit={this.handleSubmit}>
-          <h2 className="title">Register as a Customer</h2>
-          <div className="field">
-            <label className="label">Email</label>
-            <div className="control">
+      <div className="container">
+        <div className="section">
+          <form onSubmit={this.handleSubmit}>
+            <h2 className="title">Register as a Customer</h2>
+            <div className="field">
+              <label className="label">Email</label>
+              <div className="control">
+                <input
+                  className="input"
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={this.handleChange}
+                />
+                {errors.email && <small className="help is-danger">{errors.email}</small>}
+              </div>
+            </div>
+            <div className="field">
+              <label className="label">Password</label>
               <input
                 className="input"
-                name="email"
-                type="email"
-                placeholder="Email"
-                value={email}
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={password}
                 onChange={this.handleChange}
               />
-              {errors.email && <small className="help is-danger">{errors.email}</small>}
+              {errors.password && <small className="help is-danger">{errors.password}</small>}
             </div>
-          </div>
-          <div className="field">
-            <label className="label">Password</label>
-            <input
-              className="input"
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={this.handleChange}
-            />
-            {errors.password && <small className="help is-danger">{errors.password}</small>}
-          </div>
-          <div className="field">
-            <label className="label">Password Confirmation</label>
-            <input
-              className="input"
-              type="password"
-              name="password_confirmation"
-              placeholder="Password Confirmation"
-              value={password_confirmation}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="field">
-            <label className="label">Please select a location</label>
-            <div className="control is-expanded">
-              <MapboxAutocomplete
-                publicKey={process.env.MAPBOX_KEY}
-                inputClass='form-control search'
-                onSuggestionSelect={this.suggestionSelect}
-                resetSearch={false}
-                name="location"
+            <div className="field">
+              <label className="label">Password Confirmation</label>
+              <input
+                className="input"
+                type="password"
+                name="password_confirmation"
+                placeholder="Password Confirmation"
+                value={password_confirmation}
+                onChange={this.handleChange}
               />
             </div>
-          </div>
-          {errors.location && <small className="help is-danger">Please enter an address</small>}
-          <div className="field">
-            <label className="label">Phone number</label>
-            <input
-              className="input"
-              name="phone_number"
-              placeholder="Enter your number so we can send you the latest sales"
-              value={phone_number}
-              onChange={this.handleChange}
-            />
-            {errors.phone_number && <small className="help is-danger">Please enter a number</small>}
-          </div>
-          <div className="field">
-            <label className="label">Category</label>
-            <span
-              className="select is-fullwidth"
-            >
-              <select
-                name="category"
-                defaultValue="Please choose a category"
-                onChange={this.handleSelect}
+            <div className="field">
+              <label className="label">Please select a location</label>
+              <div className="control is-expanded">
+                <div className="input">
+                  <MapboxAutocomplete
+                    publicKey={process.env.MAPBOX_KEY}
+                    inputClass='form-control search'
+                    onSuggestionSelect={this.suggestionSelect}
+                    resetSearch={false}
+                    name="location"
+                  />
+                </div>
+              </div>
+            </div>
+            {errors.location && <small className="help is-danger">Please enter an address</small>}
+            <div className="field">
+              <label className="label">Phone number</label>
+              <input
+                className="input"
+                name="phone_number"
+                placeholder="Enter your number so we can send you the latest sales"
+                value={phone_number}
+                onChange={this.handleChange}
+              />
+              {errors.phone_number && <small className="help is-danger">Please enter a number</small>}
+            </div>
+            <div className="field">
+              <label className="label">Category</label>
+              <span
+                className="select is-fullwidth"
               >
-                <option disabled>Please choose a category</option>
-                {this.state.categories.map(category =>
-                  <option
-                    key={category.id}
-                    value={`${category.id}-${category.type}`}
-                  >
-                    {category.type}
-                  </option>
-                )}
-              </select>
-            </span>
-            {errors.category && <small className="help is-danger">Please select a category</small>}
-          </div>
-          <div className="regButton">
-            <button className="button is-info">Submit</button>
-          </div>
-        </form>
+                <select
+                  name="category"
+                  defaultValue="Please choose a category"
+                  onChange={this.handleSelect}
+                >
+                  <option disabled>Please choose a category</option>
+                  {this.state.categories.map(category =>
+                    <option
+                      key={category.id}
+                      value={`${category.id}-${category.type}`}
+                    >
+                      {category.type}
+                    </option>
+                  )}
+                </select>
+              </span>
+              {errors.category && <small className="help is-danger">Please select a category</small>}
+            </div>
+            <div className="regButton">
+              <button className="button is-info">Submit</button>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }
