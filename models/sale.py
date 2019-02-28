@@ -13,14 +13,15 @@ class Sale(db.Model, BaseModel):
     content = db.Column(db.String(512), nullable=False)
     expiry_date = db.Column(db.DateTime, nullable=False)
     sale_fees = db.Column(db.Integer, nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
     category = db.relationship('Category', backref='sales')
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship('User', backref='sales')
 
 class SaleSchema(ma.ModelSchema, BaseSchema):
 
-    user = fields.Nested('UserSchema', only=('business_name', 'location', 'logo', 'hero_image', 'id'))
+    user = fields.Nested('UserSchema', only=('business_name', 'location',
+    'logo', 'hero_image', 'lat', 'lng', 'id'))
     category = fields.Nested('CategorySchema', only=('type', 'id', 'users'))
     expiry_date = fields.DateTime(format='%Y-%m-%d %H:%M:%S')
 

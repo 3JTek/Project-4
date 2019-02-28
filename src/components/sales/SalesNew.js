@@ -8,6 +8,7 @@ import axios from 'axios'
 
 import Loading from '../common/Loading'
 import Flash from '../../lib/Flash'
+import Auth from '../../lib/Auth'
 
 class SaleNew extends React.Component{
   constructor(props){
@@ -18,8 +19,10 @@ class SaleNew extends React.Component{
         content: '',
         category: '',
         sale_fees: 94,
-        expiry_date: moment().format('YYYY-MM-DD hh:mm:ss')
-      }
+        expiry_date: moment().format('YYYY-MM-DD hh:mm:ss'),
+        user: ''
+      },
+      categories: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
@@ -34,8 +37,9 @@ class SaleNew extends React.Component{
   }
 
   handleDateChange(date) {
+    console.log(date)
     const data = { ...this.state.data,
-      expiry_date: moment(date).format('YYYY-MM-DD hh:mm:ss') }
+      expiry_date: moment(date).format('YYYY-MM-DD HH:mm:ss') }
     this.setState({ data })
   }
 
@@ -61,14 +65,23 @@ class SaleNew extends React.Component{
   }
 
   componentDidMount(){
+    axios(`/api/users/${Auth.getPayload().sub}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(({data}) => {
+        const newState = { ...this.state.data, user: data }
+        this.setState({data: newState})
+      })
+      .catch(({response}) => this.setState({...response}))
+
     axios.get('/api/categories')
-      .then(res => this.setState({ categories: res.data }))
+      .then(({data}) => this.setState({ categories: data }))
   }
 
   render(){
     console.log(this.state)
-    if(!this.state.categories) return <Loading/>
-    const { title, content, sale_fees } = this.state.data
+    if(!this.state.categories.length) return <Loading/>
+    const { title, content, sale_fees } = this.state.data // eslint-disable-line
     return(
       <section>
         <section>
@@ -130,7 +143,7 @@ class SaleNew extends React.Component{
                   </div>
                   <hr />
                 </div>
-                <p>The fees for this sale is <strong>£ {sale_fees}</strong></p>
+                <p>The fees for this sale is <strong>£ {sale_fees/*eslint-disable-line*/}</strong></p>
               </div>
               <div className="column is-half">
                 <div className="field">

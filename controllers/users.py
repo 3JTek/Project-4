@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify, g
 from models.user import User, UserSchema
-from marshmallow import ValidationError
 from lib.secure_route import secure_route
 
 users_schema = UserSchema(many=True)
@@ -40,6 +39,6 @@ def show_edit(user_id):
 
     user.save()
 
-    print('RES',partial_schema.jsonify(user))
+    print('RES', partial_schema.jsonify(user))
 
     return partial_schema.jsonify(user)

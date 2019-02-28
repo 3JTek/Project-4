@@ -3,26 +3,28 @@ import React from 'react'
 import axios from 'axios'
 
 import Loading from '../common/Loading'
+import PageNotFound from '../common/PageNotFound'
 import SaleMiniMap from './SaleMiniMap'
 
 class SaleShow extends React.Component{
   constructor(props){
     super(props)
-    this.state = ''
   }
 
   componentDidMount(){
     axios(`/api/sales/${this.props.match.params.id}`)
       .then(({data}) => this.setState({...data}))
+      .catch(({response}) => this.setState({...response}))
   }
 
   render(){
-    if(this.state === '') return <Loading/>
+    if(!this.state) return <Loading/>
+    if(this.state.status === 404) return <PageNotFound/>
+    console.log(this.state)
     const {content, expiry_date, title, user} = this.state // eslint-disable-line
     const hoursBeforeSaleEnd = Math.floor(
       (new Date(expiry_date)- Date.now()) / 1000 / 3600
     )
-    console.log(this.state)
     return(
       <section>
         <section>
@@ -49,7 +51,7 @@ class SaleShow extends React.Component{
                 <hr />
                 <address>{user.location}</address>
                 <hr />
-                <SaleMiniMap businessAddress={this.state.user.location}/>
+                <SaleMiniMap businessLatLng={this.state.user}/>
                 <hr />
 
               </div>
