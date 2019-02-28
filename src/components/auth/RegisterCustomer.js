@@ -14,7 +14,10 @@ class RegisterCustomer extends React.Component {
         password_confirmation: '',
         location: '',
         phone_number: '',
-        category: '',
+        category: {
+          id: '',
+          type: ''
+        },
         is_merchant: 'False'
       },
       errors: {}
@@ -29,6 +32,7 @@ class RegisterCustomer extends React.Component {
   }
 
   handleChange({target: { name, value }}) {
+    console.log(name, value)
     if (name === 'email' && value.includes(' ')) return
     const data = { ...this.state.data, [name]: value }
     const errors = {...this.state.errors, [name]: null}
@@ -125,14 +129,17 @@ class RegisterCustomer extends React.Component {
             <label className="label">Category</label>
             <span
               className="select is-fullwidth"
-              onChange={this.handleSelect}
             >
-              <select>
+              <select
+                name="category"
+                onChange={this.handleChange}
+              >
                 {this.state.categories.map(category =>
                   <option
                     key={category.id}
-                    value={category}
-                  >{category.type}
+                    value={category.id}
+                  >
+                    {category.type}
                   </option>
                 )}
               </select>
