@@ -15,7 +15,7 @@ class UserProfile extends React.Component{
   }
 
   componentDidMount(){
-    // axios(`/api/users/${this.props.match.params.id}`)
+
     axios(`/api/users/${Auth.getPayload().sub}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
@@ -24,7 +24,7 @@ class UserProfile extends React.Component{
   }
 
   render(){
-    console.log(this.state)
+    
     if(this.state === '') return <Loading/>
     //If the user doesn't exist (anymore) in the database, return 404
     if(this.state.status === 404) return <PageNotFound/>

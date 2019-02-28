@@ -33,11 +33,10 @@ class Login extends React.Component {
       .then((res) => {
         Auth.setToken(res.data.token)
         Flash.setMessage('success', res.data.message)
-        console.log(res)
+        console.log('RES', res)
       })
       .then(() => {
-        console.log()
-        this.props.history.push('/')
+        this.props.history.push('/profile')
       })
       .catch(err => this.setState({ errors: err.response.data}))
     const data = { email: '', password: '' }
