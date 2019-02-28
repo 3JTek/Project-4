@@ -13,7 +13,6 @@ def secure_route(func):
         token = request.headers.get('Authorization').replace('Bearer ', '')
         payload = jwt.decode(token, secret)
         user = User.query.get(payload.get('sub'))
-
         if not user:
             return jsonify({'message': 'Unauthorized'}), 401
 
