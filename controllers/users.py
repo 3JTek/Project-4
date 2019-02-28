@@ -5,6 +5,7 @@ from lib.secure_route import secure_route
 
 users_schema = UserSchema(many=True)
 user_schema = UserSchema()
+partial_schema = UserSchema(partial=True)
 
 api = Blueprint('users', __name__)
 
@@ -30,18 +31,15 @@ def show_secure(user_id):
 @api.route('/users/<int:user_id>', methods=['PUT'])
 @secure_route
 def show_edit(user_id):
+
     user = User.query.get(user_id)
+    user, errors = partial_schema.load(request.get_json(), instance=user)
 
-    if user != g.current_user:
-        return jsonify({'message': 'Unauthorized'}), 401
+    if errors:
+        return jsonify(errors), 422
 
-    req_data = request.get_json()
+    user.save()
 
-    try:
-        data = user_schema.load(req_data, partial=True)
-    except ValidationError as error:
-        return jsonify({'error': error.messages}), 422
+    print('RES',partial_schema.jsonify(user))
 
-    user.update(data)
-
-    return user_schema.jsonify(user)
+    return partial_schema.jsonify(user)

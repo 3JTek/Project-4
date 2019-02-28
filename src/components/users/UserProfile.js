@@ -43,13 +43,16 @@ class UserProfile extends React.Component{
   }
 
   handleSubmit(e) {
-    console.log(this.state)
+    const dataToSend = {...this.state}
+    delete dataToSend.categories
+    console.log('dataToSend',dataToSend)
     e.preventDefault()
     axios
-      .put(`/api/users/${Auth.getPayload().sub}`, this.state,
+      .put(`/api/users/${Auth.getPayload().sub}`, dataToSend,
         { headers: { Authorization: `Bearer ${Auth.getToken()}` } }
       )
-      .then(() => {
+      .then((res) => {
+        console.log(res.data)
         Flash.setMessage('info', 'Changes saved')
       })
       .catch(err => this.setState({ errors: err.response.data.errors }))
@@ -60,6 +63,7 @@ class UserProfile extends React.Component{
     if(this.state === '') return <Loading/>
     //If the user doesn't exist (anymore) in the database, return 404
     if(this.state.status === 404) return <PageNotFound/>
+    console.log('this.state',this.state)
     return(
       <section>
         {this.state.is_merchant === true && <MerchantShow  {...this.state}/>}
