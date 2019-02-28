@@ -4,12 +4,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import './style.scss'
 
-import SalesShow from './components/sales/SalesShow'
 import Home from './components/Home'
+import Navbar from './components/common/Navbar'
 import FlashMessages from './components/common/FlashMessages'
 import RegisterMerchant from './components/auth/RegisterMerchant'
 import RegisterCustomer from './components/auth/RegisterCustomer'
 import Login from './components/auth/Login'
+import SalesShow from './components/sales/SalesShow'
 
 class App extends React.Component{
   constructor(){
@@ -22,7 +23,8 @@ class App extends React.Component{
       <BrowserRouter>
 
         <main>
-
+        
+          <Navbar />
           <FlashMessages />
           <Switch>
             <Route path="/sales/:id" component={SalesShow} />
