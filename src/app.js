@@ -9,6 +9,7 @@ import Home from './components/Home'
 import FlashMessages from './components/common/FlashMessages'
 import RegisterMerchant from './components/auth/RegisterMerchant'
 import RegisterCustomer from './components/auth/RegisterCustomer'
+import Login from './components/auth/Login'
 
 class App extends React.Component{
   constructor(){
@@ -25,6 +26,7 @@ class App extends React.Component{
           <FlashMessages />
           <Switch>
             <Route path="/sales/:id" component={SalesShow} />
+            <Route path="/login" component={Login} />
             <Route path="/signup" component={RegisterCustomer} />
             <Route path="/register" component={RegisterMerchant} />
             <Route path="/" component={Home} />
