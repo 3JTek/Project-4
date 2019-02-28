@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import MapboxAutocomplete from 'react-mapbox-autocomplete'
 
 import Flash from '../../lib/Flash'
 
@@ -13,6 +14,8 @@ class RegisterMerchant extends React.Component {
         password: '',
         password_confirmation: '',
         location: '',
+        lat: '',
+        lng: '',
         business_name: '',
         logo: '',
         hero_image: '',
@@ -22,6 +25,7 @@ class RegisterMerchant extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.suggestionSelect = this.suggestionSelect.bind(this)
   }
 
   handleChange({target: { name, value }}) {
@@ -40,6 +44,18 @@ class RegisterMerchant extends React.Component {
         this.props.history.push('/login')
       })
       .catch(err => this.setState({ errors: err.response.data}))
+  }
+
+  suggestionSelect(result, lat, lng ) {
+    console.log(result, lat, lng)
+    const data = {
+      ...this.state.data,
+      location: result,
+      lat: parseFloat(lat),
+      lng: parseFloat(lng)
+    }
+    const errors = {...this.state.errors, location: ''}
+    this.setState({ data, errors })
   }
 
   render() {
@@ -111,16 +127,16 @@ class RegisterMerchant extends React.Component {
             />
           </div>
           <div className="field">
-            <label className="label">Location</label>
-            <input
-              className="input"
-              type="text"
-              name="location"
-              placeholder="Please enter your location"
-              value={location}
-              onChange={this.handleChange}
-            />
-            {errors.location && <small className="help is-danger">Please write a small bio about yourself</small>}
+            <label className="label">Please select a location</label>
+            <div className="control is-expanded">
+              <MapboxAutocomplete
+                publicKey={process.env.MAPBOX_KEY}
+                inputClass='form-control search'
+                onSuggestionSelect={this.suggestionSelect}
+                resetSearch={false}
+                name="location"
+              />
+            </div>
           </div>
           <div className="field">
             <label className="label">Logo</label>
