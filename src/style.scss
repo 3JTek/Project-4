@@ -27,6 +27,15 @@ $wheel-color: #6e94cc !default;
   animation: spin 800ms infinite linear;
 }
 
+//Page not found
+.page-not-found{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 //Sale show page
 
 .business-hero {
