@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import MapboxAutocomplete from 'react-mapbox-autocomplete'
 
 import Flash from '../../lib/Flash'
 
@@ -13,6 +14,8 @@ class RegisterCustomer extends React.Component {
         password: '',
         password_confirmation: '',
         location: '',
+        lat: '',
+        lng: '',
         phone_number: '',
         category: {
           id: '',
@@ -24,6 +27,8 @@ class RegisterCustomer extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
+    this.suggestionSelect = this.suggestionSelect.bind(this)
   }
 
   componentDidMount(){
@@ -39,6 +44,16 @@ class RegisterCustomer extends React.Component {
     this.setState({ data, errors })
   }
 
+  handleSelect({target: { value }}) {
+    const data = { ...this.state.data,
+      category: {
+        id: parseInt(value.split('-')[0]),
+        type: value.split('-')[1]
+      }}
+    const errors = {...this.state.errors, category: null}
+    this.setState({ data, errors })
+  }
+
   handleSubmit(e) {
     e.preventDefault()
     axios
@@ -48,6 +63,18 @@ class RegisterCustomer extends React.Component {
         this.props.history.push('/login')
       })
       .catch(err => this.setState({ errors: err.response.data}))
+  }
+
+  suggestionSelect(result, lat, lng ) {
+    console.log(result, lat, lng)
+    const data = {
+      ...this.state.data,
+      location: result,
+      lat: parseFloat(lat),
+      lng: parseFloat(lng)
+    }
+    const errors = {...this.state.errors, location: ''}
+    this.setState({ data, errors })
   }
 
   render() {
@@ -104,17 +131,18 @@ class RegisterCustomer extends React.Component {
             />
           </div>
           <div className="field">
-            <label className="label">Location</label>
-            <input
-              className="input"
-              type="text"
-              name="location"
-              placeholder="Please enter your location"
-              value={location}
-              onChange={this.handleChange}
-            />
-            {errors.location && <small className="help is-danger">Please enter an address</small>}
+            <label className="label">Please select a location</label>
+            <div className="control is-expanded">
+              <MapboxAutocomplete
+                publicKey={process.env.MAPBOX_KEY}
+                inputClass='form-control search'
+                onSuggestionSelect={this.suggestionSelect}
+                resetSearch={false}
+                name="location"
+              />
+            </div>
           </div>
+          {errors.location && <small className="help is-danger">Please enter an address</small>}
           <div className="field">
             <label className="label">Phone number</label>
             <input
@@ -124,6 +152,7 @@ class RegisterCustomer extends React.Component {
               value={phone_number}
               onChange={this.handleChange}
             />
+            {errors.phone_number && <small className="help is-danger">Please enter a number</small>}
           </div>
           <div className="field">
             <label className="label">Category</label>
@@ -132,12 +161,14 @@ class RegisterCustomer extends React.Component {
             >
               <select
                 name="category"
-                onChange={this.handleChange}
+                defaultValue="Please choose a category"
+                onChange={this.handleSelect}
               >
+                <option disabled>Please choose a category</option>
                 {this.state.categories.map(category =>
                   <option
                     key={category.id}
-                    value={category.id}
+                    value={`${category.id}-${category.type}`}
                   >
                     {category.type}
                   </option>

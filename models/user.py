@@ -17,6 +17,8 @@ class User(db.Model, BaseModel):
 
     #Shared
     location = db.Column(db.String(200), nullable=False)
+    lat = db.Column(db.Float, nullable=True)
+    lng = db.Column(db.Float, nullable=True)
 
     #merchants
     business_name = db.Column(db.String(50), nullable=True)
