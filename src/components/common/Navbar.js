@@ -7,7 +7,15 @@ import Flash from '../../lib/Flash'
 class Navbar extends React.Component {
   constructor(){
     super()
+    this.state = {
+      loginActive: false
+    }
+    this.toggle = this.toggle.bind(this)
+    this.logout = this.logout.bind(this)
+  }
 
+  toggle(key){
+    this.setState({[key]: !this.state[key]})
   }
 
   logout() {
@@ -15,7 +23,6 @@ class Navbar extends React.Component {
     Flash.setMessage('danger', 'You have logged out')
     this.props.history.push('/')
   }
-
 
   render(){
     return(
@@ -25,6 +32,13 @@ class Navbar extends React.Component {
             <Link to="/" className="navbar-item">
               <h1 className="title is-2"><span id="navbar-hero">Gather</span></h1>
             </Link>
+            {!Auth.isAuthenticated() &&
+                  <Link
+                    to="/login"
+                    className="navbar-item"
+                    onClick={() => this.toggle('loginActive')}>Login
+                  </Link>}
+            {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
           </div>
         </nav>
       </div>
