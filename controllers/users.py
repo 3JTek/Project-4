@@ -13,19 +13,10 @@ def user_index():
     return users_schema.jsonify(users)
 
 @api.route('/users/<int:user_id>', methods=['GET'])
-def show(user_id):
-    user = User.query.get(user_id)
-
-    #Return 404 if user does not exist
-    if user is None:
-        return jsonify({'message': 'User doesn\'t seem to exist'}), 404
-    return user_schema.jsonify(user)
-
-@api.route('/users_secure/<int:user_id>', methods=['GET'])
 @secure_route
 def show_secure(user_id):
     user = User.query.get(user_id)
-    print(user.id)
+
     #Check if user can access this page
     if user != g.current_user:
         return jsonify({'message': 'Unauthorized'}), 401
