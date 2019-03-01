@@ -1,3 +1,4 @@
+#Pylint: disable=C0302
 from app import app, db
 from models.user import UserSchema
 from models.category import Category
