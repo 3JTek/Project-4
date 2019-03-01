@@ -4,6 +4,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
+const plugins = [
+  new webpack.HotModuleReplacementPlugin(),
+  new HtmlWebpackPlugin({
+    template: 'src/index.html',
+    filename: 'index.html',
+    inject: 'body'
+  }),
+  new CopyWebpackPlugin([
+    { from: 'src/assets', to: 'assets' }
+  ])
+]
+
+if(process.env.NODE_ENV !== 'production') {
+  plugins.push(new Dotenv())
+}
+
 module.exports = {
   entry: './src/app.js',
   output: {
@@ -32,16 +48,5 @@ module.exports = {
       }
     }
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      filename: 'index.html',
-      inject: 'body'
-    }),
-    new CopyWebpackPlugin([
-      { from: 'src/assets', to: 'assets' }
-    ]),
-    new Dotenv()
-  ]
+  plugins
 }
