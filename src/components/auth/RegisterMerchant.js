@@ -60,15 +60,14 @@ class RegisterMerchant extends React.Component {
 
   render() {
     console.log(this.state.data)
-    console.log(process.env)
     const {
       email,
       password,
-      password_confirmation,
+      password_confirmation: passwordConfirmation,
       location,
-      business_name,
+      business_name: businessName,
       logo,
-      hero_image
+      hero_image: heroImage
     } = this.state.data
     const errors = this.state.errors
     if (!this.state) return <Loading />
@@ -84,7 +83,7 @@ class RegisterMerchant extends React.Component {
                 type="text"
                 name="business_name"
                 placeholder="Business name"
-                value={business_name}
+                value={businessName}
                 onChange={this.handleChange}
               />
               {errors.business && <small className="help is-danger">{errors.email}</small>}
@@ -123,7 +122,7 @@ class RegisterMerchant extends React.Component {
               type="password"
               name="password_confirmation"
               placeholder="Password Confirmation"
-              value={password_confirmation}
+              value={passwordConfirmation}
               onChange={this.handleChange}
             />
           </div>
@@ -158,7 +157,7 @@ class RegisterMerchant extends React.Component {
               type="text"
               name="hero_image"
               placeholder="Enter an image to display on your profile"
-              value={hero_image}
+              value={heroImage}
               onChange={this.handleChange}
             />
           </div>
