@@ -3,7 +3,7 @@ import Loading from '../common/Loading'
 
 import mapboxgl from 'mapbox-gl'
 
-class MiniMap extends React.Component {
+class SaleShowMiniMap extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -70,4 +70,4 @@ class MiniMap extends React.Component {
   }
 }
 
-export default MiniMap
+export default SaleShowMiniMap

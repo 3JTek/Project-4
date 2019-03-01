@@ -39,12 +39,13 @@ def sale_create():
     if errors:
         return jsonify(errors), 422
 
-    sale.save()
 
     #turning the sale's tile in a more URL style before sending text message
-    sale_title = sale.title.replace(' ', '-').replace('%', '%25')
+    sale.title = sale.title.replace(' ', '-').replace('%', '-percent')
 
     #Use Twillion API to send a text Message
-    send_text_message(sale_title)
+    # send_text_message(sale)
+
+    sale.save()
 
     return sale_schema.jsonify(sale)

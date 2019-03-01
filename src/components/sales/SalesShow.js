@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import Loading from '../common/Loading'
 import PageNotFound from '../common/PageNotFound'
-import SaleMiniMap from './SaleMiniMap'
+import SaleShowMiniMap from './SaleShowMiniMap'
 
 class SaleShow extends React.Component{
   constructor(props){
@@ -51,7 +51,7 @@ class SaleShow extends React.Component{
                 <hr />
                 <address>{user.location}</address>
                 <hr />
-                <SaleMiniMap businessLatLng={this.state.user}/>
+                <SaleShowMiniMap businessLatLng={this.state.user}/>
                 <hr />
 
               </div>

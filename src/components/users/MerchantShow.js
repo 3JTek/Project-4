@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 const MerchantShow = ({business_name, email, hero_image, location, logo, sales}) => {//eslint-disable-line
+  console.log(sales)
   return(
     <section>
       <section>
@@ -28,7 +29,14 @@ const MerchantShow = ({business_name, email, hero_image, location, logo, sales})
               <h1 className="title is-4">SalesHistory</h1>
               <hr />
               {sales.map( sale =>
-                <p key= {sale.id}>{sale.title}</p>
+                <Link key= {sale.id} to={`/sales/${sale.title.replace('%','')}`}>
+                  <p>
+                    {new Date(sale.expiry_date)- Date.now() > 0 ?
+                      <span>✅ </span> :
+                      <span>❌ </span>
+                    }
+                    {sale.title}</p>
+                </Link>
               )}
               <hr />
               <Link to="/profile/new-sale">

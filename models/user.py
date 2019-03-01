@@ -67,7 +67,7 @@ class User(db.Model, BaseModel):
 class UserSchema(ma.ModelSchema, BaseSchema):
 
     category = fields.Nested('CategorySchema', only=('type', 'id'))
-    sales = fields.Nested('SaleSchema', only=('id', 'title'), many=True)
+    sales = fields.Nested('SaleSchema', only=('id', 'title', 'expiry_date'), many=True)
 
     @validates_schema
     def check_passwords_match(self, data):
