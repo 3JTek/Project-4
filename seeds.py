@@ -20,8 +20,8 @@ with app.app_context():
     clothes.save()
     sport = Category(type='Sport')
     sport.save()
-    sandwiches = Category(type='Sandwiches')
-    sandwiches.save()
+    plants = Category(type='Plants')
+    plants.save()
     bars = Category(type='Bars')
     bars.save()
     womens_clothes = Category(type='Womens Clothes')
@@ -343,7 +343,7 @@ with app.app_context():
         'phone_number': '+447 123454322',
         'category': {
             'id': '6',
-            'type': 'Sandwiches'
+            'type': 'Plants'
         },
 
         'is_merchant': 'False'
@@ -363,7 +363,7 @@ with app.app_context():
         'phone_number': '+447 123454322',
         'category': {
             'id': '6',
-            'type': 'Sandwiches'
+            'type': 'Plants'
         },
 
         'is_merchant': 'False'
@@ -383,7 +383,7 @@ with app.app_context():
         'phone_number': '+447 123454322',
         'category': {
             'id': '6',
-            'type': 'Sandwiches'
+            'type': 'Plants'
         },
 
         'is_merchant': 'False'
