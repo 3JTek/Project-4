@@ -11,10 +11,10 @@ def send_text_message(sale_title):
 
     client = Client(account_sid, auth_token)
 
-    # # message = client.messages.create(
-    # #     to="+33752755762",
-    # #     from_="+33644642413",
-    # #     body=f'Hi it\'s Gather here, check this new Flash Sale next to you {domain}/api/sales/{sale_title}'
-    # # )
-    #
-    # print(message.sid)
+    message = client.messages.create(
+        to="+33752755762",
+        from_="+33644642413",
+        body=f'Hi it\'s Gather here, check this new Flash Sale next to you {domain}/api/sales/{sale_title}'
+    )
+
+    print(message.sid)
