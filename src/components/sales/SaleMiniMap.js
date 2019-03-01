@@ -1,12 +1,14 @@
 import React from 'react'
+import Loading from '../common/Loading'
 
 import mapboxgl from 'mapbox-gl'
 
 class MiniMap extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
-
+      lat: this.props.businessLatLng.lat,
+      lng: this.props.businessLatLng.lng
     }
     this.customerLocation = []
   }
@@ -17,7 +19,7 @@ class MiniMap extends React.Component {
       this.map = new mapboxgl.Map({
         container: this.mapDOMElement,
         style: 'mapbox://styles/mapbox/streets-v10',
-        center: [-0.118092, 51.509865],
+        center: [this.state.lng, this.state.lat],
         scrollZoom: true,
         zoom: 10
       })
@@ -31,14 +33,14 @@ class MiniMap extends React.Component {
       const markerDOM = document.createElement('div')
       markerDOM.className = 'customer-marker'
       new mapboxgl.Marker({element: markerDOM, anchor: 'center'})
-        .setLngLat([longitude, latitude])
+        .setLngLat([String(longitude), String(latitude)])
         .addTo(this.map)
     }
-    const [lat, lng] = [-0.118092, 51.509865]
+    const {lat, lng} = this.state
     const markerDOM = document.createElement('div')
     markerDOM.className = 'business-marker'
     new mapboxgl.Marker({element: markerDOM, anchor: 'center'})
-      .setLngLat([lat, lng])
+      .setLngLat([String(lng), String(lat)])
       .addTo(this.map)
   }
 
@@ -59,6 +61,9 @@ class MiniMap extends React.Component {
   }
 
   render(){
+    if(!this.state) return <Loading/>
+
+    console.log(this.state)
     return(
       <div id='map' ref={element => this.mapDOMElement = element}/>
     )

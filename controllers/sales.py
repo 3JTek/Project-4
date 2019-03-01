@@ -15,14 +15,20 @@ def sale_index():
 @api.route('/sales/<string:sale_id>', methods=['GET'])
 def sale_show(sale_id):
     print(sale_id)
+
     #Can get a sale parsing the sales id
     if sale_id.isdigit():
         sale = Sale.query.get(sale_id)
+
     #...or parsing the sale's title since this is what we will present to the customer (nicer url)
     else:
         sale_title = sale_id.replace('-', ' ').replace('%25', '%')
         print(sale_title)
         sale = Sale.query.filter_by(title=sale_title).first()
+
+    #Return 404 if sale doesn't exist
+    if sale is None:
+        return jsonify({'message': 'User doesn\'t seem to exist'}), 404
 
     return sale_schema.jsonify(sale)
 

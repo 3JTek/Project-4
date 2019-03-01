@@ -12,6 +12,8 @@ import RegisterCustomer from './components/auth/RegisterCustomer'
 import Login from './components/auth/Login'
 import UserProfile from './components/users/UserProfile'
 import SalesShow from './components/sales/SalesShow'
+import SalesNew from './components/sales/SalesNew'
+import Test from './Test'
 
 class App extends React.Component{
   constructor(){
@@ -28,6 +30,8 @@ class App extends React.Component{
           <Navbar />
           <FlashMessages />
           <Switch>
+            <Route path="/test" component={Test} />
+            <Route path="/profile/new-sale" component={SalesNew} />
             <Route path="/sales/:id" component={SalesShow} />
             <Route path="/profile" component={UserProfile} />
             <Route path="/login" component={Login} />

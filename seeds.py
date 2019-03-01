@@ -48,6 +48,8 @@ with app.app_context():
         'password': 'password',
         'password_confirmation': 'password',
         'location': '1234, test Lane, Test, SE1 1ER',
+        'lng': '-0.118092',
+        'lat': '51.509865',
         'business_name': 'Zara',
         'logo': 'https://s2.qwant.com/thumbr/0x0/e/c/2cfc32d78af019faaed18632e1db55657c26b39c69c32de0191f26062ef778/Zara_logo_website.png?u=https%3A%2F%2Fwww.waldengalleria.com%2Fwp-content%2Fuploads%2Fsites%2F3%2F2017%2F03%2FZara_logo_website.png&q=0&b=1&p=0&a=1',
         'hero_image': 'https://s1.qwant.com/thumbr/0x380/3/0/2224b1ba7031bf11772048fdc8a35c6837d967a2689e827fe5cfd6c516d185/visite-en-images-du-plus-grand-magasin-zara-de-france-photo-4.jpg?u=http%3A%2F%2Fi.f1g.fr%2Fmedia%2Fext%2F1900x1900%2Fmadame.lefigaro.fr%2Fsites%2Fdefault%2Ffiles%2Fimg%2F2017%2F04%2Fvisite-en-images-du-plus-grand-magasin-zara-de-france-photo-4.jpg&q=0&b=1&p=0&a=1',
@@ -64,6 +66,8 @@ with app.app_context():
         'password_confirmation': 'password',
         'location': '5, merchant Lane, merchant, SW4 1GA',
         'business_name': 'Joe & the Juice',
+        'lng': '-0.118092',
+        'lat': '51.509865',
         'logo': 'https://s2.qwant.com/thumbr/0x380/e/0/50f0bf00c902968003bb1bac8cc9e9b68304fe9ec8288ffd757385af1d4de9/joe_and_the_juice.jpg?u=http%3A%2F%2Fmollyinadomi.files.wordpress.com%2F2011%2F12%2Fjoe_and_the_juice.jpg&q=0&b=1&p=0&a=1',
         'hero_image': 'https://s1.qwant.com/thumbr/0x380/2/d/ba333ce18be0b1fe4daf65b39eb2814bfb250dc9cfb0711d364ec345cd520c/171025-joe-and-the-juice-london.jpg?u=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2017%2F10%2F171025-joe-and-the-juice-london.jpg&q=0&b=1&p=0&a=1',
         'is_merchant': 'True'
