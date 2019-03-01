@@ -11,35 +11,35 @@ with app.app_context():
     db.create_all()
 
     #Category seeds.........................................
-    fashion = Category(type='Fashion')
+    fashion = Category(type='Fashion', logo='assets/clothes.png')
     fashion.save()
-    lunch = Category(type='Lunch')
+    lunch = Category(type='Lunch', logo='assets/cupcake.png' )
     lunch.save()
-    shopping = Category(type='Shopping')
+    shopping = Category(type='Shopping', logo='assets/shopping-bag.png')
     shopping.save()
-    clothes = Category(type='Clothes')
+    clothes = Category(type='Clothes', logo='assets/hanger.png')
     clothes.save()
-    sport = Category(type='Sport')
-    sport.save()
-    plants = Category(type='Plants')
+    fitness = Category(type='Fitness', logo='assets/weightlifting.png')
+    fitness.save()
+    plants = Category(type='Plants', logo='assets/plant.png')
     plants.save()
-    bars = Category(type='Bars')
+    bars = Category(type='Bars', logo='assets/glass.png')
     bars.save()
-    womens_clothes = Category(type='Womens Clothes')
+    womens_clothes = Category(type='Womens Clothes', logo='assets/slit-skirt.png')
     womens_clothes.save()
-    mens_clothes = Category(type='Mens Clothes')
+    mens_clothes = Category(type='Mens Clothes', logo='assets/wedding-suit.png')
     mens_clothes.save()
-    shoes = Category(type='Shoes')
+    shoes = Category(type='Shoes', logo='assets/high-heels.png')
     shoes.save()
-    electronics = Category(type='Electronics')
+    electronics = Category(type='Electronics', logo='assets/screen.png')
     electronics.save()
-    leisure = Category(type='Leisure')
+    leisure = Category(type='Leisure', logo='assets/meditation.png')
     leisure.save()
-    beauty = Category(type='Beauty')
+    beauty = Category(type='Beauty', logo='assets/make-up.png')
     beauty.save()
-    coffee = Category(type='Coffee')
+    coffee = Category(type='Coffee', logo='assets/coffee.png')
     coffee.save()
-    food = Category(type='Food')
+    food = Category(type='Food', logo='assets/cutlery.png')
     food.save()
 
 
@@ -148,7 +148,7 @@ with app.app_context():
         'phone_number': '+447 123454322',
         'category': {
             'id': '5',
-            'type': 'Sport'
+            'type': 'Fitness'
         },
 
         'is_merchant': 'False'
@@ -168,7 +168,7 @@ with app.app_context():
         'phone_number': '+447 123454322',
         'category': {
             'id': '5',
-            'type': 'Sport'
+            'type': 'Fitness'
         },
 
         'is_merchant': 'False'

@@ -7,6 +7,7 @@ class Category(db.Model, BaseModel):
     __tablename__ = 'categories'
 
     type = db.Column(db.String(80), nullable=False)
+    logo = db.Column(db.String(50), nullable=True)
 
 
 class CategorySchema(ma.ModelSchema, BaseSchema):
