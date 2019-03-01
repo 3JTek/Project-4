@@ -1,7 +1,7 @@
 import os
+from config.environment import domainUrl
 from twilio.rest import Client
 
-domain = os.getenv('DEV_DOMAIN')
 
 def send_text_message(sale_title):
     # Your Account SID from twilio.com/console
@@ -11,10 +11,11 @@ def send_text_message(sale_title):
 
     client = Client(account_sid, auth_token)
 
-    # # message = client.messages.create(
-    # #     to="+33752755762",
-    # #     from_="+33644642413",
-    # #     body=f'Hi it\'s Gather here, check this new Flash Sale next to you {domain}/api/sales/{sale_title}'
-    # # )
-    #
-    # print(message.sid)
+    message = client.messages.create(
+        to="+33752755762",
+        from_="+33644642413",
+        body=f'Hi it\'s Gather here, check this new Flash Sale next \
+        to you {domainUrl}api/sales/{sale_title}'
+    )
+
+    print(message.sid)
