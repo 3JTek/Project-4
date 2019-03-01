@@ -1,45 +1,46 @@
 import React from 'react'
+import CustomerUpdateForm from './CustomerUpdate'
 
-
-const CustomerShow = ( { categories, handleChange, handleSubmit }) => {
+const CustomerShow = ( {
+  data,
+  categories,
+  suggestionSelect,
+  handleFormChange,
+  handleClick
+}) => {
+  console.log(data)
   if (!categories) return <h1> Loading</h1>
-  console.log(categories[0])
   return(
-    <div>
-      <div
-        className="test"
-        style={{ backgroundImage: `url(${categories[0].logo})` }}
-      >
+    <div className="section customer-profile">
+      <h1>Your categories</h1>
+      <div className="selected-categories">
       </div>
-      <div className="customer-profile-select">
-        <section className="container">
-          <form onSubmit={handleSubmit}>
-            <label className="label">Change your categroy of interest</label>
-            <div className="field has-addons">
-              <span
-                className="select is-fullwidth"
+      <section className="section">
+        <div className="container">
+          <div className="columns is-mobile is-multiline">
+            {categories.map((category, i) =>
+              <button
+                key={category.id}
+                className="customer-button"
+                style={{ backgroundImage: `url(${category.logo})` }}
+                onClick={(e) => handleClick(e, i)}
               >
-                <select
-                  name="category"
-                  defaultValue="Please choose a new category"
-                  onChange={handleChange}
-                >
-                  <option disabled>Please choose a new category</option>
-                  {categories.map(category =>
-                    <option
-                      key={category.id}
-                      value={`${category.id}-${category.type}`}
-                    >
-                      {category.type}
-                    </option>
-                  )}
-                </select>
-              </span>
-              <button className="button is-info">Submit</button>
-            </div>
-          </form>
-        </section>
+              </button>
+            )}
+          </div>
+        </div>
+      </section>
+      <div className="customer-description">
+        <div
+          className="description-image"
+          style={{ background: 'yellow' }}
+        ></div>
       </div>
+      <CustomerUpdateForm
+        data={data}
+        suggestionSelect={suggestionSelect}
+        handleFormChange={handleFormChange}
+      />
     </div>
   )
 }
