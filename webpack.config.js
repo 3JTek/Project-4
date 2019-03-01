@@ -18,6 +18,8 @@ const plugins = [
 
 if(process.env.NODE_ENV !== 'production') {
   plugins.push(new Dotenv())
+} else {
+  plugins.push(new webpack.EnvironmentPlugin({ ...process.env }))
 }
 
 module.exports = {
