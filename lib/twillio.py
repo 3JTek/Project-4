@@ -15,7 +15,7 @@ def send_text_message(sale_title):
         to="+33752755762",
         from_="+33644642413",
         body=f'Hi it\'s Gather here, check this new Flash Sale next \
-        to you {domainUrl}api/sales/{sale_title}'
+        to you {domainUrl}sales/{sale_title}'
     )
 
     print(message.sid)
