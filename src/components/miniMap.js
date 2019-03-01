@@ -1,6 +1,7 @@
 import React from 'react'
 
 import mapboxgl from 'mapbox-gl'
+mapboxgl.accessToken = process.env.MAPBOX_KEY
 
 import MapControls from './MapControls'
 
@@ -33,7 +34,6 @@ class MiniMap extends React.Component {
 
   createMap(){
     return new Promise(resolve => {
-      mapboxgl.accessToken = process.env.MAPBOX_KEY
       this.map = new mapboxgl.Map({
         container: this.mapDOMElement,
         style: 'mapbox://styles/mapbox/streets-v10',

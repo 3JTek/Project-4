@@ -60,6 +60,7 @@ class RegisterMerchant extends React.Component {
 
   render() {
     console.log(this.state.data)
+    console.log(process.env)
     const {
       email,
       password,
