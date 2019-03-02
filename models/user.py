@@ -4,7 +4,6 @@ import jwt
 from config.environment import secret
 from sqlalchemy.ext.hybrid import hybrid_property
 from marshmallow import validates_schema, ValidationError, fields
-from .category import Category, CategorySchema
 from .base import BaseModel, BaseSchema
 
 class User(db.Model, BaseModel):
@@ -27,8 +26,7 @@ class User(db.Model, BaseModel):
 
     #Customer
     phone_number = db.Column(db.String(30), nullable=True)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
-    category = db.relationship('Category', backref='users')
+
 
     is_merchant = db.Column(db.Boolean, nullable=False)
 
@@ -66,7 +64,7 @@ class User(db.Model, BaseModel):
 
 class UserSchema(ma.ModelSchema, BaseSchema):
 
-    category = fields.Nested('CategorySchema', only=('type', 'id'))
+    categories = fields.Nested('CategorySchema', many=True, only=('type', 'id'))
     sales = fields.Nested('SaleSchema', only=('id', 'title'), many=True)
 
     @validates_schema
