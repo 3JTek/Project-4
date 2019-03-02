@@ -7,7 +7,7 @@ const Home = () => {
     <section className="section">
       <div className="container">
         <div className="home-hero">
-        <h1>Find the best offers in town</h1>
+          <h1>The best sales will find you</h1>
         </div>
         <Link to={'/register'}>
           <h1>Register as Merchant</h1>
