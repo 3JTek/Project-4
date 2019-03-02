@@ -1,5 +1,5 @@
 //Loading spinning wheel
-@import "~bulma/bulma";
+@import "~bulma/bulma"; // ===================== MISC ==========
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -26,7 +26,32 @@ $wheel-color: #6e94cc !default;
   }
   animation: spin 800ms infinite linear;
 }
-//Page not found
+//============== LOGIN ===========================
+
+#loginFormSection {
+  height: 0;
+  padding: 0;
+  transition: height 0.7s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  &.displayed {
+    height: 10vh;
+  }
+
+  .container {
+    width: 90%;
+  }
+
+  form {
+    h2,
+    label {
+      color: #fff;
+    }
+  }
+}
+//Page not found =============================
 
 .page-not-found {
   height: 100vh;
@@ -35,7 +60,7 @@ $wheel-color: #6e94cc !default;
   justify-content: center;
   align-items: center;
 }
-//Sale show page
+//Sale show page =======================
 
 .business-hero {
   display: flex;
@@ -114,7 +139,7 @@ section .customer-profile {
     border: 2px solid;
   }
 }
-//Map
+//================== MAP ====================
 
 #map {
   height: 300px;

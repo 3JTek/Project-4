@@ -1,4 +1,5 @@
 import React from 'react'
+import Login from '../auth/Login'
 import { Link, withRouter } from 'react-router-dom'
 
 import Auth from '../../lib/Auth'
@@ -8,6 +9,7 @@ class Navbar extends React.Component {
   constructor(){
     super()
     this.state = {
+      navbarOpen: false,
       loginActive: false
     }
     this.toggle = this.toggle.bind(this)
@@ -24,6 +26,13 @@ class Navbar extends React.Component {
     this.props.history.push('/')
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.location.pathname !== prevProps.location.pathname &&
+      this.props.location.pathname !== '/login'){
+      this.setState({ navbarOpen: false, loginActive: false })
+    }
+  }
+
   render(){
     return(
       <div className="container">
@@ -35,14 +44,18 @@ class Navbar extends React.Component {
           </div>
           <div className="navbar-end">
             {!Auth.isAuthenticated() &&
-                    <Link
-                      to="/login"
-                      className="navbar-item"
-                      onClick={() => this.toggle('loginActive')}>Login
-                    </Link>}
+                <Link
+                  to="/login"
+                  className="navbar-item"
+                  onClick={() => this.toggle('loginActive')}>Login
+                </Link>}
             {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
           </div>
         </nav>
+        <Login
+          displayed={`${this.state.loginActive ? 'displayed' : ''}`}
+          toggle={this.toggle}
+        />
       </div>
     )
   }
