@@ -36,7 +36,7 @@ class Login extends React.Component {
       })
       .then(() => {
         this.props.toggle('loginActive')
-        this.props.history.push('/')
+        this.props.history.push('/profile')
       })
       .catch(err => this.setState({ errors: err.response.data}))
     const data = { email: '', password: '' }
