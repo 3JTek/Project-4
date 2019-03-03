@@ -4,6 +4,7 @@ import jwt
 from config.environment import secret
 from sqlalchemy.ext.hybrid import hybrid_property
 from marshmallow import validates_schema, ValidationError, fields
+#pylint: disable=W0611
 from .category import Category, CategorySchema
 from .base import BaseModel, BaseSchema
 
@@ -69,6 +70,7 @@ class UserSchema(ma.ModelSchema, BaseSchema):
     category = fields.Nested('CategorySchema', only=('type', 'id'))
     sales = fields.Nested('SaleSchema', only=('id', 'title', 'expiry_date'), many=True)
 
+    # pylint: disable=R0201
     @validates_schema
     def check_passwords_match(self, data):
         if data.get('password') != data.get('password_confirmation'):

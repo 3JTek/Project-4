@@ -64,7 +64,6 @@ class RegisterMerchant extends React.Component {
       email,
       password,
       password_confirmation: passwordConfirmation,
-      location,
       business_name: businessName,
       logo,
       hero_image: heroImage

@@ -11,20 +11,33 @@ class SaleShow extends React.Component{
     super(props)
   }
 
+  calulateTimeRemaining(){
+    const totalHours = (new Date(this.state.expiry_date)- Date.now()) / 1000 / 3600
+    return {
+      days: Math.floor(totalHours / 24),
+      hours: Math.round(totalHours % 24)
+    }
+  }
+
   componentDidMount(){
     axios(`/api/sales/${this.props.match.params.id}`)
-      .then(({data}) => this.setState({...data}))
+      .then(({data}) => this.newState = {...data})
+      .then(() => this.calulateTimeRemaining())
+      .then((res) => {
+        console.log(res)
+        this.newState['timeRemaining'] = res
+      })
+      .then(() => this.setState({...this.newState}))
       .catch(({response}) => this.setState({...response}))
   }
 
   render(){
-    if(!this.state) return <Loading/>
+    console.log('normal',this.state)
+    if(!this.state) return <Loading />
     if(this.state.status === 404) return <PageNotFound/>
-    console.log(this.state)
     const {content, expiry_date, title, user} = this.state // eslint-disable-line
-    const hoursBeforeSaleEnd = Math.floor(
-      (new Date(expiry_date)- Date.now()) / 1000 / 3600
-    )
+    const { daysRemaining, hoursRemaining } = this.calulateTimeRemaining()
+
     return(
       <section>
         <section>
@@ -44,7 +57,14 @@ class SaleShow extends React.Component{
                 <hr />
                 <p>{content}</p>
                 <hr />
-                <p><strong>{hoursBeforeSaleEnd}</strong> hours before sale ends</p>
+                <p>
+                  {daysRemaining &&
+                    <span><strong>daysRemaining.days</strong> day(s) and </span>
+                  }
+                  {hoursRemaining &&
+                    <span><strong>hoursRemaining.hours</strong> hours </span>
+                  }
+                  before sale ends</p>
               </div>
               <div className="column is-half">
                 <h1 className="title is-4">Address</h1>
@@ -53,7 +73,6 @@ class SaleShow extends React.Component{
                 <hr />
                 <SaleShowMiniMap businessLatLng={this.state.user}/>
                 <hr />
-
               </div>
             </div>
           </div>
