@@ -45,7 +45,7 @@ class SaleShow extends React.Component{
             className="business-hero"
             style={{backgroundImage: `url(${user.hero_image})`}}
             alt={user.business_name}>
-            <div className="business-logo" style={{backgroundImage: `url(${user.logo})`}}>
+            <div className="business-logo" style={{backgroundImage: `url(${user.logo})`}} alt='Business Logo'>
             </div>
           </div>
         </section>

@@ -2,7 +2,10 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 const MerchantShow = ({business_name, email, hero_image, location, logo, sales}) => {//eslint-disable-line
-  console.log(sales)
+
+  const currentSale = sales.filter(sale => new Date(sale.expiry_date) - Date.now() > 0)
+  const pastSale = sales.filter(sale => new Date(sale.expiry_date) - Date.now() < 0)
+  console.log(currentSale)
   return(
     <section>
       <section>
@@ -11,7 +14,7 @@ const MerchantShow = ({business_name, email, hero_image, location, logo, sales})
           style={{backgroundImage: `url(${hero_image})`}}//eslint-disable-line
           alt={business_name}//eslint-disable-line
         >
-          <div className="business-logo" style={{backgroundImage: `url(${logo})`}}>
+          <div className="business-logo" style={{backgroundImage: `url(${logo})`}} alt='Business logo'>
           </div>
         </div>
       </section>
@@ -26,19 +29,19 @@ const MerchantShow = ({business_name, email, hero_image, location, logo, sales})
               <address>{location}</address>
             </div>
             <div className="column is-half">
-              <h1 className="title is-4">SalesHistory</h1>
-              <hr />
-              {sales.map( sale =>
+              <h1 className="title is-4">Current Sales</h1>
+              {currentSale.map( sale =>
                 <Link key= {sale.id} to={`/sales/${sale.title.replace('%','')}`}>
-                  <p>
-                    {new Date(sale.expiry_date)- Date.now() > 0 ?
-                      <span>✅ </span> :
-                      <span>❌ </span>
-                    }
-                    {sale.title}</p>
+                  <p>{sale.title}</p>
                 </Link>
               )}
               <hr />
+              <h1 className="title is-4">Sale History</h1>
+              {pastSale.map( sale =>
+                <Link key= {sale.id} to={`/sales/${sale.title.replace('%','')}`}>
+                  <p>{sale.title}</p>
+                </Link>
+              )}
               <Link to="/profile/new-sale">
                 <button className="button is-primary">Create a New Sale</button>
               </Link>
