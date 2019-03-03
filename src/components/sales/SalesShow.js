@@ -15,7 +15,7 @@ class SaleShow extends React.Component{
     const totalHours = (new Date(this.state.expiry_date)- Date.now()) / 1000 / 3600
     return {
       daysRemaining: Math.floor(totalHours / 24) || null,
-      hoursRemaining: Math.round(totalHours % 24) || null
+      hoursRemaining: Math.round(totalHours % 24) || (Math.floor(totalHours / 24) === 0 ? 'less than 1 hour' : null)
     }
   }
 
@@ -31,6 +31,8 @@ class SaleShow extends React.Component{
     if(this.state.status === 404) return <PageNotFound/>
     const {content, expiry_date, title, user} = this.state // eslint-disable-line
     const { daysRemaining, hoursRemaining } = this.calulateTimeRemaining()
+    console.log(this.state)
+    console.log(daysRemaining, hoursRemaining)
     return(
       <section>
         <section>
@@ -50,14 +52,16 @@ class SaleShow extends React.Component{
                 <hr />
                 <p>{content}</p>
                 <hr />
-                <p>
-                  {daysRemaining &&
-                    <span><strong>{daysRemaining}</strong> day(s) and </span>
-                  }
-                  {hoursRemaining &&
-                    <span><strong>{hoursRemaining}</strong> hour(s) </span>
-                  }
-                  before sale ends</p>
+                {this.props.location.state.saleExpired === false &&
+                  <p>
+                    {daysRemaining &&
+                      <span><strong>{daysRemaining}</strong> day(s) and </span>
+                    }
+                    {hoursRemaining &&
+                      <span><strong>{hoursRemaining}</strong> hour(s) </span>
+                    }
+                    before sale ends</p>
+                }
               </div>
               <div className="column is-half">
                 <h1 className="title is-4">Address</h1>

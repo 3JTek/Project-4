@@ -33,7 +33,7 @@ const MerchantShow = ({business_name, email, hero_image, location, logo, sales})
                 <Link
                   key= {sale.id}
                   to={{ pathname: `/sales/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`,
-                    state: { id: sale.id } }}>
+                    state: { id: sale.id, saleExpired: false  } }}>
                   <p>{sale.title}</p>
                 </Link>
               )}
@@ -43,7 +43,7 @@ const MerchantShow = ({business_name, email, hero_image, location, logo, sales})
                 <Link
                   key= {sale.id}
                   to={{ pathname: `/sales/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`,
-                    state: { id: sale.id } }}>
+                    state: { id: sale.id, saleExpired: true } }}>
                   <p>{sale.title}</p>
                 </Link>
               )}
