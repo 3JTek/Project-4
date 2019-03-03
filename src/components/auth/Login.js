@@ -33,7 +33,6 @@ class Login extends React.Component {
       .then((res) => {
         Auth.setToken(res.data.token)
         Flash.setMessage('success', res.data.message)
-        console.log('RES', res)
       })
       .then(() => {
         this.props.history.push('/profile')

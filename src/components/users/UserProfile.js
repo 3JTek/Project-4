@@ -51,7 +51,6 @@ class UserProfile extends React.Component{
         { headers: { Authorization: `Bearer ${Auth.getToken()}` } }
       )
       .then((res) => {
-        console.log(res.data)
         Flash.setMessage('info', 'Changes saved')
       })
       .catch(err => this.setState({ errors: err.response.data.errors }))

@@ -47,7 +47,6 @@ class RegisterMerchant extends React.Component {
   }
 
   suggestionSelect(result, lat, lng ) {
-    console.log(result, lat, lng)
     const data = {
       ...this.state.data,
       location: result,
@@ -59,7 +58,6 @@ class RegisterMerchant extends React.Component {
   }
 
   render() {
-    console.log(this.state.data)
     const {
       email,
       password,

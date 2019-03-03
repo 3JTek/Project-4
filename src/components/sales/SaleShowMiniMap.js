@@ -63,7 +63,6 @@ class SaleShowMiniMap extends React.Component {
   render(){
     if(!this.state) return <Loading/>
 
-    console.log(this.state)
     return(
       <div id='map' ref={element => this.mapDOMElement = element}/>
     )

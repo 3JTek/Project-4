@@ -72,7 +72,6 @@ class SaleNew extends React.Component{
   }
 
   render(){
-    console.log(this.state)
     if(!this.state.categories) return <Loading/>
     const { title, content, sale_fees, expiry_date} = this.state.newSale // eslint-disable-line
     return(

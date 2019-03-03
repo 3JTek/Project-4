@@ -38,7 +38,6 @@ class RegisterCustomer extends React.Component {
   }
 
   handleChange({target: { name, value }}) {
-    console.log(name, value)
     if (name === 'email' && value.includes(' ')) return
     const data = { ...this.state.data, [name]: value }
     const errors = {...this.state.errors, [name]: null}
@@ -67,7 +66,6 @@ class RegisterCustomer extends React.Component {
   }
 
   suggestionSelect(result, lat, lng ) {
-    console.log(result, lat, lng)
     const data = {
       ...this.state.data,
       location: result,
@@ -89,7 +87,6 @@ class RegisterCustomer extends React.Component {
     } = this.state.data
     const errors = this.state.errors
     if (!this.state.categories) return <Loading />
-    console.log(this.state)
     return (
       <div className="container">
         <div className="section">

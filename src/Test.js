@@ -16,7 +16,6 @@ class Test extends React.Component {
   }
 
   handleChange(date) {
-    console.log(date)
     this.setState({ startDate: date })
   }
 

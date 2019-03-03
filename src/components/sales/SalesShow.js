@@ -20,7 +20,7 @@ class SaleShow extends React.Component{
   }
 
   componentDidMount(){
-    axios(`/api/sales/${this.props.match.params.id}`)
+    axios(`/api/sales/${this.props.location.state.id}`)
       .then(({data}) => this.setState({...data}))
       .catch(({response}) => this.setState({...response}))
   }
@@ -31,8 +31,6 @@ class SaleShow extends React.Component{
     if(this.state.status === 404) return <PageNotFound/>
     const {content, expiry_date, title, user} = this.state // eslint-disable-line
     const { daysRemaining, hoursRemaining } = this.calulateTimeRemaining()
-    console.log(daysRemaining, hoursRemaining)
-    console.log(this.state)
     return(
       <section>
         <section>
