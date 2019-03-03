@@ -14,30 +14,25 @@ class SaleShow extends React.Component{
   calulateTimeRemaining(){
     const totalHours = (new Date(this.state.expiry_date)- Date.now()) / 1000 / 3600
     return {
-      days: Math.floor(totalHours / 24),
-      hours: Math.round(totalHours % 24)
+      daysRemaining: Math.floor(totalHours / 24) || null,
+      hoursRemaining: Math.round(totalHours % 24) || null
     }
   }
 
   componentDidMount(){
     axios(`/api/sales/${this.props.match.params.id}`)
-      .then(({data}) => this.newState = {...data})
-      .then(() => this.calulateTimeRemaining())
-      .then((res) => {
-        console.log(res)
-        this.newState['timeRemaining'] = res
-      })
-      .then(() => this.setState({...this.newState}))
+      .then(({data}) => this.setState({...data}))
       .catch(({response}) => this.setState({...response}))
   }
 
   render(){
-    console.log('normal',this.state)
+
     if(!this.state) return <Loading />
     if(this.state.status === 404) return <PageNotFound/>
     const {content, expiry_date, title, user} = this.state // eslint-disable-line
     const { daysRemaining, hoursRemaining } = this.calulateTimeRemaining()
-
+    console.log(daysRemaining, hoursRemaining)
+    console.log(this.state)
     return(
       <section>
         <section>
@@ -59,10 +54,10 @@ class SaleShow extends React.Component{
                 <hr />
                 <p>
                   {daysRemaining &&
-                    <span><strong>daysRemaining.days</strong> day(s) and </span>
+                    <span><strong>{daysRemaining}</strong> day(s) and </span>
                   }
                   {hoursRemaining &&
-                    <span><strong>hoursRemaining.hours</strong> hours </span>
+                    <span><strong>{hoursRemaining}</strong> hour(s) </span>
                   }
                   before sale ends</p>
               </div>

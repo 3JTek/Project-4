@@ -14,15 +14,13 @@ class SaleNew extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      data: {
+      newSale: {
         title: '',
         content: '',
         category: '',
         sale_fees: 94,
-        expiry_date: moment().format('YYYY-MM-DD hh:mm:ss'),
-        user: ''
-      },
-      categories: ''
+        expiry_date: moment().format('YYYY-MM-DD hh:mm:ss')
+      }
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
@@ -31,22 +29,20 @@ class SaleNew extends React.Component{
   }
 
   handleChange({target: { name, value }}) {
-    const data = { ...this.state.data, [name]: value }
-    const errors = {...this.state.errors, [name]: null}
-    this.setState({ data, errors })
+    // const data = { ...this.state.newSale, [name]: value }
+    this.setState({newSale: {...this.state.newSale, [name]: value }})
   }
 
   handleDateChange(date) {
-    console.log(date)
-    const data = { ...this.state.data,
-      expiry_date: moment(date).format('YYYY-MM-DD HH:mm:ss') }
-    this.setState({ data })
+    this.setState({newSale: {...this.state.newSale,
+      expiry_date: moment(date).format('YYYY-MM-DD HH:mm:ss')
+    }})
   }
 
   handleSubmit(e) {
     e.preventDefault()
     axios
-      .post('/api/sales', this.state.data)
+      .post('/api/sales', this.state.newSale)
       .then(()=> {
         Flash.setMessage('success', 'Sale Successfuly Created')
         this.props.history.push('/profile')
@@ -55,23 +51,20 @@ class SaleNew extends React.Component{
   }
 
   handleSelect({target: { value }}) {
-    const data = { ...this.state.data,
+    this.setState({newSale: {...this.state.newSale,
       category: {
         id: parseInt(value.split('-')[0]),
         type: value.split('-')[1]
-      }}
-    const errors = {...this.state.errors, category: null}
-    this.setState({ data, errors })
+      }
+    }})
   }
 
   componentDidMount(){
     axios(`/api/users/${Auth.getPayload().sub}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(({data}) => {
-        const newState = { ...this.state.data, user: data }
-        this.setState({data: newState})
-      })
+      .then(({data}) => this.setState({newSale: {...this.state.newSale, user: data}}))
+
       .catch(({response}) => this.setState({...response}))
 
     axios.get('/api/categories')
@@ -80,8 +73,8 @@ class SaleNew extends React.Component{
 
   render(){
     console.log(this.state)
-    if(!this.state.categories.length) return <Loading/>
-    const { title, content, sale_fees } = this.state.data // eslint-disable-line
+    if(!this.state.categories) return <Loading/>
+    const { title, content, sale_fees, expiry_date} = this.state.newSale // eslint-disable-line
     return(
       <section>
         <section>
@@ -151,7 +144,7 @@ class SaleNew extends React.Component{
                   <div className="control">
                     <DatePicker
                       className="input date-picker"
-                      selected={this.state.data.expiry_date}
+                      selected={expiry_date} //eslint-disable-line
                       onChange={this.handleDateChange}
                       showTimeSelect
                       timeFormat="HH:mm"
