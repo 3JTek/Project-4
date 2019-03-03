@@ -12,7 +12,7 @@ class Category(db.Model, BaseModel):
 
     __tablename__ = 'categories'
 
-    type = db.Column(db.String(80), nullable=False)
+    type = db.Column(db.String(80), nullable=True)
     logo = db.Column(db.String(50), nullable=True)
     users = db.relationship(
         'User',

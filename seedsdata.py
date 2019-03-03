@@ -1,100 +1,3 @@
-#Pylint: disable=C0302
-from app import app, db
-from models.user import UserSchema
-from models.category import Category
-from models.sale import Sale
-
-user_schema = UserSchema()
-
-with app.app_context():
-    db.drop_all()
-    db.create_all()
-
-    #Category seeds.........................................
-    fashion = Category(type='Fashion', logo='assets/clothes.png')
-    fashion.save()
-    lunch = Category(type='Lunch', logo='assets/cupcake.png' )
-    lunch.save()
-    shopping = Category(type='Shopping', logo='assets/shopping-bag.png')
-    shopping.save()
-    clothes = Category(type='Clothes', logo='assets/hanger.png')
-    clothes.save()
-    fitness = Category(type='Fitness', logo='assets/weightlifting.png')
-    fitness.save()
-    plants = Category(type='Plants', logo='assets/plant.png')
-    plants.save()
-    bars = Category(type='Bars', logo='assets/glass.png')
-    bars.save()
-    womens_clothes = Category(type='Womens Clothes', logo='assets/slit-skirt.png')
-    womens_clothes.save()
-    mens_clothes = Category(type='Mens Clothes', logo='assets/wedding-suit.png')
-    mens_clothes.save()
-    shoes = Category(type='Shoes', logo='assets/high-heels.png')
-    shoes.save()
-    electronics = Category(type='Electronics', logo='assets/screen.png')
-    electronics.save()
-    leisure = Category(type='Leisure', logo='assets/meditation.png')
-    leisure.save()
-    beauty = Category(type='Beauty', logo='assets/make-up.png')
-    beauty.save()
-    coffee = Category(type='Coffee', logo='assets/coffee.png')
-    coffee.save()
-    food = Category(type='Food', logo='assets/cutlery.png')
-    food.save()
-
-
-
-    zara, errors = user_schema.load({
-        'email': 'zara@test.com',
-        'password': 'password',
-        'password_confirmation': 'password',
-        'location': '1234, test Lane, Test, SE1 1ER',
-        'lng': '-0.118092',
-        'lat': '51.509865',
-        'business_name': 'Zara',
-        'logo': 'https://s2.qwant.com/thumbr/0x0/e/c/2cfc32d78af019faaed18632e1db55657c26b39c69c32de0191f26062ef778/Zara_logo_website.png?u=https%3A%2F%2Fwww.waldengalleria.com%2Fwp-content%2Fuploads%2Fsites%2F3%2F2017%2F03%2FZara_logo_website.png&q=0&b=1&p=0&a=1',
-        'hero_image': 'https://s1.qwant.com/thumbr/0x380/3/0/2224b1ba7031bf11772048fdc8a35c6837d967a2689e827fe5cfd6c516d185/visite-en-images-du-plus-grand-magasin-zara-de-france-photo-4.jpg?u=http%3A%2F%2Fi.f1g.fr%2Fmedia%2Fext%2F1900x1900%2Fmadame.lefigaro.fr%2Fsites%2Fdefault%2Ffiles%2Fimg%2F2017%2F04%2Fvisite-en-images-du-plus-grand-magasin-zara-de-france-photo-4.jpg&q=0&b=1&p=0&a=1',
-        'is_merchant': 'True'
-    })
-    if errors:
-        raise Exception(errors)
-
-    zara.save()
-
-    joe_and_the_juice, errors = user_schema.load({
-        'email': 'jatj@test.com',
-        'password': 'password',
-        'password_confirmation': 'password',
-        'location': '5, merchant Lane, merchant, SW4 1GA',
-        'business_name': 'Joe & the Juice',
-        'lng': '-0.118092',
-        'lat': '51.509865',
-        'logo': 'https://s2.qwant.com/thumbr/0x380/e/0/50f0bf00c902968003bb1bac8cc9e9b68304fe9ec8288ffd757385af1d4de9/joe_and_the_juice.jpg?u=http%3A%2F%2Fmollyinadomi.files.wordpress.com%2F2011%2F12%2Fjoe_and_the_juice.jpg&q=0&b=1&p=0&a=1',
-        'hero_image': 'https://s1.qwant.com/thumbr/0x380/2/d/ba333ce18be0b1fe4daf65b39eb2814bfb250dc9cfb0711d364ec345cd520c/171025-joe-and-the-juice-london.jpg?u=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2017%2F10%2F171025-joe-and-the-juice-london.jpg&q=0&b=1&p=0&a=1',
-        'is_merchant': 'True'
-    })
-    if errors:
-        raise Exception(errors)
-
-    joe_and_the_juice.save()
-
-    test_user, errors = user_schema.load({
-        'email': 'test1@test.com',
-        'password': 'password',
-        'password_confirmation': 'password',
-        'location': '1 test avenue, Test, EN5 1ER',
-        'lat': '51.507877',
-        'lng': '-0.087732',
-        'phone_number': '+447 000 111 22',
-        'categories': [],
-
-        'is_merchant': 'False'
-    })
-    if errors:
-        raise Exception(errors)
-
-    test_user.save()
-
     test_user2, errors = user_schema.load({
         'email': 'test2@test.com',
         'password': 'password',
@@ -103,7 +6,7 @@ with app.app_context():
         'lat': '51.510960',
         'lng': '-0.075130',
         'phone_number': '+447 000222333',
-        'categories': [],
+        'categories': []
 
         'is_merchant': 'False'
     })
@@ -120,7 +23,7 @@ with app.app_context():
         'lng': '-0.125250',
         'location': '3 test avenue, Test, N1 1DR',
         'phone_number': '+447 000333444',
-        'categories': [],
+        'categories': []
 
         'is_merchant': 'False'
     })
@@ -137,7 +40,8 @@ with app.app_context():
         'lat': '51.507565',
         'lng': '-0.127500',
         'phone_number': '+447 123454322',
-        'categories':[],
+        'categories': {
+[],
 
         'is_merchant': 'False'
     })
@@ -154,7 +58,8 @@ with app.app_context():
         'lat': '51.367565',
         'lng': '-0.128570',
         'phone_number': '+447 123454322',
-        'categories': [],
+        'categories': {
+[],
 
         'is_merchant': 'False'
     })
@@ -647,7 +552,7 @@ with app.app_context():
         'lat': '51.51258872299006',
         'lng': '-0.0940706025390904',
         'phone_number': '+447 123454322',
-        'categories': [],
+        'categories': []
 
         'is_merchant': 'False'
     })
@@ -664,7 +569,7 @@ with app.app_context():
         'lat': '51.50404134526334',
         'lng': '-0.07347123730471594',
         'phone_number': '+447 123454322',
-        'categories': [],
+        'categories': []
 
         'is_merchant': 'False'
     })
@@ -681,7 +586,7 @@ with app.app_context():
         'lat': '51.5142980061192',
         'lng': '-0.0968171845703409',
         'phone_number': '+447 123454322',
-        'categories': [],
+        'categories': []
 
         'is_merchant': 'False'
     })
@@ -698,7 +603,7 @@ with app.app_context():
         'lat': '51.50062194518504',
         'lng': '-0.11055009472659094',
         'phone_number': '+447 123454322',
-        'categories': [],
+        'categories': []
 
         'is_merchant': 'False'
     })
@@ -715,7 +620,7 @@ with app.app_context():
         'lat': '51.517716379968476',
         'lng': '-0.1366426240234659',
         'phone_number': '+447 123454322',
-        'categories': [],
+        'categories': []
 
         'is_merchant': 'False'
     })
@@ -732,7 +637,7 @@ with app.app_context():
         'lat': '51.515152623632524',
         'lng': '-0.1311494599609659',
         'phone_number': '+447 123454322',
-        'categories': [],
+        'categories': []
 
         'is_merchant': 'False'
     })
@@ -749,7 +654,7 @@ with app.app_context():
         'lat': '51.48352109602779',
         'lng': '-0.1709748994140909',
         'phone_number': '+447 123454322',
-        'categories': [],
+        'categories': []
 
         'is_merchant': 'False'
     })
@@ -766,7 +671,7 @@ with app.app_context():
         'lat': '51.47582362098229',
         'lng': '-0.0940706025390909',
         'phone_number': '+447 123454322',
-        'categories': [],
+        'categories': []
 
         'is_merchant': 'False'
     })
@@ -783,7 +688,7 @@ with app.app_context():
         'lat': '51.52369791691055',
         'lng': '-0.1500322114258097',
         'phone_number': '+447 123454322',
-        'categories':[],
+        'categories':[]
 
         'is_merchant': 'False'
     })
@@ -927,25 +832,3 @@ with app.app_context():
         raise Exception(errors)
 
     test_user5.save()
-
-    flash_sale_1 = Sale(
-    user=joe_and_the_juice,
-    title='Half price coffee',
-    expiry_date='2019-05-01 9:22:54',
-    content='For three hours only, we will be serving the best coffee for half price',
-    sale_fees=300,
-    category=coffee
-    )
-
-    flash_sale_1.save()
-
-    flash_sale_2 = Sale(
-    user=zara,
-    title='Winter collection 50% Off',
-    expiry_date='2019-03-03 18:25:27',
-    content='Come and enjoy the latest winter collection at a ridiculous price!!! ',
-    sale_fees=213,
-    category=womens_clothes
-    )
-
-    flash_sale_2.save()
