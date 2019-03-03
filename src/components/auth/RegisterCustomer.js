@@ -18,10 +18,6 @@ class RegisterCustomer extends React.Component {
         lat: '',
         lng: '',
         phone_number: '',
-        category: {
-          id: '',
-          type: ''
-        },
         is_merchant: 'False'
       },
       errors: {}

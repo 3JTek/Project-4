@@ -13,13 +13,13 @@ class UserProfile extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      selected: '',
-      selectedImages: []
+      selected: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.suggestionSelect = this.suggestionSelect.bind(this)
   }
 
   componentDidMount(){
@@ -30,14 +30,11 @@ class UserProfile extends React.Component{
       .then(({data}) => this.setState({...data}))
       .catch(({response}) => this.setState({...response}))
 
-    axios.get('/api/categories')
-      .then(res => this.setState({ categories: res.data }))
-
   }
 
   handleChange({target: { value }}) {
     const data = { ...this.state,
-      categoriesSelected: {
+      categories: {
         id: parseInt(value.split('-')[0]),
         type: value.split('-')[1]
       }}
@@ -91,16 +88,7 @@ class UserProfile extends React.Component{
       <section>
         {this.state.is_merchant === true && <MerchantShow  {...this.state}/>}
         {this.state.is_merchant === false &&
-          <CustomerShow {...this.state}
-            data={this.state}
-            hover={this.state.hover}
-            handleClick={this.handleClick}
-            categories={this.state.categories}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            suggestionSelect={this.suggestionSelect}
-            handleFormChange={this.handleFormChange}
-          />
+          <CustomerShow />
         }
       </section>
     )
