@@ -21,12 +21,16 @@ class SaleNew extends React.Component{
         category: '',
         sale_fees: 94,
         expiry_date: moment().format('YYYY-MM-DD hh:mm:ss')
-      }
+      },
+      saleRadius: 2
     }
+    this.customersDistance = []
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDateChange = this.handleDateChange.bind(this)
+    this.changeSaleRadius = this.changeSaleRadius.bind(this)
   }
 
   handleChange({target: { name, value }}) {
@@ -60,21 +64,52 @@ class SaleNew extends React.Component{
     }})
   }
 
+  calculSalePrice(){
+    return this.customersDistance.reduce((price, customerDistance) => {
+      return customerDistance <= this.state.saleRadius? price += 46 : price
+    },0)
+  }
+
+  calculDistanceFromBusiness(){
+    this.customersDistance = this.state.customers.map(customer => {
+      const businessLat = this.state.newSale.user.lat
+      const businessLng = this.state.newSale.user.lng
+      const {lat, lng} = customer
+      const lngDiff = Math.abs(lng - businessLng)
+      const latDiff = Math.abs(lat - businessLat)
+      const kmX = lngDiff * (111.320*Math.cos(businessLat*Math.PI/180))
+      const kmY = latDiff * 110.574
+      return Math.sqrt(Math.pow(kmX,2) + Math.pow(kmY,2))
+    })
+  }
+
+  changeSaleRadius({ target: { name }}){
+    const newSaleRadius = name === 'increase-radius' ?
+      this.state.saleRadius + 0.2:
+      this.state.saleRadius - 0.2
+    this.setState({saleRadius: newSaleRadius})
+  }
+
   componentDidMount(){
     axios(`/api/users/${Auth.getPayload().sub}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(({data}) => this.setState({newSale: {...this.state.newSale, user: data}}))
-
       .catch(({response}) => this.setState({...response}))
 
-    axios.get('/api/categories')
+    axios('/api/categories')
       .then(({data}) => this.setState({ categories: data }))
+
+    axios('/api/users?customers_only=true')
+      .then(({data}) => this.setState({customers: data }))
+
   }
 
   render(){
-    if(!this.state.categories) return <Loading/>
+    if(!this.state.categories || !this.state.customers) return <Loading/>
     const { title, content, sale_fees, expiry_date} = this.state.newSale // eslint-disable-line
+    this.calculDistanceFromBusiness()
+    console.log('State before render', this.state)
     return(
       <section>
         <section>
@@ -137,7 +172,7 @@ class SaleNew extends React.Component{
                   </div>
                   <hr />
                 </div>
-                <p>The fees for this sale is <strong>£ {sale_fees/*eslint-disable-line*/}</strong></p>
+                <p>The fees for this sale is <strong>£ {this.calculSalePrice()}</strong></p>
               </div>
               <div className="column is-half">
                 <div className="field">
@@ -158,8 +193,19 @@ class SaleNew extends React.Component{
                 <hr />
                 <div className="field">
                   <label className="label">Sale Description</label>
-                  <SaleNewMiniMap businessLatLng={this.state.newSale.user}/>
+                  <SaleNewMiniMap
+                    {...this.state}
+                    customersDistance={this.customersDistance}
+                  />
                 </div>
+                <button
+                  className="button is-primary"
+                  onClick={this.changeSaleRadius}
+                  name="increase-radius">Increase Sale Reach</button>
+                <button
+                  className="button is-primary"
+                  onClick={this.changeSaleRadius}
+                  name="decrease-radius">Decrease Sale Reach</button>
                 <hr />
               </div>
             </div>

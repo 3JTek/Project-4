@@ -1,19 +1,15 @@
 import React from 'react'
-import Loading from '../common/Loading'
 
 import mapboxgl from 'mapbox-gl'
-import axios from 'axios'
 
 class SaleShowMiniMap extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      saleRadius: 2,
-      businessLat: this.props.businessLatLng.lat,
-      businessLng: this.props.businessLatLng.lng
-    }
-    this.customersDistance = [],
-    this.changeSaleRadius = this.changeSaleRadius.bind(this)
+    this.newSale = this.props.newSale,
+    this.categories = this.props.categories
+    this.user = this.props.user
+    this.customers = this.props.customers
+    this.customersDistance = this.props.customersDistance
   }
 
   //Create sale impact area on the map
@@ -58,8 +54,8 @@ class SaleShowMiniMap extends React.Component {
   }
 
   addSource(){
-    const {businessLat, businessLng, saleRadius} = this.state
-    this.map.addSource('polygon', this.createGeoJSONCircle([businessLng, businessLat], saleRadius))
+    const {lat, lng} = this.newSale.user
+    this.map.addSource('polygon', this.createGeoJSONCircle([lng, lat], this.props.saleRadius))
 
     this.map.addLayer({
       'id': 'polygon',
@@ -74,7 +70,7 @@ class SaleShowMiniMap extends React.Component {
   }
 
   createMarkups(){
-    this.state.customers.map( (customer, index) => {
+    this.customers.map( (customer, index) => {
       const {lat, lng} = customer
       const markerDOM = document.createElement('div')
       markerDOM.className = 'customer-marker'
@@ -91,7 +87,7 @@ class SaleShowMiniMap extends React.Component {
       this.map = new mapboxgl.Map({
         container: this.mapDOMElement,
         style: 'mapbox://styles/mapbox/streets-v10',
-        center: [this.state.businessLng, this.state.businessLat],
+        center: [this.newSale.user.lng, this.newSale.user.lat],
         scrollZoom: true,
         zoom: 11
       })
@@ -99,33 +95,12 @@ class SaleShowMiniMap extends React.Component {
     })
   }
 
-  changeSaleRadius({ target: { name }}){
-    const newSaleRadius = name === 'increase-radius' ?
-      this.state.saleRadius + 0.2:
-      this.state.saleRadius - 0.2
-    this.setState({saleRadius: newSaleRadius})
-  }
-
-  calculDistanceFromBusiness(){
-    this.customersDistance = this.state.customers.map(customer => {
-      const {businessLat, businessLng} = this.state
-      const {lat, lng} = customer
-      const lngDiff = Math.abs(lng - businessLng)
-      const latDiff = Math.abs(lat - businessLat)
-      const kmX = lngDiff * (111.320*Math.cos(businessLat*Math.PI/180))
-      const kmY = latDiff * 110.574
-      return Math.sqrt(Math.pow(kmX,2) + Math.pow(kmY,2))
-
-    })
-  }
-
   updateMarkersReached(){
-    console.log(this.customersDistance)
+    console.log('updateMarkers')
     this.customersDistance.map((distance, index) => {
       document.getElementById(index).classList.remove('customer-reached')
-      if(distance <= this.state.saleRadius){
+      if(distance <= this.props.saleRadius){
         document.getElementById(index).classList.add('customer-reached')
-        console.log('reached', index)
       }
     })
   }
@@ -133,10 +108,7 @@ class SaleShowMiniMap extends React.Component {
   componentDidMount(){
     this.createMap()
       .then(() => this.map.on('load', () => this.addSource()))
-      .then(() => axios('/api/users?customers_only=true'))
-      .then(({data}) => this.setState({customers: data }))
       .then(() => this.createMarkups())
-      .then(() => this.calculDistanceFromBusiness())
       .then(() => this.updateMarkersReached())
   }
 
@@ -150,21 +122,10 @@ class SaleShowMiniMap extends React.Component {
   }
 
   render(){
-    console.log('State', this.state)
-    if(!this.state) return <Loading/>
+    console.log('StateOfMiniMap', this.props)
 
     return(
-      <div>
-        <div id='map' ref={element => this.mapDOMElement = element}/>
-        <button
-          className="button is-primary"
-          onClick={this.changeSaleRadius}
-          name="increase-radius">Increase Sale Reach</button>
-        <button
-          className="button is-primary"
-          onClick={this.changeSaleRadius}
-          name="decrease-radius">Decrease Sale Reach</button>
-      </div>
+      <div id='map' ref={element => this.mapDOMElement = element}/>
     )
   }
 }
