@@ -86,7 +86,7 @@ with app.app_context():
         'lat': '51.507877',
         'lng': '-0.087732',
         'phone_number': '+447 000 111 22',
-        'category': {
+        'categories': {
             'id': '14',
             'type': 'Coffee'
         },
@@ -106,7 +106,7 @@ with app.app_context():
         'lat': '51.510960',
         'lng': '-0.075130',
         'phone_number': '+447 000222333',
-        'category': {
+        'categories': {
             'id': '14',
             'type': 'Coffee'
         },
@@ -126,7 +126,7 @@ with app.app_context():
         'lng': '-0.125250',
         'location': '3 test avenue, Test, N1 1DR',
         'phone_number': '+447 000333444',
-        'category': {
+        'categories': {
             'id': '12',
             'type': 'Leisure'
         },
@@ -146,7 +146,7 @@ with app.app_context():
         'lat': '51.507565',
         'lng': '-0.127500',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '5',
             'type': 'Fitness'
         },
@@ -166,7 +166,7 @@ with app.app_context():
         'lat': '51.367565',
         'lng': '-0.128570',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '5',
             'type': 'Fitness'
         },
@@ -186,7 +186,7 @@ with app.app_context():
         'lat': '51.535231',
         'lng': '-0.108490',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '1',
             'type': 'Fashion'
         },
@@ -206,7 +206,7 @@ with app.app_context():
         'lat': '51.533950',
         'lng': '-0.1208497',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '1',
             'type': 'Fashion'
         },
@@ -226,7 +226,7 @@ with app.app_context():
         'lat': '51.506178',
         'lng': '-0.102310',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '2',
             'type': 'Lunch'
         },
@@ -246,7 +246,7 @@ with app.app_context():
         'lat': '51.507565',
         'lng': '-0.127500',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '2',
             'type': 'Lunch'
         },
@@ -266,7 +266,7 @@ with app.app_context():
         'lat': '51.5027591',
         'lng': '-0.09544334',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '3',
             'type': 'Shopping'
         },
@@ -286,7 +286,7 @@ with app.app_context():
         'lat': '51.46898033',
         'lng': '-0.1043702',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '3',
             'type': 'Shopping'
         },
@@ -306,7 +306,7 @@ with app.app_context():
         'lat': '51.4689803',
         'lng': '-0.1160432',
         'phone_number': '+1347 123454322',
-        'category': {
+        'categories': {
             'id': '4',
             'type': 'Clothes'
         },
@@ -326,7 +326,7 @@ with app.app_context():
         'lat': '51.454007052',
         'lng': '-0.1318361054',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '4',
             'type': 'Clothes'
         },
@@ -346,7 +346,7 @@ with app.app_context():
         'lat': '51.45101180786',
         'lng': '-0.1558686982',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '6',
             'type': 'Plants'
         },
@@ -366,7 +366,7 @@ with app.app_context():
         'lat': '51.471974396',
         'lng': '-0.203933883789',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '6',
             'type': 'Plants'
         },
@@ -386,7 +386,7 @@ with app.app_context():
         'lat': '51.4869417790',
         'lng': '-0.204620529296',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '6',
             'type': 'Plants'
         },
@@ -406,7 +406,7 @@ with app.app_context():
         'lat': '51.492072322',
         'lng': '-0.223159958007',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '7',
             'type': 'Bars'
         },
@@ -426,7 +426,7 @@ with app.app_context():
         'lat': '51.43474847721',
         'lng': '-0.188827682617',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '7',
             'type': 'Bars'
         },
@@ -446,7 +446,7 @@ with app.app_context():
         'lat': '51.4347484772',
         'lng': '-0.0954438935547',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '7',
             'type': 'Bars'
         },
@@ -466,7 +466,7 @@ with app.app_context():
         'lat': '51.4681248467',
         'lng': '-0.1400758515625',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '8',
             'type': 'Womens Clothes'
         },
@@ -486,7 +486,7 @@ with app.app_context():
         'lat': '51.47240210394',
         'lng': '-0.16479508984',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '8',
             'type': 'Womens Clothes'
         },
@@ -506,7 +506,7 @@ with app.app_context():
         'lat': '51.4907897407',
         'lng': '-0.15380876171877',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '8',
             'type': 'Womens Clothes'
         },
@@ -526,7 +526,7 @@ with app.app_context():
         'lat': '51.49463737766',
         'lng': '-0.22453324902346',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '9',
             'type': 'Mens Clothes'
         },
@@ -546,7 +546,7 @@ with app.app_context():
         'lat': '51.52198898623',
         'lng': '-0.1984407197265909',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '9',
             'type': 'Mens Clothes'
         },
@@ -566,7 +566,7 @@ with app.app_context():
         'lat': '51.49634733427764',
         'lng': '-0.191574264648465',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '9',
             'type': 'Mens Clothes'
         },
@@ -586,7 +586,7 @@ with app.app_context():
         'lat': '51.517716379968',
         'lng': '-0.032272506835965',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '10',
             'type': 'Shoes'
         },
@@ -606,7 +606,7 @@ with app.app_context():
         'lat': '51.50746048877',
         'lng': '0.03913862597653',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '10',
             'type': 'Shoes'
         },
@@ -626,7 +626,7 @@ with app.app_context():
         'lat': '51.521988986522',
         'lng': '-0.0048066865234659',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '10',
             'type': 'Shoes'
         },
@@ -646,7 +646,7 @@ with app.app_context():
         'lat': '51.51942547069028',
         'lng': '-0.0569917451172159',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '10',
             'type': 'Shoes'
         },
@@ -666,7 +666,7 @@ with app.app_context():
         'lat': '51.517716379968',
         'lng': '-0.0775911103515909',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '11',
             'type': 'Electronics'
         },
@@ -686,7 +686,7 @@ with app.app_context():
         'lat': '51.50575094908906',
         'lng': '-0.0968171845703409',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '11',
             'type': 'Electronics'
         },
@@ -706,7 +706,7 @@ with app.app_context():
         'lat': '51.536512850684616',
         'lng': '-0.1311494599609659',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '11',
             'type': 'Electronics'
         },
@@ -726,7 +726,7 @@ with app.app_context():
         'lat': '51.52198898652206',
         'lng': '-0.1407624970703409',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '11',
             'type': 'Electronics'
         },
@@ -746,7 +746,7 @@ with app.app_context():
         'lat': '51.51258872299006',
         'lng': '-0.0940706025390904',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '12',
             'type': 'Leisure'
         },
@@ -766,7 +766,7 @@ with app.app_context():
         'lat': '51.50404134526334',
         'lng': '-0.07347123730471594',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '12',
             'type': 'Leisure'
         },
@@ -786,7 +786,7 @@ with app.app_context():
         'lat': '51.5142980061192',
         'lng': '-0.0968171845703409',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '13',
             'type': 'Beauty'
         },
@@ -806,7 +806,7 @@ with app.app_context():
         'lat': '51.50062194518504',
         'lng': '-0.11055009472659094',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '13',
             'type': 'Beauty'
         },
@@ -826,7 +826,7 @@ with app.app_context():
         'lat': '51.517716379968476',
         'lng': '-0.1366426240234659',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '14',
             'type': 'Coffee'
         },
@@ -846,7 +846,7 @@ with app.app_context():
         'lat': '51.515152623632524',
         'lng': '-0.1311494599609659',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '14',
             'type': 'Coffee'
         },
@@ -866,7 +866,7 @@ with app.app_context():
         'lat': '51.48352109602779',
         'lng': '-0.1709748994140909',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '14',
             'type': 'Coffee'
         },
@@ -886,7 +886,7 @@ with app.app_context():
         'lat': '51.47582362098229',
         'lng': '-0.0940706025390909',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '14',
             'type': 'Coffee'
         },
@@ -906,7 +906,7 @@ with app.app_context():
         'lat': '51.52369791691055',
         'lng': '-0.1500322114258097',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '14',
             'type': 'Coffee'
         },
@@ -926,7 +926,7 @@ with app.app_context():
         'lat': '51.50703310986577',
         'lng': '-0.1589586030273722',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '15',
             'type': 'Food'
         },
@@ -946,7 +946,7 @@ with app.app_context():
         'lat': '51.51686181055704',
         'lng': '-0.06351487744143469',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '15',
             'type': 'Food'
         },
@@ -966,7 +966,7 @@ with app.app_context():
         'lat': '51.51515262363254',
         'lng': '-0.09716050732424719',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '15',
             'type': 'Food'
         },
@@ -986,7 +986,7 @@ with app.app_context():
         'lat': '51.52198898652209',
         'lng': '-0.05596177685549719',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '15',
             'type': 'Food'
         },
@@ -1006,7 +1006,7 @@ with app.app_context():
         'lat': '51.51173405737399',
         'lng': '-0.0233461152344034',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '15',
             'type': 'Food'
         },
@@ -1026,7 +1026,7 @@ with app.app_context():
         'lat': '51.517716379968505',
         'lng': '-0.136299301269559',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '15',
             'type': 'Food'
         },
@@ -1046,7 +1046,7 @@ with app.app_context():
         'lat': '51.46769709899375',
         'lng': '-0.1349260102539347',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '15',
             'type': 'Food'
         },
@@ -1066,7 +1066,7 @@ with app.app_context():
         'lat': '51.457002101',
         'lng': '-0.110550094',
         'phone_number': '+447 123454322',
-        'category': {
+        'categories': {
             'id': '15',
             'type': 'Food'
         },
@@ -1084,7 +1084,7 @@ with app.app_context():
     expiry_date='2019-05-01 9:22:54',
     content='For three hours only, we will be serving the best coffee for half price',
     sale_fees=300,
-    category=coffee
+    categories=coffee
     )
 
     flash_sale_1.save()
@@ -1095,7 +1095,7 @@ with app.app_context():
     expiry_date='2019-03-03 18:25:27',
     content='Come and enjoy the latest winter collection at a ridiculous price!!! ',
     sale_fees=213,
-    category=womens_clothes
+    categories=womens_clothes
     )
 
     flash_sale_2.save()

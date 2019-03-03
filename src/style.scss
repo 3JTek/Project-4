@@ -134,12 +134,6 @@ section .customer-profile {
   .customer-update form {
     display: flex;
     justify-content: space-around;
-
-    .mapbox-field {
-      height: 2rem;
-      width: 38rem;
-      margin: 0;
-    }
   }
 
   .selected-categories {

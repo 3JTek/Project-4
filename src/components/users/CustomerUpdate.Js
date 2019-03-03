@@ -27,9 +27,8 @@ const CustomerUpdateForm = ({
           <label className="label">Update your location</label>
           <div className="control is-expanded">
             <MapboxAutocomplete
-              className="input"
               publicKey={process.env.MAPBOX_KEY}
-              inputClass='mapbox-field form-control search'
+              inputClass='input form-control search'
               onSuggestionSelect={suggestionSelect}
               resetSearch={false}
               name="location"
