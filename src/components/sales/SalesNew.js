@@ -9,6 +9,7 @@ import axios from 'axios'
 import Loading from '../common/Loading'
 import Flash from '../../lib/Flash'
 import Auth from '../../lib/Auth'
+import SaleNewMiniMap from './SaleNewMiniMap'
 
 class SaleNew extends React.Component{
   constructor(props){
@@ -97,6 +98,7 @@ class SaleNew extends React.Component{
                       onChange={this.handleChange}
                     />
                   </div>
+                  <hr />
                   <div className="field">
                     <label className="label">Category</label>
                     <span
@@ -154,7 +156,10 @@ class SaleNew extends React.Component{
                   </div>
                 </div>
                 <hr />
-                <h1 className="title is-4">Map Goes here</h1>
+                <div className="field">
+                  <label className="label">Sale Description</label>
+                  <SaleNewMiniMap businessLatLng={this.state.newSale.user}/>
+                </div>
                 <hr />
               </div>
             </div>

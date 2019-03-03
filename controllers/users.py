@@ -1,3 +1,4 @@
+from urllib.parse import parse_qs, urlparse
 from flask import Blueprint, request, jsonify, g
 from models.user import User, UserSchema
 from lib.secure_route import secure_route
@@ -10,7 +11,15 @@ api = Blueprint('users', __name__)
 
 @api.route('/users', methods=['GET'])
 def user_index():
-    users = User.query.all()
+
+    #Check if there is a query string to only return customers (not merchants)
+    parsed = urlparse(request.url)
+
+    if parse_qs(parsed.query) != {'customers_only':['true']}:
+        users = User.query.all()
+    else:
+        users = User.query.filter_by(is_merchant=False)
+
     return users_schema.jsonify(users)
 
 @api.route('/users/<int:user_id>', methods=['GET'])

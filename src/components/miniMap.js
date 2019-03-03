@@ -63,7 +63,23 @@ class MiniMap extends React.Component {
     })
   }
 
+  calculDistance(){
+    const {customer1, customer2} = this.state.customers
+    const [lng, lat] = this.state.latlngReversed
+    const distanceX = Math.abs(customer2.lng - lng)
+    const distanceY = Math.abs(customer2.lat - lat)
+
+    console.log('diff latlng', distanceX, distanceY)
+    const kmX = distanceX * (111.320*Math.cos(customer1.lat*Math.PI/180))
+    const kmY = distanceY * 110.574
+    const kmDistance = Math.sqrt(Math.pow(kmX,2) + Math.pow(kmY,2))
+    console.log('kmX, kmY',kmX, kmY)
+    console.log('kmDistance',kmDistance)
+
+  }
+
   createGeoJSONCircle (center, radiusInKm, points) {
+    console.log('Radius', radiusInKm)
     if(!points) points = 64
 
     const coords = {
@@ -106,7 +122,7 @@ class MiniMap extends React.Component {
     Object.keys(this.state.customers).map(customer => {
       const {lat, lng} = this.state.customers[customer]
       const markerDOM = document.createElement('div')
-      markerDOM.className = 'custom-marker'
+      markerDOM.className = 'customer-marker'
       return new mapboxgl.Marker({element: markerDOM, anchor: 'center'})
         .setLngLat([String(lng), String(lat)])
         .addTo(this.map)
@@ -117,6 +133,7 @@ class MiniMap extends React.Component {
     this.createMap()
       .then(() => this.createMarkups())
       .then(() => this.map.on('load', () => this.addSource()))
+      .then(() => this.calculDistance())
   }
 
   componentDidUpdate(){
