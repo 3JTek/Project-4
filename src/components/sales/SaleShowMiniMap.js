@@ -21,7 +21,7 @@ class SaleShowMiniMap extends React.Component {
         style: 'mapbox://styles/mapbox/streets-v10',
         center: [this.state.lng, this.state.lat],
         scrollZoom: true,
-        zoom: 10
+        zoom: 11
       })
       resolve()
     })
