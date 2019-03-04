@@ -13,7 +13,7 @@ with app.app_context():
     #Category seeds.........................................
     fashion = Category(type='Fashion', logo='assets/clothes.png')
     fashion.save()
-    lunch = Category(type='Lunch', logo='assets/cupcake.png' )
+    lunch = Category(type='Lunch', logo='assets/cupcake.png')
     lunch.save()
     shopping = Category(type='Shopping', logo='assets/shopping-bag.png')
     shopping.save()
@@ -41,8 +41,6 @@ with app.app_context():
     coffee.save()
     food = Category(type='Food', logo='assets/cutlery.png')
     food.save()
-
-
 
     zara, errors = user_schema.load({
         'email': 'zara@test.com',
@@ -103,7 +101,7 @@ with app.app_context():
         'lat': '51.510960',
         'lng': '-0.075130',
         'phone_number': '+447 000222333',
-        'categories': [{'id':1, 'type':'Coffee'}],
+        'categories': [{'id':14, 'type':'Coffee'}],
 
         'is_merchant': 'False'
     })
@@ -930,7 +928,6 @@ with app.app_context():
     title='Half price coffee',
     expiry_date='2019-05-01 9:22:54',
     content='For three hours only, we will be serving the best coffee for half price',
-    sale_fees=300,
     category=coffee
     )
 
@@ -941,7 +938,6 @@ with app.app_context():
     title='Winter collection 50% Off',
     expiry_date='2019-03-03 18:25:27',
     content='Come and enjoy the latest winter collection at a ridiculous price!!! ',
-    sale_fees=213,
     category=womens_clothes
     )
 

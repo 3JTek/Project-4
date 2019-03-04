@@ -1,5 +1,6 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
+import Promise from 'bluebird'
 import moment from 'moment'
 
 import 'react-datepicker/dist/react-datepicker.css'
@@ -18,14 +19,12 @@ class SaleNew extends React.Component{
         title: '',
         content: '',
         category: '',
-        sale_fees: 94,
         expiry_date: moment().format('YYYY-MM-DD hh:mm:ss'),
         user: this.props.location.state
       },
-      customer: [],
-      categories: [],
       saleRadius: 2
     }
+    this.sale_fees = '',
     this.customersDistance = []
 
     this.handleChange = this.handleChange.bind(this)
@@ -39,21 +38,17 @@ class SaleNew extends React.Component{
     this.setState({newSale: {...this.state.newSale, [name]: value }})
   }
 
+  changeSaleRadius({ target: { name }}){
+    const newSaleRadius = name === 'increase-radius' ?
+      this.state.saleRadius + 0.2:
+      this.state.saleRadius - 0.2
+    this.setState({saleRadius: newSaleRadius})
+  }
+
   handleDateChange(date) {
     this.setState({newSale: {...this.state.newSale,
       expiry_date: moment(date).format('YYYY-MM-DD HH:mm:ss')
     }})
-  }
-
-  handleSubmit(e) {
-    e.preventDefault()
-    axios
-      .post('/api/sales', this.state.newSale)
-      .then(()=> {
-        Flash.setMessage('success', 'Sale Successfuly Created')
-        this.props.history.push('/profile')
-      })
-      .catch(err => this.setState({ errors: err.response.data}))
   }
 
   handleSelect({target: { value }}) {
@@ -66,13 +61,11 @@ class SaleNew extends React.Component{
   }
 
   calculSalePrice(){
-    return this.customersDistance.reduce((price, customerDistance) => {
-      return customerDistance <= this.state.saleRadius? price += 46 : price
-    },0)
+    return this.customersToContact().length * 46
   }
 
-  calculDistanceFromBusiness(){
-    this.customersDistance = this.state.customers.map(customer => {
+  calculDistanceFromBusiness(customers){
+    this.customersDistance = customers.map(customer => {
       const businessLat = this.state.newSale.user.lat
       const businessLng = this.state.newSale.user.lng
       const {lat, lng} = customer
@@ -84,36 +77,53 @@ class SaleNew extends React.Component{
     })
   }
 
-  changeSaleRadius({ target: { name }}){
-    const newSaleRadius = name === 'increase-radius' ?
-      this.state.saleRadius + 0.2:
-      this.state.saleRadius - 0.2
-    this.setState({saleRadius: newSaleRadius})
+  customersToContact(){
+    return this.customersDistance.reduce((newArray, distance, index) => {
+      if(distance <= this.state.saleRadius){
+        //Return an array of category ids for each customer
+        const customerCategoryIds = this.state.customers[index]
+          .categories.map(category => category.id)
+        //Compare the above array to the sale category
+        if(customerCategoryIds.includes(this.state.newSale.category.id)){
+          return newArray.concat(this.state.customers[index])
+        }
+      }
+      return newArray
+    },[])
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+
+    const customerToReach = this.customersToContact()
+    axios
+      .post('/api/sales', {...this.state.newSale, customerToReach })
+      .then(()=> {
+        Flash.setMessage('success', 'Sale Successfuly Created')
+        this.props.history.push('/profile')
+      })
+      .catch(err => this.setState({ errors: err.response.data}))
   }
 
   componentDidMount(){
-
-    axios('/api/categories')
-      .then(({data}) => this.setState({ categories: data }))
-
-    axios('/api/users?customers_only=true')
-      .then(({data}) => this.setState({customers: data }))
-
+    Promise.props({
+      categories: axios('/api/categories').then(res => res.data),
+      customers: axios('/api/users?customers_only=true').then(res => res.data)
+    })
+      .then(data => {
+        this.calculDistanceFromBusiness(data.customers)
+        this.setState({...data})
+      })
   }
 
   render(){
     if(!this.state.categories || !this.state.customers) return <Loading/>
-    const { title, content, sale_fees, expiry_date} = this.state.newSale // eslint-disable-line
-    this.calculDistanceFromBusiness()
+    const { title, content, expiry_date} = this.state.newSale // eslint-disable-line
+    const saleFee = this.calculSalePrice()
+
     console.log('State before render', this.state)
     return(
       <section>
-        <section>
-          <div
-            className="business-hero"
-            style={{backgroundImage: 'url("https://s2.qwant.com/thumbr/0x0/6/5/af0ed2715779781ecbe6b6b34b3b5ec6e09bfcc18deda99ec3f3268a0ef770/01597b814ecb489.jpg?u=https%3A%2F%2Fpng.pngtree.com%2Fthumb_back%2Ffw800%2Fback_pic%2F05%2F08%2F26%2F01597b814ecb489.jpg&q=0&b=1&p=0&a=1")'}}>
-          </div>
-        </section>
         <section className="section">
           <div className="container">
             <div className="columns">
@@ -132,9 +142,7 @@ class SaleNew extends React.Component{
                   <hr />
                   <div className="field">
                     <label className="label">Category</label>
-                    <span
-                      className="select is-fullwidth"
-                    >
+                    <span className="select is-fullwidth">
                       <select
                         name="category"
                         defaultValue="Please choose a category"
@@ -168,7 +176,7 @@ class SaleNew extends React.Component{
                   </div>
                   <hr />
                 </div>
-                <p>The fees for this sale is <strong>£ {this.calculSalePrice()}</strong></p>
+                <p>The fees for this sale is <strong>£ {saleFee}</strong></p>
               </div>
               <div className="column is-half">
                 <div className="field">
@@ -188,7 +196,7 @@ class SaleNew extends React.Component{
                 </div>
                 <hr />
                 <div className="field">
-                  <label className="label">Sale Description</label>
+                  <label className="label">Sale Reach</label>
                   <SaleNewMiniMap
                     {...this.state}
                     customersDistance={this.customersDistance}

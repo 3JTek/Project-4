@@ -15,7 +15,7 @@ def user_index():
     #Check if there is a query string to only return customers (not merchants)
     parsed = urlparse(request.url)
 
-    if parse_qs(parsed.query) != {'customers_category':['true']}:
+    if parse_qs(parsed.query) != {'customers_only':['true']}:
         users = User.query.all()
     else:
         users = User.query.filter_by(is_merchant=False)

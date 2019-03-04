@@ -70,7 +70,7 @@ class SaleShowMiniMap extends React.Component {
   }
 
   createMarkups(){
-    this.customers.map( (customer, index) => {
+    this.props.customers.map( (customer, index) => {
       const {lat, lng} = customer
       const markerDOM = document.createElement('div')
       markerDOM.className = 'customer-marker'
@@ -98,7 +98,6 @@ class SaleShowMiniMap extends React.Component {
   updateMarkersReached(){
 
     this.props.customersDistance.map((distance, index) => {
-
       document.getElementById(index).classList.remove('customer-reached')
       document.getElementById(index).classList.remove('customer-hide')
 
