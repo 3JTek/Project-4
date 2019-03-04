@@ -70,7 +70,7 @@ nav {
   align-items: center;
 
   &.displayed {
-    height: 10vh;
+    height: 5vh;
   }
 
   .container {
@@ -144,6 +144,7 @@ section .customer-profile {
   border: 2px solid red;
 }
 //================== MAP ====================
+
 #map {
   height: 300px;
   width: 300px;
