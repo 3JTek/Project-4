@@ -36,6 +36,7 @@ class App extends React.Component{
 
             <Route path="/test" component={Test} />
             <Route path="/profile/new-sale" component={SalesNew} />
+            <Route path="/sales/:id/" component={SalesShow} />            
             <Route path="/sales/:id" component={SalesShow} />
             <Route path="/profile" component={UserProfile} />
             <Route path="/signup" component={RegisterCustomer} />

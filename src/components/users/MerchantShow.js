@@ -34,8 +34,7 @@ const MerchantShow = (props) => {
               {currentSale.map( sale =>
                 <Link
                   key= {sale.id}
-                  to={{ pathname: `/sales/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`,
-                    state: { id: sale.id, saleExpired: false  } }}>
+                  to={`/sales/${sale.id}/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`}>
                   <p>{sale.title}</p>
                 </Link>
               )}
@@ -44,8 +43,7 @@ const MerchantShow = (props) => {
               {pastSale.map( sale =>
                 <Link
                   key= {sale.id}
-                  to={{ pathname: `/sales/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`,
-                    state: { id: sale.id, saleExpired: true } }}>
+                  to={`/sales/${sale.id}/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`}>
                   <p>{sale.title}</p>
                 </Link>
               )}

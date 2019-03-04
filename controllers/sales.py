@@ -33,7 +33,9 @@ def sale_create():
         return jsonify(errors), 422
 
     #Use Twillion API to send a text Message
-    # send_text_message(sale)
+    for user in sale.category.users:
+        if user.email == 'jeremy@gmail.com':
+            send_text_message(sale)
 
     sale.save()
 

@@ -8,7 +8,6 @@ import axios from 'axios'
 
 import Loading from '../common/Loading'
 import Flash from '../../lib/Flash'
-import Auth from '../../lib/Auth'
 import SaleNewMiniMap from './SaleNewMiniMap'
 
 class SaleNew extends React.Component{
@@ -37,7 +36,6 @@ class SaleNew extends React.Component{
   }
 
   handleChange({target: { name, value }}) {
-    // const data = { ...this.state.newSale, [name]: value }
     this.setState({newSale: {...this.state.newSale, [name]: value }})
   }
 

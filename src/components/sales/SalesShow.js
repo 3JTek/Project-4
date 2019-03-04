@@ -20,7 +20,7 @@ class SaleShow extends React.Component{
   }
 
   componentDidMount(){
-    axios(`/api/sales/${this.props.location.state.id}`)
+    axios(`/api/sales/${this.props.match.params.id}`)
       .then(({data}) => this.setState({...data}))
       .catch(({response}) => this.setState({...response}))
   }
@@ -31,6 +31,7 @@ class SaleShow extends React.Component{
     if(this.state.status === 404) return <PageNotFound/>
     const {content, expiry_date, title, user} = this.state // eslint-disable-line
     const { daysRemaining, hoursRemaining } = this.calulateTimeRemaining()
+    const saleExpired = new Date(this.state.expiry_date) - Date.now() > 0 ? false : true
     console.log(this.state)
     console.log(daysRemaining, hoursRemaining)
     return(
@@ -52,7 +53,7 @@ class SaleShow extends React.Component{
                 <hr />
                 <p>{content}</p>
                 <hr />
-                {this.props.location.state.saleExpired === false &&
+                {!saleExpired &&
                   <p>
                     {daysRemaining &&
                       <span><strong>{daysRemaining}</strong> day(s) and </span>
