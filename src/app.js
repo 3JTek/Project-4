@@ -14,8 +14,6 @@ import SalesShow from './components/sales/SalesShow'
 import SalesNew from './components/sales/SalesNew'
 import Test from './Test'
 
-import MiniMap from './components/MiniMap'
-
 class App extends React.Component{
   constructor(){
     super()
@@ -31,12 +29,9 @@ class App extends React.Component{
           <Navbar />
           <FlashMessages />
           <Switch>
-
-            <Route path="/map" component={MiniMap} />
-
             <Route path="/test" component={Test} />
             <Route path="/profile/new-sale" component={SalesNew} />
-            <Route path="/sales/:id/" component={SalesShow} />            
+            <Route path="/sales/:id/" component={SalesShow} />
             <Route path="/sales/:id" component={SalesShow} />
             <Route path="/profile" component={UserProfile} />
             <Route path="/signup" component={RegisterCustomer} />
