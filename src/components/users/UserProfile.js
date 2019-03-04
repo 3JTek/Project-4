@@ -82,10 +82,7 @@ class UserProfile extends React.Component{
     if(this.state === '') return <Loading/>
     //If the user doesn't exist (anymore) in the database, return 404
     if(this.state.status === 404) return <PageNotFound/>
-<<<<<<< HEAD
 
-=======
->>>>>>> dev
     return(
       <section>
         {this.state.is_merchant === true && <MerchantShow  {...this.state}/>}
