@@ -5,6 +5,8 @@ import Auth from '../../lib/Auth'
 import Loading from '../common/Loading'
 import Flash from '../../lib/Flash'
 
+import { withRouter } from 'react-router-dom'
+
 import axios from 'axios'
 
 const Category = ({ id, type, logo, isSelected, onChange }) => (
@@ -45,7 +47,6 @@ class CustomerShow extends React.Component {
   }
 
   componentDidMount() {
-    console.log('HEELLOO')
     axios(`/api/users/${Auth.getPayload().sub}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
@@ -117,7 +118,7 @@ class CustomerShow extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log('props',this.props.history)
+
     const { user, categories } = this.state
     const dataToSend = {
       ...user,
@@ -126,14 +127,14 @@ class CustomerShow extends React.Component {
         .map(category => category)
 
     }
-    console.log('dataToSend',dataToSend)
     axios
       .put(`/api/users/${Auth.getPayload().sub}`, dataToSend,
         { headers: { Authorization: `Bearer ${Auth.getToken()}` } }
       )
-      .then((res) => {
-        console.log(res.data)
+      .then(() => {
         Flash.setMessage('info', 'Changes saved')
+        this.props.history.push('/profile')
+
       })
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
@@ -170,13 +171,12 @@ class CustomerShow extends React.Component {
 
   render() {
     if (!this.state) return <Loading />
-    console.log('THIS.STATE', this.state)
     return (
       <div className="container">
         <div>
-          <div>
+          <div className="container">
             <form
-              className="columns customer-update"
+              className="columns is-multiline customer-update"
               onSubmit={this.handleSubmit}>
               {this.createCategories()}
               <div>
@@ -221,10 +221,11 @@ class CustomerShow extends React.Component {
                   />
                 </div>
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="button">
                 Save
               </button>
             </form>
+
           </div>
         </div>
       </div>
@@ -232,4 +233,4 @@ class CustomerShow extends React.Component {
   }
 }
 
-export default CustomerShow
+export default withRouter(CustomerShow)

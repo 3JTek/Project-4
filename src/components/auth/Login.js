@@ -78,6 +78,7 @@ class Login extends React.Component {
                     />
                     {errors.message && <small className="help is-danger">{errors.message}</small>}
                   </div>
+
                 </div>
                 <div className="control">
                   <button className="button is-info">Log in</button>

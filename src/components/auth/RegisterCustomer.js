@@ -51,6 +51,7 @@ class RegisterCustomer extends React.Component {
   }
 
   handleSubmit(e) {
+  
     e.preventDefault()
     axios
       .post('/api/register', this.state.data)
@@ -58,7 +59,7 @@ class RegisterCustomer extends React.Component {
         Flash.setMessage('success', 'Successfully registered')
         this.props.history.push('/login')
       })
-      .catch(err => this.setState({ errors: err.response.data}))
+      .catch(err => console.log(err))
   }
 
   suggestionSelect(result, lat, lng ) {
@@ -77,9 +78,7 @@ class RegisterCustomer extends React.Component {
       email,
       password,
       password_confirmation,
-      location,
       phone_number,
-      category
     } = this.state.data
     const errors = this.state.errors
     if (!this.state.categories) return <Loading />

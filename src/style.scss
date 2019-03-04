@@ -70,7 +70,7 @@ nav {
   align-items: center;
 
   &.displayed {
-    height: 5vh;
+    height: 8vh;
   }
 
   .container {
@@ -126,9 +126,6 @@ nav {
 //======================= Customer Show page ============
 
 section .customer-profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   height: 100vh;
 }
 
@@ -137,7 +134,7 @@ section .customer-profile {
 }
 
 .customer-update input[type="checkbox"] + label {
-  border: 2px solid white;
+  height: 6rem;
 }
 
 .customer-update input[type="checkbox"]:checked + label img {
@@ -156,7 +153,8 @@ section .customer-profile {
   width: 10px;
   border-radius: 50%;
 }
-.customer-reached{
+
+.customer-reached {
   background-color: blue;
 }
 .customer-hide{
