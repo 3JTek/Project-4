@@ -1,5 +1,5 @@
 //Loading spinning wheel
-@import "~bulma/bulma";
+@import "~bulma/bulma"; // ===================== MISC ==========
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -14,6 +14,39 @@ $thickness: 6px !default;
 $base-color: #fff !default;
 $wheel-color: #6e94cc !default;
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+}
+
+nav {
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+}
+//================= HOME =================
+
+.home-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-image: url("https://images.unsplash.com/41/NmnKzKIyQsyGIkFjiNsb_20140717_212636-3.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+
+  h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 600;
+  }
+}
+//============= LOADING ===========================
+
 #loading {
   margin: 5% auto;
   height: $size;
@@ -26,7 +59,32 @@ $wheel-color: #6e94cc !default;
   }
   animation: spin 800ms infinite linear;
 }
-//Page not found
+//============== LOGIN ===========================
+
+#loginFormSection {
+  height: 0;
+  padding: 0;
+  transition: height 0.7s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  &.displayed {
+    height: 5vh;
+  }
+
+  .container {
+    width: 90%;
+  }
+
+  form {
+    h2,
+    label {
+      color: #fff;
+    }
+  }
+}
+//Page not found =============================
 
 .page-not-found {
   height: 100vh;
@@ -35,7 +93,7 @@ $wheel-color: #6e94cc !default;
   justify-content: center;
   align-items: center;
 }
-//Sale show page
+//Sale show page =======================
 
 .business-hero {
   display: flex;
@@ -67,13 +125,25 @@ $wheel-color: #6e94cc !default;
 }
 //======================= Customer Show page ============
 
-.customer-profile-select {
+section .customer-profile {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100vh;
-  justify-content: center;
-  margin-top: 5rem;
 }
-//Map
+
+.customer-update input[type="checkbox"] {
+  display: none;
+}
+
+.customer-update input[type="checkbox"] + label {
+  border: 2px solid white;
+}
+
+.customer-update input[type="checkbox"]:checked + label img {
+  border: 2px solid red;
+}
+//================== MAP ====================
 
 #map {
   width: 100%;
@@ -95,13 +165,14 @@ $wheel-color: #6e94cc !default;
   background-size: contain;
   height: 30px;
   width: 30px;
-  background-image: url("https://s1.qwant.com/thumbr/0x380/9/3/956b158d13001c1f57346b9fa0932fa2bc0aba7071bdc679d34e390524c1da/2000px-Map_marker.svg.png?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F8%2F88%2FMap_marker.svg%2F2000px-Map_marker.svg.png&q=0&b=1&p=0&a=1")
+  background-image: url("https://s1.qwant.com/thumbr/0x380/9/3/956b158d13001c1f57346b9fa0932fa2bc0aba7071bdc679d34e390524c1da/2000px-Map_marker.svg.png?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F8%2F88%2FMap_marker.svg%2F2000px-Map_marker.svg.png&q=0&b=1&p=0&a=1");
 }
-
 //New Sale
-.react-datepicker-wrapper{
+
+.react-datepicker-wrapper {
   width: 100%;
 }
-.react-datepicker__input-container{
-  width:100%;
+
+.react-datepicker__input-container {
+  width: 100%;
 }

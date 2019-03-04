@@ -126,15 +126,13 @@ class RegisterMerchant extends React.Component {
           <div className="field">
             <label className="label">Please select a location</label>
             <div className="control is-expanded">
-              <div className="input">
-                <MapboxAutocomplete
-                  publicKey={process.env.MAPBOX_KEY}
-                  inputClass='form-control search'
-                  onSuggestionSelect={this.suggestionSelect}
-                  resetSearch={false}
-                  name="location"
-                />
-              </div>
+              <MapboxAutocomplete
+                publicKey={process.env.MAPBOX_KEY}
+                inputClass='input form-control search'
+                onSuggestionSelect={this.suggestionSelect}
+                resetSearch={false}
+                name="location"
+              />
             </div>
           </div>
           <div className="field">
