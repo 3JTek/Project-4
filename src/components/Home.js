@@ -6,6 +6,9 @@ const Home = () => {
   return(
     <section className="section">
       <div className="container">
+        <div className="home-hero">
+          <h1>The best sales should find you</h1>
+        </div>
         <Link to={'/register'}>
           <h1>Register as Merchant</h1>
         </Link>

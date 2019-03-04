@@ -33,9 +33,9 @@ class Login extends React.Component {
       .then((res) => {
         Auth.setToken(res.data.token)
         Flash.setMessage('success', res.data.message)
-        console.log('RES', res)
       })
       .then(() => {
+        this.props.toggle('loginActive')
         this.props.history.push('/profile')
       })
       .catch(err => this.setState({ errors: err.response.data}))
@@ -46,7 +46,10 @@ class Login extends React.Component {
   render() {
     const errors = this.state.errors
     return (
-      <main>
+      <main
+        className={ `section ${this.props.displayed}` }
+        id="loginFormSection"
+      >
         <div className="container">
 
           <form onSubmit={this.handleSubmit}>

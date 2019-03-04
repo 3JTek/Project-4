@@ -18,10 +18,6 @@ class RegisterCustomer extends React.Component {
         lat: '',
         lng: '',
         phone_number: '',
-        category: {
-          id: '',
-          type: ''
-        },
         is_merchant: 'False'
       },
       errors: {}
@@ -135,15 +131,13 @@ class RegisterCustomer extends React.Component {
             <div className="field">
               <label className="label">Please select a location</label>
               <div className="control is-expanded">
-                <div className="input">
-                  <MapboxAutocomplete
-                    publicKey={process.env.MAPBOX_KEY}
-                    inputClass='form-control search'
-                    onSuggestionSelect={this.suggestionSelect}
-                    resetSearch={false}
-                    name="location"
-                  />
-                </div>
+                <MapboxAutocomplete
+                  publicKey={process.env.MAPBOX_KEY}
+                  inputClass='input form-control search'
+                  onSuggestionSelect={this.suggestionSelect}
+                  resetSearch={false}
+                  name="location"
+                />
               </div>
             </div>
             {errors.location && <small className="help is-danger">Please enter an address</small>}
@@ -158,31 +152,8 @@ class RegisterCustomer extends React.Component {
               />
               {errors.phone_number && <small className="help is-danger">Please enter a number</small>}
             </div>
-            <div className="field">
-              <label className="label">Category</label>
-              <span
-                className="select is-fullwidth"
-              >
-                <select
-                  name="category"
-                  defaultValue="Please choose a category"
-                  onChange={this.handleSelect}
-                >
-                  <option disabled>Please choose a category</option>
-                  {this.state.categories.map(category =>
-                    <option
-                      key={category.id}
-                      value={`${category.id}-${category.type}`}
-                    >
-                      {category.type}
-                    </option>
-                  )}
-                </select>
-              </span>
-              {errors.category && <small className="help is-danger">Please select a category</small>}
-            </div>
             <div className="regButton">
-              <button className="button is-info">Submit</button>
+              <button className="button is-info">Register</button>
             </div>
           </form>
         </div>
