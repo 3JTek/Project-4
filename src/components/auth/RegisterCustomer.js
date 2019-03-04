@@ -51,7 +51,7 @@ class RegisterCustomer extends React.Component {
   }
 
   handleSubmit(e) {
-  
+
     e.preventDefault()
     axios
       .post('/api/register', this.state.data)
@@ -86,9 +86,9 @@ class RegisterCustomer extends React.Component {
       <div className="container">
         <div className="section">
           <form onSubmit={this.handleSubmit}>
-            <h2 className="title">Register as a Customer</h2>
+
+            <h1 className="label">Register as a new customer</h1>
             <div className="field">
-              <label className="label">Email</label>
               <div className="control">
                 <input
                   className="input"
@@ -102,7 +102,7 @@ class RegisterCustomer extends React.Component {
               </div>
             </div>
             <div className="field">
-              <label className="label">Password</label>
+
               <input
                 className="input"
                 type="password"
@@ -114,7 +114,7 @@ class RegisterCustomer extends React.Component {
               {errors.password && <small className="help is-danger">{errors.password}</small>}
             </div>
             <div className="field">
-              <label className="label">Password Confirmation</label>
+
               <input
                 className="input"
                 type="password"
@@ -124,8 +124,7 @@ class RegisterCustomer extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="field">
-              <label className="label">Please select a location</label>
+            <div className="mapbox-field field">
               <div className="control is-expanded">
                 <MapboxAutocomplete
                   publicKey={process.env.MAPBOX_KEY}
@@ -138,7 +137,7 @@ class RegisterCustomer extends React.Component {
             </div>
             {errors.location && <small className="help is-danger">Please enter an address</small>}
             <div className="field">
-              <label className="label">Phone number</label>
+
               <input
                 className="input"
                 name="phone_number"

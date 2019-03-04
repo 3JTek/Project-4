@@ -4,19 +4,21 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
   return(
-    <section className="section">
+
+    <div className="home-hero">
       <div className="container">
-        <div className="home-hero">
-          <h1>The best sales should find you</h1>
+        <h2>the best <span id="home-sale">sales</span> should find you</h2>
+        <div className="sign-up">
+          <Link to={'/register'}>
+            <h3>Register as Merchant</h3>
+          </Link>
+          <Link to={'/signup'}>
+            <h3>sign up as a customer</h3>
+          </ Link>
         </div>
-        <Link to={'/register'}>
-          <h1>Register as Merchant</h1>
-        </Link>
-        <Link to={'/signup'}>
-          <h1>Sign up as a Customer</h1>
-        </ Link>
       </div>
-    </section>
+    </div>
+
   )
 }
 
