@@ -64,7 +64,7 @@ class User(db.Model, BaseModel):
 
 class UserSchema(ma.ModelSchema, BaseSchema):
 
-    category = fields.Nested('CategorySchema', many=True, only=('type', 'id'))
+    categories = fields.Nested('CategorySchema', many=True, only=('type', 'id'))
     sales = fields.Nested('SaleSchema', only=('id', 'title', 'expiry_date'), many=True)
 
     # pylint: disable=R0201

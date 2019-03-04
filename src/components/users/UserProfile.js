@@ -13,13 +13,8 @@ class UserProfile extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      selected: ''
+    
     }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleClick = this.handleClick.bind(this)
-    this.suggestionSelect = this.suggestionSelect.bind(this)
   }
 
   componentDidMount(){
@@ -32,50 +27,6 @@ class UserProfile extends React.Component{
 
   }
 
-  handleChange({target: { value }}) {
-    const data = { ...this.state,
-      categories: {
-        id: parseInt(value.split('-')[0]),
-        type: value.split('-')[1]
-      }}
-    this.setState(data)
-  }
-
-  handleFormChange({target: { name, value }}) {
-    if (name === 'email' && value.includes(' ')) return
-    const data = { ...this.state, [name]: value }
-    this.setState({ data })
-  }
-
-  handleClick(e, i){
-    this.setState({ selected: i })
-  }
-
-  handleSubmit(e) {
-    const dataToSend = {...this.state}
-    delete dataToSend.categories
-    e.preventDefault()
-    axios
-      .put(`/api/users/${Auth.getPayload().sub}`, dataToSend,
-        { headers: { Authorization: `Bearer ${Auth.getToken()}` } }
-      )
-      .then((res) => {
-        Flash.setMessage('info', 'Changes saved')
-      })
-      .catch(err => this.setState({ errors: err.response.data.errors }))
-  }
-
-  suggestionSelect(result, lat, lng ) {
-    console.log(result, lat, lng)
-    const data = {
-      ...this.state.data,
-      location: result,
-      lat: parseFloat(lat),
-      lng: parseFloat(lng)
-    }
-    const errors = {...this.state.errors, location: ''}
-    this.setState({ data, errors })
-  }
 
   render(){
 
