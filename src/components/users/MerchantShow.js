@@ -1,10 +1,12 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-const MerchantShow = ({business_name, email, hero_image, location, logo, sales}) => {//eslint-disable-line
+const MerchantShow = (props) => {
 
+  const {categories, business_name, email, hero_image, location, logo, sales} = props //eslint-disable-line
   const currentSale = sales.filter(sale => new Date(sale.expiry_date) - Date.now() > 0)
   const pastSale = sales.filter(sale => new Date(sale.expiry_date) - Date.now() < 0)
+
   return(
     <section>
       <section>
@@ -47,7 +49,7 @@ const MerchantShow = ({business_name, email, hero_image, location, logo, sales})
                   <p>{sale.title}</p>
                 </Link>
               )}
-              <Link to="/profile/new-sale">
+              <Link to={{ pathname: '/profile/new-sale', state: { ...props} }}>
                 <button className="button is-primary">Create a New Sale</button>
               </Link>
             </div>

@@ -39,11 +39,11 @@ class RegisterMerchant extends React.Component {
     e.preventDefault()
     axios
       .post('/api/register', this.state.data)
-      .then(()=> {
+      .then(() => {
         Flash.setMessage('success', 'Successfully registered')
         this.props.history.push('/login')
       })
-      .catch(err => this.setState({ errors: err.response.data}))
+      .catch(err => console.log(err.response))
   }
 
   suggestionSelect(result, lat, lng ) {

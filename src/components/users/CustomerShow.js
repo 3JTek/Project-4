@@ -117,7 +117,7 @@ class CustomerShow extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-
+    console.log('props',this.props.history)
     const { user, categories } = this.state
     const dataToSend = {
       ...user,

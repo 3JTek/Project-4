@@ -20,8 +20,11 @@ class SaleNew extends React.Component{
         content: '',
         category: '',
         sale_fees: 94,
-        expiry_date: moment().format('YYYY-MM-DD hh:mm:ss')
+        expiry_date: moment().format('YYYY-MM-DD hh:mm:ss'),
+        user: this.props.location.state
       },
+      customer: [],
+      categories: [],
       saleRadius: 2
     }
     this.customersDistance = []
@@ -91,11 +94,6 @@ class SaleNew extends React.Component{
   }
 
   componentDidMount(){
-    axios(`/api/users/${Auth.getPayload().sub}`, {
-      headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    })
-      .then(({data}) => this.setState({newSale: {...this.state.newSale, user: data}}))
-      .catch(({response}) => this.setState({...response}))
 
     axios('/api/categories')
       .then(({data}) => this.setState({ categories: data }))

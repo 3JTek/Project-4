@@ -159,7 +159,9 @@ section .customer-profile {
 .customer-reached{
   background-color: blue;
 }
-
+.customer-hide{
+  display: none;
+}
 .business-marker {
   background-repeat: no-repeat;
   background-size: contain;

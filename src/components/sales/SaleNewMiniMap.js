@@ -5,8 +5,8 @@ import mapboxgl from 'mapbox-gl'
 class SaleShowMiniMap extends React.Component {
   constructor(props){
     super(props)
-    this.newSale = this.props.newSale,
     this.categories = this.props.categories
+    this.newSale = this.props.newSale
     this.user = this.props.user
     this.customers = this.props.customers
     this.customersDistance = this.props.customersDistance
@@ -96,11 +96,24 @@ class SaleShowMiniMap extends React.Component {
   }
 
   updateMarkersReached(){
-    console.log('updateMarkers')
-    this.customersDistance.map((distance, index) => {
+
+    this.props.customersDistance.map((distance, index) => {
+
       document.getElementById(index).classList.remove('customer-reached')
+      document.getElementById(index).classList.remove('customer-hide')
+
+
       if(distance <= this.props.saleRadius){
         document.getElementById(index).classList.add('customer-reached')
+      }
+
+      //Return an array of category ids for each customer
+      const customerCategoryIds = this.props.customers[index]
+        .categories.map(category => category.id)
+
+      //Compare the above array to the sale category
+      if(!customerCategoryIds.includes(this.props.newSale.category.id)){
+        document.getElementById(index).classList.add('customer-hide')
       }
     })
   }
