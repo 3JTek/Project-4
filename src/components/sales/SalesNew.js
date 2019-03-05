@@ -112,18 +112,12 @@ class SaleNew extends React.Component{
     console.log('State before render', this.state)
     return(
       <section>
-        <section>
-          <div
-            className="business-hero"
-            style={{backgroundImage: 'url("https://s2.qwant.com/thumbr/0x0/6/5/af0ed2715779781ecbe6b6b34b3b5ec6e09bfcc18deda99ec3f3268a0ef770/01597b814ecb489.jpg?u=https%3A%2F%2Fpng.pngtree.com%2Fthumb_back%2Ffw800%2Fback_pic%2F05%2F08%2F26%2F01597b814ecb489.jpg&q=0&b=1&p=0&a=1")'}}>
-          </div>
-        </section>
         <section className="section">
           <div className="container">
             <div className="columns">
               <div className="column is-half">
                 <div className="field">
-                  <label className="label">Sale Title</label>
+                  <h4 className="label">Sale Title</h4>
                   <div className="control">
                     <input
                       className="input"
@@ -135,7 +129,7 @@ class SaleNew extends React.Component{
                   </div>
                   <hr />
                   <div className="field">
-                    <label className="label">Category</label>
+                    <h4 className="label">Category</h4>
                     <span
                       className="select is-fullwidth"
                     >
@@ -159,7 +153,7 @@ class SaleNew extends React.Component{
                 </div>
                 <hr />
                 <div className="field">
-                  <label className="label">Sale Description</label>
+                  <h4 className="label">Sale Description</h4>
                   <div className="control">
                     <textarea
                       className="textarea"
@@ -176,7 +170,7 @@ class SaleNew extends React.Component{
               </div>
               <div className="column is-half">
                 <div className="field">
-                  <label className="label">Expiry Date</label>
+                  <h4 className="label">Expiry Date</h4>
                   <div className="control">
                     <DatePicker
                       className="input date-picker"
@@ -192,7 +186,7 @@ class SaleNew extends React.Component{
                 </div>
                 <hr />
                 <div className="field">
-                  <label className="label">Sale Description</label>
+                  <h4 className="label">Sale Description</h4>
                   <SaleNewMiniMap
                     {...this.state}
                     customersDistance={this.customersDistance}

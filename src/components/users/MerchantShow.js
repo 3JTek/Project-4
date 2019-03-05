@@ -21,34 +21,38 @@ const MerchantShow = ({business_name, email, hero_image, location, logo, sales})
         <div className="container">
           <div className="columns">
             <div className="column is-half">
+              <div>
               <h1 className="title is-4">{business_name/*eslint-disable-line*/}</h1>
+              </div>
               <hr />
-              <p>{email}</p>
+              <h5>{email}</h5>
               <hr />
-              <address>{location}</address>
+              <h5>{location}</h5>
             </div>
-            <div className="column is-half">
-              <h1 className="title is-4">current sales</h1>
+            <div className="column is-quarter">
+              <h1 className="title is-4">current sale</h1>
               {currentSale.map( sale =>
                 <Link
                   key= {sale.id}
                   to={{ pathname: `/sales/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`,
                     state: { id: sale.id, saleExpired: false  } }}>
-                  <p>{sale.title}</p>
+                  <h4>{sale.title}</h4>
                 </Link>
               )}
               <hr />
-              <h1 className="title is-4">sale history</h1>
+              <h1 className="title is-4">sAles history</h1>
               {pastSale.map( sale =>
                 <Link
                   key= {sale.id}
                   to={{ pathname: `/sales/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`,
                     state: { id: sale.id, saleExpired: true } }}>
-                  <p>{sale.title}</p>
+                  <h4>{sale.title}</h4>
                 </Link>
               )}
+            </div>
+            <div className="new-sale-container column is-quarter">
               <Link to="/profile/new-sale">
-                <button className="button is-primary">Create a New Sale</button>
+                <div className="new-sale-button">new sale</div>
               </Link>
             </div>
           </div>
