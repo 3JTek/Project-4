@@ -12,7 +12,6 @@ class Sale(db.Model, BaseModel):
     title = db.Column(db.String(40), nullable=False)
     content = db.Column(db.String(512), nullable=False)
     expiry_date = db.Column(db.DateTime, nullable=False)
-    sale_fees = db.Column(db.Integer, nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
     category = db.relationship('Category', backref='sales')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

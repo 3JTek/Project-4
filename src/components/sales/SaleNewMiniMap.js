@@ -1,12 +1,12 @@
 import React from 'react'
 
-import mapboxgl from 'mapbox-gl'
+import mapboxgl from '../../lib/mapbox-gl'
 
 class SaleShowMiniMap extends React.Component {
   constructor(props){
     super(props)
-    this.newSale = this.props.newSale,
     this.categories = this.props.categories
+    this.newSale = this.props.newSale
     this.user = this.props.user
     this.customers = this.props.customers
     this.customersDistance = this.props.customersDistance
@@ -70,7 +70,7 @@ class SaleShowMiniMap extends React.Component {
   }
 
   createMarkups(){
-    this.customers.map( (customer, index) => {
+    this.props.customers.map( (customer, index) => {
       const {lat, lng} = customer
       const markerDOM = document.createElement('div')
       markerDOM.className = 'customer-marker'
@@ -83,7 +83,6 @@ class SaleShowMiniMap extends React.Component {
 
   createMap(){
     return new Promise(resolve => {
-      mapboxgl.accessToken = process.env.MAPBOX_KEY
       this.map = new mapboxgl.Map({
         container: this.mapDOMElement,
         style: 'mapbox://styles/mapbox/streets-v10',
@@ -96,11 +95,23 @@ class SaleShowMiniMap extends React.Component {
   }
 
   updateMarkersReached(){
-    console.log('updateMarkers')
-    this.customersDistance.map((distance, index) => {
+
+    this.props.customersDistance.map((distance, index) => {
       document.getElementById(index).classList.remove('customer-reached')
+      document.getElementById(index).classList.remove('customer-hide')
+
+
       if(distance <= this.props.saleRadius){
         document.getElementById(index).classList.add('customer-reached')
+      }
+
+      //Return an array of category ids for each customer
+      const customerCategoryIds = this.props.customers[index]
+        .categories.map(category => category.id)
+
+      //Compare the above array to the sale category
+      if(!customerCategoryIds.includes(this.props.newSale.category.id)){
+        document.getElementById(index).classList.add('customer-hide')
       }
     })
   }

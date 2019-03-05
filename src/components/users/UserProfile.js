@@ -38,7 +38,7 @@ class UserProfile extends React.Component{
       <section>
         {this.state.is_merchant === true && <MerchantShow  {...this.state}/>}
         {this.state.is_merchant === false &&
-          <CustomerShow />
+          <CustomerShow {...this.props}/>
         }
       </section>
     )

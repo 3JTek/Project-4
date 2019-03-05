@@ -1,10 +1,12 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-const MerchantShow = ({business_name, email, hero_image, location, logo, sales}) => {//eslint-disable-line
+const MerchantShow = (props) => {
 
+  const {categories, business_name, email, hero_image, location, logo, sales} = props //eslint-disable-line
   const currentSale = sales.filter(sale => new Date(sale.expiry_date) - Date.now() > 0)
   const pastSale = sales.filter(sale => new Date(sale.expiry_date) - Date.now() < 0)
+
   return(
     <section>
       <section>
@@ -21,38 +23,40 @@ const MerchantShow = ({business_name, email, hero_image, location, logo, sales})
         <div className="container">
           <div className="columns">
             <div className="column is-half">
+<<<<<<< HEAD
 
               <h1 className="title is-4">{business_name/*eslint-disable-line*/}</h1>
+=======
+              <h1 className="title is-4 business-name">{business_name/*eslint-disable-line*/}</h1>
+>>>>>>> dev
               <hr />
-              <h5>{email}</h5>
+              <h5 className="email">{email}</h5>
               <hr />
-              <h5>{location}</h5>
+              <h5 className="address">{location}</h5>
             </div>
             <div className="column is-quarter">
-              <h1 className="title is-4">current sale</h1>
+              <h1 className="title is-4 active-sales">current sales</h1>
               {currentSale.map( sale =>
                 <Link
                   key= {sale.id}
-                  to={{ pathname: `/sales/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`,
-                    state: { id: sale.id, saleExpired: false  } }}>
-                  <h4>{sale.title}</h4>
+                  to={`/sales/${sale.id}/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`}>
+                  <p>{sale.title}</p>
                 </Link>
               )}
               <hr />
-              <h1 className="title is-4">sAles history</h1>
+              <h1 className="title is-4 past-sales">sAles history</h1>
               {pastSale.map( sale =>
                 <Link
                   key= {sale.id}
-                  to={{ pathname: `/sales/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`,
-                    state: { id: sale.id, saleExpired: true } }}>
-                  <h4>{sale.title}</h4>
+                  to={`/sales/${sale.id}/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`}>
+                  <p>{sale.title}</p>
                 </Link>
               )}
-            </div>
-            <div className="new-sale-container column is-quarter">
-              <Link to="/profile/new-sale">
-                <div className="new-sale-button">new sale</div>
-              </Link>
+              <div className="new-sale-container column is-quarter">
+                <Link to={{ pathname: '/profile/new-sale', state: { ...props} }}>
+                  <div className="new-sale-button">Create a New Sale</div>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

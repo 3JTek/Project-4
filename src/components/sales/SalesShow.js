@@ -6,11 +6,7 @@ import Loading from '../common/Loading'
 import PageNotFound from '../common/PageNotFound'
 import SaleShowMiniMap from './SaleShowMiniMap'
 
-class SaleShow extends React.Component{
-  constructor(props){
-    super(props)
-  }
-
+class SalesShow extends React.Component{
   calulateTimeRemaining(){
     const totalHours = (new Date(this.state.expiry_date)- Date.now()) / 1000 / 3600
     return {
@@ -20,9 +16,9 @@ class SaleShow extends React.Component{
   }
 
   componentDidMount(){
-    axios(`/api/sales/${this.props.location.state.id}`)
-      .then(({data}) => this.setState({...data}))
-      .catch(({response}) => this.setState({...response}))
+    axios.get(`/api/sales/${this.props.match.params.id}`)
+      .then(res => this.setState(res.data))
+      .catch(err => this.setState(err.response))
   }
 
   render(){
@@ -31,6 +27,7 @@ class SaleShow extends React.Component{
     if(this.state.status === 404) return <PageNotFound/>
     const {content, expiry_date, title, user} = this.state // eslint-disable-line
     const { daysRemaining, hoursRemaining } = this.calulateTimeRemaining()
+    const saleExpired = new Date(this.state.expiry_date) - Date.now() > 0 ? false : true
     console.log(this.state)
     console.log(daysRemaining, hoursRemaining)
     return(
@@ -47,12 +44,12 @@ class SaleShow extends React.Component{
         <section className="section">
           <div className="container">
             <div className="columns">
-              <div className="column is-half">
+              <div className="column is-half  sale-title">
                 <h1 className="title is-4">{title}</h1>
                 <hr />
                 <p>{content}</p>
                 <hr />
-                {this.props.location.state.saleExpired === false &&
+                {!saleExpired &&
                   <p>
                     {daysRemaining &&
                       <span><strong>{daysRemaining}</strong> day(s) and </span>
@@ -64,7 +61,7 @@ class SaleShow extends React.Component{
                 }
               </div>
               <div className="column is-half">
-                <h1 className="title is-4">Address</h1>
+                <h1 className="title is-4 address">Address</h1>
                 <hr />
                 <address>{user.location}</address>
                 <hr />
@@ -79,4 +76,4 @@ class SaleShow extends React.Component{
   }
 }
 
-export default SaleShow
+export default SalesShow
