@@ -21,9 +21,8 @@ const MerchantShow = ({business_name, email, hero_image, location, logo, sales})
         <div className="container">
           <div className="columns">
             <div className="column is-half">
-              <div>
+
               <h1 className="title is-4">{business_name/*eslint-disable-line*/}</h1>
-              </div>
               <hr />
               <h5>{email}</h5>
               <hr />

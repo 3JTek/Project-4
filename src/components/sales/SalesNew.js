@@ -117,7 +117,7 @@ class SaleNew extends React.Component{
             <div className="columns">
               <div className="column is-half">
                 <div className="field">
-                  <h4 className="label">Sale Title</h4>
+                  <h5 className="label">Sale Title</h5>
                   <div className="control">
                     <input
                       className="input"
@@ -129,7 +129,7 @@ class SaleNew extends React.Component{
                   </div>
                   <hr />
                   <div className="field">
-                    <h4 className="label">Category</h4>
+                    <h5 className="label">Category</h5>
                     <span
                       className="select is-fullwidth"
                     >
@@ -153,7 +153,7 @@ class SaleNew extends React.Component{
                 </div>
                 <hr />
                 <div className="field">
-                  <h4 className="label">Sale Description</h4>
+                  <h5 className="label">Sale Description</h5>
                   <div className="control">
                     <textarea
                       className="textarea"
@@ -170,7 +170,7 @@ class SaleNew extends React.Component{
               </div>
               <div className="column is-half">
                 <div className="field">
-                  <h4 className="label">Expiry Date</h4>
+                  <h5 className="label">Expiry Date</h5>
                   <div className="control">
                     <DatePicker
                       className="input date-picker"
@@ -186,7 +186,7 @@ class SaleNew extends React.Component{
                 </div>
                 <hr />
                 <div className="field">
-                  <h4 className="label">Sale Description</h4>
+                  <h5 className="label">Sale Description</h5>
                   <SaleNewMiniMap
                     {...this.state}
                     customersDistance={this.customersDistance}
