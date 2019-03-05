@@ -30,11 +30,7 @@ const MerchantShow = (props) => {
               <address className="address">{location}</address>
             </div>
             <div className="column is-half">
-<<<<<<< HEAD
-              <h1 className="title is-4 active-sales">Current Sales</h1>
-=======
-              <h1 className="title is-4">current sales</h1>
->>>>>>> dev
+              <h1 className="title is-4 active-sales">current sales</h1>
               {currentSale.map( sale =>
                 <Link
                   key= {sale.id}
@@ -43,11 +39,7 @@ const MerchantShow = (props) => {
                 </Link>
               )}
               <hr />
-<<<<<<< HEAD
-              <h1 className="title is-4 past-sales">Sale History</h1>
-=======
-              <h1 className="title is-4">sale history</h1>
->>>>>>> dev
+              <h1 className="title is-4 past-sales">sale history</h1>
               {pastSale.map( sale =>
                 <Link
                   key= {sale.id}

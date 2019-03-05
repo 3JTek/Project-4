@@ -61,7 +61,7 @@ class SalesShow extends React.Component{
                 }
               </div>
               <div className="column is-half">
-                <h1 className="title is-4">Address</h1>
+                <h1 className="title is-4 address">Address</h1>
                 <hr />
                 <address>{user.location}</address>
                 <hr />
