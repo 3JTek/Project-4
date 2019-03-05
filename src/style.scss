@@ -289,9 +289,11 @@ section .customer-profile {
 .customer-reached {
   background-color: blue;
 }
-.customer-hide{
+
+.customer-hide {
   display: none;
 }
+
 .business-marker {
   background-repeat: no-repeat;
   background-size: contain;
@@ -299,7 +301,18 @@ section .customer-profile {
   width: 30px;
   background-image: url("https://s1.qwant.com/thumbr/0x380/9/3/956b158d13001c1f57346b9fa0932fa2bc0aba7071bdc679d34e390524c1da/2000px-Map_marker.svg.png?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F8%2F88%2FMap_marker.svg%2F2000px-Map_marker.svg.png&q=0&b=1&p=0&a=1");
 }
-//New Sale
+//====================== New Sale
+
+.fees-button-sale-new {
+  button {
+    margin: 20px;
+  }
+}
+
+.radius-buttons-container {
+  display: flex;
+  justify-content: space-around;
+}
 
 .react-datepicker-wrapper {
   width: 100%;

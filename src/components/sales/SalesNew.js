@@ -173,13 +173,19 @@ class SaleNew extends React.Component{
                       name="content"
                       value= {content}
                       onChange={this.handleChange}
-                      placeholder="i.e. Come and enjoy the cheapest coffee you ever had and meet some great people that work or live around you. Don't forget to tell your friends and people around you."
+                      placeholder="Write something eyecatching here to ensure you get the highest amount of customers interested in what you have to offer."
                       rows="10">
                     </textarea>
                   </div>
                   <hr />
                 </div>
-                <p>The fees for this sale is <strong>£ {saleFee}</strong></p>
+                <div className="fees-button-sale-new">
+                  <h5>The fees for this sale is <strong>£ {saleFee}</strong></h5>
+                  <button
+                    className="button is-outlined is-info"
+                    onClick={this.handleSubmit}
+                  >create sale</button>
+                </div>
               </div>
               <div className="column is-half">
                 <div className="field">
@@ -205,21 +211,19 @@ class SaleNew extends React.Component{
                     customersDistance={this.customersDistance}
                   />
                 </div>
-                <button
-                  className="button is-primary"
-                  onClick={this.changeSaleRadius}
-                  name="increase-radius">Increase Sale Reach</button>
-                <button
-                  className="button is-primary"
-                  onClick={this.changeSaleRadius}
-                  name="decrease-radius">Decrease Sale Reach</button>
-                <hr />
+                <div className="radius-buttons-container">
+                  <button
+                    className="button is-info"
+                    onClick={this.changeSaleRadius}
+                    name="increase-radius">Increase Sale Reach</button>
+                  <button
+                    className="button is-info"
+                    onClick={this.changeSaleRadius}
+                    name="decrease-radius">Decrease Sale Reach</button>
+                  <hr />
+                </div>
               </div>
             </div>
-            <button
-              className="button is-primary"
-              onClick={this.handleSubmit}
-            >Create Sale</button>
           </div>
         </section>
       </section>
