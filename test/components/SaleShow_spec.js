@@ -54,12 +54,11 @@ describe('SalesShow tests', () => {
   it('should render the correct HTML', done => {
     response.then(() => {
       wrapper.update()
-      // console.log(wrapper.debug())
+      console.log(wrapper.debug())
       expect(wrapper.find('.business-hero').length).to.eq(1)
       expect(wrapper.find('.business-logo').length).to.eq(1)
       expect(wrapper.find('.sale-title > h1').length).to.eq(1)
       expect(wrapper.find('.sale-title p').length).to.eq(2)
-      expect(wrapper.find('.address').length).to.eq(1)
       expect(wrapper.find('address').length).to.eq(1)
     })
     done()

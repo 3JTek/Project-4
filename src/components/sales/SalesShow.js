@@ -1,5 +1,4 @@
 import React from 'react'
-
 import axios from 'axios'
 
 import Loading from '../common/Loading'
@@ -63,9 +62,10 @@ class SalesShow extends React.Component{
               <div className="column is-half">
                 <h1 className="title is-4 address">Address:</h1>
                 <hr />
-                <h5>{user.location}</h5>
-                <hr />
-                <SaleShowMiniMap businessLatLng={this.state.user}/>
+                <SaleShowMiniMap
+                  address ={user.location}
+                  businessLatLng={this.state.user}
+                />
                 <hr />
               </div>
             </div>
