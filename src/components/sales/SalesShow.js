@@ -62,16 +62,10 @@ class SalesShow extends React.Component{
               <div className="column is-half">
                 <h1 className="title is-4 address">Address:</h1>
                 <hr />
-<<<<<<< HEAD
                 <SaleShowMiniMap
                   address ={user.location}
                   businessLatLng={this.state.user}
                 />
-=======
-                <h5>{user.location}</h5>
-                <hr />
-                <SaleShowMiniMap businessLatLng={this.state.user}/>
->>>>>>> dev
                 <hr />
               </div>
             </div>
