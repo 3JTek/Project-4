@@ -66,6 +66,7 @@ class SaleNew extends React.Component{
 
   calculDistanceFromBusiness(customers){
     this.customersDistance = customers.map(customer => {
+      console.log(this.state)
       const businessLat = this.state.newSale.user.lat
       const businessLng = this.state.newSale.user.lng
       const {lat, lng} = customer
@@ -129,7 +130,7 @@ class SaleNew extends React.Component{
             <div className="columns">
               <div className="column is-half">
                 <div className="field">
-                  <label className="label">Sale Title</label>
+                  <h4 className="label">Sale Title</h4>
                   <div className="control">
                     <input
                       className="input"
@@ -141,8 +142,10 @@ class SaleNew extends React.Component{
                   </div>
                   <hr />
                   <div className="field">
-                    <label className="label">Category</label>
-                    <span className="select is-fullwidth">
+                    <h4 className="label">Category</h4>
+                    <span
+                      className="select is-fullwidth"
+                    >
                       <select
                         name="category"
                         defaultValue="Please choose a category"
@@ -163,7 +166,7 @@ class SaleNew extends React.Component{
                 </div>
                 <hr />
                 <div className="field">
-                  <label className="label">Sale Description</label>
+                  <h4 className="label">Sale Description</h4>
                   <div className="control">
                     <textarea
                       className="textarea"
@@ -180,7 +183,7 @@ class SaleNew extends React.Component{
               </div>
               <div className="column is-half">
                 <div className="field">
-                  <label className="label">Expiry Date</label>
+                  <h4 className="label">Expiry Date</h4>
                   <div className="control">
                     <DatePicker
                       className="input date-picker"
@@ -196,7 +199,7 @@ class SaleNew extends React.Component{
                 </div>
                 <hr />
                 <div className="field">
-                  <label className="label">Sale Reach</label>
+                  <h4 className="label">Sale Description</h4>
                   <SaleNewMiniMap
                     {...this.state}
                     customersDistance={this.customersDistance}

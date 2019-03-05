@@ -25,11 +25,11 @@ const MerchantShow = (props) => {
             <div className="column is-half">
               <h1 className="title is-4 business-name">{business_name/*eslint-disable-line*/}</h1>
               <hr />
-              <p className="email">{email}</p>
+              <h5 className="email">{email}</h5>
               <hr />
-              <address className="address">{location}</address>
+              <h5 className="address">{location}</h5>
             </div>
-            <div className="column is-half">
+            <div className="column is-quarter">
               <h1 className="title is-4 active-sales">current sales</h1>
               {currentSale.map( sale =>
                 <Link
@@ -39,7 +39,7 @@ const MerchantShow = (props) => {
                 </Link>
               )}
               <hr />
-              <h1 className="title is-4 past-sales">sale history</h1>
+              <h1 className="title is-4 past-sales">sAles history</h1>
               {pastSale.map( sale =>
                 <Link
                   key= {sale.id}
@@ -47,9 +47,11 @@ const MerchantShow = (props) => {
                   <p>{sale.title}</p>
                 </Link>
               )}
-              <Link to={{ pathname: '/profile/new-sale', state: { ...props} }}>
-                <button className="button is-primary">Create a New Sale</button>
-              </Link>
+              <div className="new-sale-container column is-quarter">
+                <Link to={{ pathname: '/profile/new-sale', state: { ...props} }}>
+                  <div className="new-sale-button">Create a New Sale</div>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
