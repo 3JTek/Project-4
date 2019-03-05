@@ -36,12 +36,17 @@ class Navbar extends React.Component {
   render(){
     return(
       <div>
-        <nav className="navbar is-fixed-bottom" role="navigation" aria-label="main navigation">
+        <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="container">
             <div className="navbar-brand">
+              {!Auth.isAuthenticated() &&
               <Link to="/" className="navbar-item">
                 <h1 className="title is-2"><span id="navbar-hero">Gather</span></h1>
-              </Link>
+              </Link>}
+              {Auth.isAuthenticated() &&
+              <Link to="/profile" className="navbar-item">
+                <h1 className="title is-2"><span id="navbar-hero">Gather</span></h1>
+              </Link>}
             </div>
             <div className="navbar-end">
               {!Auth.isAuthenticated() &&

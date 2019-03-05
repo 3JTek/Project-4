@@ -1,10 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import Auth from '../lib/Auth'
+// import UserProfile from '../users/UserProfile'
+import {  withRouter, Link } from 'react-router-dom'
 
 
 const Home = () => {
+  // if (Auth.isAuthenticated()) return <UserProfile/>
   return(
-
     <div className="home-hero">
       <div className="container">
         <h2>the best <span id="home-sale">sales</span> should find you</h2>
@@ -22,4 +24,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default withRouter(Home)
