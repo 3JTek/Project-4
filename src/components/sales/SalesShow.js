@@ -44,7 +44,7 @@ class SalesShow extends React.Component{
           <div className="container">
             <div className="columns">
               <div className="column is-half  sale-title">
-                <h1 className="title is-4">{title}</h1>
+                <h2 className="title is-4">{title}</h2>
                 <hr />
                 <p>{content}</p>
                 <hr />
@@ -60,12 +60,18 @@ class SalesShow extends React.Component{
                 }
               </div>
               <div className="column is-half">
-                <h1 className="title is-4 address">Address</h1>
+                <h1 className="title is-4 address">Address:</h1>
                 <hr />
+<<<<<<< HEAD
                 <SaleShowMiniMap
                   address ={user.location}
                   businessLatLng={this.state.user}
                 />
+=======
+                <h5>{user.location}</h5>
+                <hr />
+                <SaleShowMiniMap businessLatLng={this.state.user}/>
+>>>>>>> dev
                 <hr />
               </div>
             </div>

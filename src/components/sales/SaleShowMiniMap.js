@@ -73,7 +73,7 @@ class SaleShowMiniMap extends React.Component {
     return(
       <div>
         <a href= {`https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${this.state.lat},${this.state.lng}&travelmode=walking`} rel="noopener noreferrer" target="_blank">
-          <address>{this.props.address}</address>
+          <h5>{this.props.address}</h5>
         </a>
         <hr />
         <div id='map' ref={element => this.mapDOMElement = element}/>

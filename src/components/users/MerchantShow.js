@@ -23,19 +23,19 @@ const MerchantShow = (props) => {
         <div className="container">
           <div className="columns">
             <div className="column is-half">
-              <h1 className="title is-4 business-name">{business_name/*eslint-disable-line*/}</h1>
+              <h1 className="title is-2 business-name">{business_name/*eslint-disable-line*/}</h1>
               <hr />
               <h5 className="email">{email}</h5>
               <hr />
               <h5 className="address">{location}</h5>
             </div>
-            <div className="column is-quarter">
+            <div className="column is-one-third">
               <h1 className="title is-4 active-sales">current sales</h1>
               {currentSale.map( sale =>
                 <Link
                   key= {sale.id}
                   to={`/sales/${sale.id}/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`}>
-                  <p>{sale.title}</p>
+                  <h4>{sale.title}</h4>
                 </Link>
               )}
               <hr />
@@ -44,14 +44,14 @@ const MerchantShow = (props) => {
                 <Link
                   key= {sale.id}
                   to={`/sales/${sale.id}/${sale.title.replace(/%/g,'percent').replace(/ /g,'-')}`}>
-                  <p>{sale.title}</p>
+                  <h4>{sale.title}</h4>
                 </Link>
               )}
-              <div className="new-sale-container column is-quarter">
-                <Link to={{ pathname: '/profile/new-sale', state: { ...props} }}>
-                  <div className="new-sale-button">Create a New Sale</div>
-                </Link>
-              </div>
+            </div>
+            <div className="new-sale-container column is-quarter">
+              <Link to={{ pathname: '/profile/new-sale', state: { ...props} }}>
+                <div className="new-sale-button">new sAle</div>
+              </Link>
             </div>
           </div>
         </div>

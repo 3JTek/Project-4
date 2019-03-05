@@ -77,7 +77,9 @@ class CustomerShow extends React.Component {
 
   selectCategory = event => {
     const { name } = event.target
-    console.log(this.state.user)
+    const selectedCategoriesIds = Object.values(this.state.categories).filter(cat =>
+      cat.isSelected).map(cat => cat.id.toString())
+    if(selectedCategoriesIds.length === 3 && !selectedCategoriesIds.includes(name)) return
     this.setState(prevState => ({
       categories: {
         ...prevState.categories,
@@ -87,6 +89,8 @@ class CustomerShow extends React.Component {
         }
       }
     }))
+    console.log(name)
+    console.log(selectedCategoriesIds)
   }
 
   handleChange({ target: { name, value } }) {
@@ -154,14 +158,15 @@ class CustomerShow extends React.Component {
 
   render() {
     if (!this.state) return <Loading />
-    console.log(this.state.user.categories)
+    const selectedCategories = Object.values(this.state.categories).filter(cat =>
+      cat.isSelected)
     return (
 
       <div className="section">
         <div className="container">
           <div className="section"><h1>your categories:</h1> </div>
           <div className="my-categories">
-            {this.state.user.categories.map(category =>
+            {selectedCategories.map(category =>
               <h4 key={category.id}>
                 {category.type}
               </h4>)}
