@@ -35,21 +35,23 @@ class Navbar extends React.Component {
 
   render(){
     return(
-      <div className="container">
-        <nav className="navbar" role="navigation" aria-label="main navigation">
-          <div className="navbar-brand">
-            <Link to="/" className="navbar-item">
-              <h1 className="title is-2"><span id="navbar-hero">Gather</span></h1>
-            </Link>
-          </div>
-          <div className="navbar-end">
-            {!Auth.isAuthenticated() &&
-                <Link
-                  to="/login"
-                  className="navbar-item"
-                  onClick={() => this.toggle('loginActive')}>Login
-                </Link>}
-            {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
+      <div>
+        <nav className="navbar is-fixed-bottom" role="navigation" aria-label="main navigation">
+          <div className="container">
+            <div className="navbar-brand">
+              <Link to="/" className="navbar-item">
+                <h1 className="title is-2"><span id="navbar-hero">Gather</span></h1>
+              </Link>
+            </div>
+            <div className="navbar-end">
+              {!Auth.isAuthenticated() &&
+                  <Link
+                    to="/login"
+                    className="navbar-item"
+                    onClick={() => this.toggle('loginActive')}>Login
+                  </Link>}
+              {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
+            </div>
           </div>
         </nav>
         <Login

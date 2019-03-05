@@ -36,7 +36,7 @@ class RegisterMerchant extends React.Component {
   }
 
   handleSubmit(e) {
-    
+
     e.preventDefault()
     axios
       .post('/api/register', this.state.data)
@@ -71,98 +71,95 @@ class RegisterMerchant extends React.Component {
     if (!this.state) return <Loading />
     return (
       <section className="container">
-        <form onSubmit={this.handleSubmit}>
-          <h2 className="title">Register as a merchant</h2>
-          <div className="field">
-            <label className="label">Business Name</label>
-            <div className="control">
+        <div className="section">
+          <form onSubmit={this.handleSubmit}>
+            <h1 className="label">Register as a merchant</h1>
+            <div className="field">
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  name="business_name"
+                  placeholder="Business name"
+                  value={businessName}
+                  onChange={this.handleChange}
+                />
+                {errors.business && <small className="help is-danger">{errors.email}</small>}
+              </div>
+            </div>
+            <div className="field">
+              <div className="control">
+                <input
+                  className="input"
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={this.handleChange}
+                />
+                {errors.email && <small className="help is-danger">{errors.email}</small>}
+              </div>
+            </div>
+            <div className="field">
+              <input
+                className="input"
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={this.handleChange}
+              />
+              {errors.password && <small className="help is-danger">{errors.password}</small>}
+            </div>
+            <div className="field">
+
+              <input
+                className="input"
+                type="password"
+                name="password_confirmation"
+                placeholder="Password Confirmation"
+                value={passwordConfirmation}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="mapbox-field field">
+              <div className="control is-expanded">
+                <MapboxAutocomplete
+                  placeholder="Please enter your location"
+                  publicKey={process.env.MAPBOX_KEY}
+                  inputClass='input form-control search'
+                  onSuggestionSelect={this.suggestionSelect}
+                  resetSearch={false}
+                  name="location"
+                />
+              </div>
+            </div>
+            <div className="field">
+
+              <input
+                className="input"
+                name="logo"
+                placeholder="Add a logo"
+                value={logo}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="field">
+
               <input
                 className="input"
                 type="text"
-                name="business_name"
-                placeholder="Business name"
-                value={businessName}
+                name="hero_image"
+                placeholder="Enter an image to display on your profile"
+                value={heroImage}
                 onChange={this.handleChange}
               />
-              {errors.business && <small className="help is-danger">{errors.email}</small>}
             </div>
-          </div>
-          <div className="field">
-            <label className="label">Email</label>
-            <div className="control">
-              <input
-                className="input"
-                name="email"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={this.handleChange}
-              />
-              {errors.email && <small className="help is-danger">{errors.email}</small>}
+            <div className="regButton">
+              <button className="button is-info">Submit</button>
             </div>
-          </div>
-          <div className="field">
-            <label className="label">Password</label>
-            <input
-              className="input"
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={this.handleChange}
-            />
-            {errors.password && <small className="help is-danger">{errors.password}</small>}
-          </div>
-          <div className="field">
-            <label className="label">Password Confirmation</label>
-            <input
-              className="input"
-              type="password"
-              name="password_confirmation"
-              placeholder="Password Confirmation"
-              value={passwordConfirmation}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="field">
-            <label className="label">Please select a location</label>
-            <div className="control is-expanded">
-              <MapboxAutocomplete
-                publicKey={process.env.MAPBOX_KEY}
-                inputClass='input form-control search'
-                onSuggestionSelect={this.suggestionSelect}
-                resetSearch={false}
-                name="location"
-              />
-            </div>
-          </div>
-          <div className="field">
-            <label className="label">Logo</label>
-            <input
-              className="input"
-              name="logo"
-              placeholder="Add a logo"
-              value={logo}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="field">
-            <label className="label">Company image</label>
-            <input
-              className="input"
-              type="text"
-              name="hero_image"
-              placeholder="Enter an image to display on your profile"
-              value={heroImage}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="regButton">
-            <button className="button is-info">Submit</button>
-
-          </div>
-
-        </form>
+          </form>
+        </div>
       </section>
     )
   }

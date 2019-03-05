@@ -1,5 +1,37 @@
 //Loading spinning wheel
+@import url('https://fonts.googleapis.com/css?family=Major+Mono+Display');
+@import url('https://fonts.googleapis.com/css?family=Barlow');
+$input-background-color: transparent;
+$input-border-color: none;
+$input-shadow: none;
+$input-hover-border-color: none;
+$input-focus-border-color: none;
+$control-radius: 0;
+$danger: #802030;
+$success: #004225;
+$info: #171d22;
 @import "~bulma/bulma"; // ===================== MISC ==========
+
+* {
+  box-sizing: border-box;
+  font-family: 'Barlow', sans-serif;
+  outline: none;
+}
+
+h1 {
+  font-family: 'Major Mono Display', monospace;
+}
+
+input,
+textarea {
+  font-family: inherit;
+  font-size: 3rem;
+  resize: none!important;
+
+  &:not([id^="react-select"]) {
+    border-bottom: 0.5px $info solid!important;
+  }
+}
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -23,8 +55,12 @@ body {
 }
 
 nav {
-  border-bottom: 1px solid #ccc;
-  background-color: transparent;
+  border-top: 1px solid #ccc;
+  background: black;
+
+  #navbar-hero {
+    font-family: 'Major Mono Display', monospace;
+  }
 }
 //================= HOME =================
 
@@ -32,17 +68,37 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 100vh;
+  width: 100vw;
   background-image: url("https://images.unsplash.com/41/NmnKzKIyQsyGIkFjiNsb_20140717_212636-3.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80");
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   opacity: 0.8;
 
-  h1 {
-    font-size: 3rem;
-    text-transform: uppercase;
+  .sign-up {
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      font-family: 'Major Mono Display', monospace;
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+    }
+  }
+
+  h2 {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 5rem;
+    font-weight: 300;
     color: white;
-    font-weight: 600;
+  }
+
+  #home-sale {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 5rem;
+    font-weight: 300;
+    color: black;
   }
 }
 //============= LOADING ===========================
@@ -58,6 +114,17 @@ nav {
     radius: 100%;
   }
   animation: spin 800ms infinite linear;
+}
+//==================== REGISTERS===================
+
+.field {
+  margin: 20px;
+}
+
+.mapbox-field {
+  input {
+    margin: 0;
+  }
 }
 //============== LOGIN ===========================
 
