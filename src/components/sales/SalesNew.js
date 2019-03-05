@@ -182,7 +182,7 @@ class SaleNew extends React.Component{
                 <div className="fees-button-sale-new">
                   <h5>The fees for this sale are <strong>£ {saleFee}</strong></h5>
                   <button
-                    className="button is-outlined is-info"
+                    className="button is-info"
                     onClick={this.handleSubmit}
                   >create sale</button>
                 </div>
@@ -213,13 +213,13 @@ class SaleNew extends React.Component{
                 </div>
                 <div className="radius-buttons-container">
                   <button
-                    className="button is-info"
-                    onClick={this.changeSaleRadius}
-                    name="increase-radius">Increase Sale Reach</button>
-                  <button
-                    className="button is-info"
+                    className="button is-outlined is-info"
                     onClick={this.changeSaleRadius}
                     name="decrease-radius">Decrease Sale Reach</button>
+                  <button
+                    className="button is-outlined is-info"
+                    onClick={this.changeSaleRadius}
+                    name="increase-radius">Increase Sale Reach</button>
                   <hr />
                 </div>
               </div>
