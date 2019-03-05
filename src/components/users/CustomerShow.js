@@ -11,7 +11,7 @@ import axios from 'axios'
 
 const Category = ({ id, type, logo, isSelected, onChange }) => (
   <>
-    <div className="column">
+    <div className="checkbox-div column">
       <input
         id={id}
         name={id}
@@ -175,10 +175,10 @@ class CustomerShow extends React.Component {
         <div>
           <div className="container">
             <form
-              className="columns is-multiline customer-update"
+              className="customer-update"
               onSubmit={this.handleSubmit}>
               {this.createCategories()}
-              <div>
+              <div className="columns is-multiline">
                 <button
                   type="button"
                   className="button"

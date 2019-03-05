@@ -196,15 +196,21 @@ section .customer-profile {
   height: 100vh;
 }
 
+.checkbox-div {
+  width: 10rem;
+  display: block;
+}
+
 .customer-update input[type="checkbox"] {
   display: none;
 }
 
-.customer-update input[type="checkbox"] + label {
+.customer-update input[type="checkbox"] + label img {
   height: 6rem;
 }
 
 .customer-update input[type="checkbox"]:checked + label img {
+  height: 6rem;
   border: 2px solid red;
 }
 //================== MAP ====================
