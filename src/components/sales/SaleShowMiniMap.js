@@ -71,9 +71,13 @@ class SaleShowMiniMap extends React.Component {
 
     console.log('StateOfShowMiniMap', this.state)
     return(
-      <a href= {`https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${this.state.lat},${this.state.lng}&travelmode=walking`} rel="noopener noreferrer" target="_blank">
+      <div>
+        <a href= {`https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${this.state.lat},${this.state.lng}&travelmode=walking`} rel="noopener noreferrer" target="_blank">
+          <address>{this.props.address}</address>
+        </a>
+        <hr />
         <div id='map' ref={element => this.mapDOMElement = element}/>
-      </a>
+      </div>
     )
   }
 }
