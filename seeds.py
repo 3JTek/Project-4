@@ -18,7 +18,6 @@ with app.app_context():
     food = Category(type='Food', logo='assets/cutlery.png')
     food.save()
     lunch = Category(type='Lunch', logo='assets/cupcake.png' )
-
     shopping = Category(type='Shopping', logo='assets/shopping-bag.png')
     shopping.save()
     fitness = Category(type='Fitness', logo='assets/weightlifting.png')
@@ -66,7 +65,7 @@ with app.app_context():
         'password': 'password',
         'password_confirmation': 'password',
         'location': '5, merchant Lane, merchant, SW4 1GA',
-        'business_name': 'Joe & the Juice',
+        'business_name': 'joe & the juice',
         'lng': '-0.118092',
         'lat': '51.509865',
         'logo': 'https://s2.qwant.com/thumbr/0x380/e/0/50f0bf00c902968003bb1bac8cc9e9b68304fe9ec8288ffd757385af1d4de9/joe_and_the_juice.jpg?u=http%3A%2F%2Fmollyinadomi.files.wordpress.com%2F2011%2F12%2Fjoe_and_the_juice.jpg&q=0&b=1&p=0&a=1',
@@ -77,6 +76,26 @@ with app.app_context():
         raise Exception(errors)
 
     joe_and_the_juice.save()
+
+    tom_abbott, errors = user_schema.load({
+        'email': 'tom@test.com',
+        'password': 'password',
+        'password_confirmation': 'password',
+        'location': '1 test avenue, Test, EN5 1ER',
+        'lat': '51.51109304763886',
+        'lng': '-0.072097946289090',
+        'phone_number': '+447 525 367 740',
+        'categories': [
+        {'id':14, 'type':'Coffee'},
+        {'id':14, 'type':'Coffee'}
+        ],
+
+        'is_merchant': 'False'
+    })
+    if errors:
+        raise Exception(errors)
+
+    tom_abbott.save()
 
     test_user, errors = user_schema.load({
         'email': 'test1@test.com',
@@ -391,7 +410,7 @@ with app.app_context():
         'lat': '51.4347484772',
         'lng': '-0.0954438935547',
         'phone_number': '+447 123454322',
-        'categories': [{'id':1, 'type':'Fashion'}],
+        'categories': [{'id':1, 'type':'Shopping'}],
 
         'is_merchant': 'False'
     })
@@ -765,7 +784,7 @@ with app.app_context():
         'lat': '51.47582362098229',
         'lng': '-0.0940706025390909',
         'phone_number': '+447 123454322',
-        'categories': [{'id':1, 'type':'Fashion'}],
+        'categories': [{'id':1, 'type':'Shopping'}],
         'is_merchant': 'False'
     })
     if errors:
@@ -781,7 +800,7 @@ with app.app_context():
         'lat': '51.52369791691055',
         'lng': '-0.1500322114258097',
         'phone_number': '+447 123454322',
-        'categories': [{'id':1, 'type':'Fashion'}],
+        'categories': [{'id':1, 'type':'Shopping'}],
 
         'is_merchant': 'False'
     })
@@ -798,7 +817,7 @@ with app.app_context():
         'lat': '51.50703310986577',
         'lng': '-0.1589586030273722',
         'phone_number': '+447 123454322',
-        'categories': [{'id':1, 'type':'Fashion'}],
+        'categories': [{'id':1, 'type':'Shopping'}],
 
         'is_merchant': 'False'
     })
@@ -815,7 +834,7 @@ with app.app_context():
         'lat': '51.51686181055704',
         'lng': '-0.06351487744143469',
         'phone_number': '+447 123454322',
-        'categories': [{'id':1, 'type':'Fashion'}],
+        'categories': [{'id':1, 'type':'Shopping'}],
         'is_merchant': 'False'
     })
     if errors:
@@ -831,7 +850,7 @@ with app.app_context():
         'lat': '51.51515262363254',
         'lng': '-0.09716050732424719',
         'phone_number': '+447 123454322',
-        'categories': [{'id':1, 'type':'Fashion'}],
+        'categories': [{'id':1, 'type':'Shopping'}],
 
         'is_merchant': 'False'
     })
@@ -848,7 +867,7 @@ with app.app_context():
         'lat': '51.52198898652209',
         'lng': '-0.05596177685549719',
         'phone_number': '+447 123454322',
-        'categories': [{'id':1, 'type':'Fashion'}],
+        'categories': [{'id':1, 'type':'Shopping'}],
 
         'is_merchant': 'False'
     })
@@ -865,7 +884,7 @@ with app.app_context():
         'lat': '51.51173405737399',
         'lng': '-0.0233461152344034',
         'phone_number': '+447 123454322',
-        'categories': [{'id':1, 'type':'Fashion'}],
+        'categories': [{'id':1, 'type':'Shopping'}],
 
         'is_merchant': 'False'
     })
@@ -882,7 +901,7 @@ with app.app_context():
         'lat': '51.517716379968505',
         'lng': '-0.136299301269559',
         'phone_number': '+447 123454322',
-        'categories': [{'id':1, 'type':'Fashion'}],
+        'categories': [{'id':1, 'type':'Shopping'}],
 
         'is_merchant': 'False'
     })
@@ -899,7 +918,7 @@ with app.app_context():
         'lat': '51.46769709899375',
         'lng': '-0.1349260102539347',
         'phone_number': '+447 123454322',
-        'categories': [{'id':1, 'type':'Fashion'}],
+        'categories': [{'id':1, 'type':'Shopping'}],
 
         'is_merchant': 'False'
     })
@@ -916,7 +935,7 @@ with app.app_context():
         'lat': '51.457002101',
         'lng': '-0.110550094',
         'phone_number': '+447 123454322',
-        'categories': [{'id':1, 'type':'Fashion'}],
+        'categories': [{'id':1, 'type':'Shopping'}],
 
         'is_merchant': 'False'
     })

@@ -135,7 +135,7 @@ class SaleNew extends React.Component{
                     <input
                       className="input"
                       name="title"
-                      placeholder="i.e. Crazy 70% off on next 50 coffees sold."
+                      placeholder="i.e. Half price coffee's for the next 2 hours!"
                       value= {title}
                       onChange={this.handleChange}
                     />
@@ -180,7 +180,7 @@ class SaleNew extends React.Component{
                   <hr />
                 </div>
                 <div className="fees-button-sale-new">
-                  <h5>The fees for this sale is <strong>£ {saleFee}</strong></h5>
+                  <h5>The fees for this sale are <strong>£ {saleFee}</strong></h5>
                   <button
                     className="button is-outlined is-info"
                     onClick={this.handleSubmit}

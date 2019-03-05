@@ -1,6 +1,6 @@
 //Loading spinning wheel
 @import url('https://fonts.googleapis.com/css?family=Major+Mono+Display');
-@import url('https://fonts.googleapis.com/css?family=Barlow');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 $input-background-color: transparent;
 $input-border-color: none;
 $input-shadow: none;
@@ -16,12 +16,17 @@ $gather: #ff26e5;
 
 * {
   box-sizing: border-box;
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Roboto', sans-serif;
   outline: none;
 }
 
 h1 {
   font-family: 'Major Mono Display', monospace;
+}
+
+h2 {
+  font-family: 'Major Mono Display', monospace;
+  text-transform: lowercase;
 }
 
 h5 {
@@ -160,7 +165,7 @@ nav {
   align-items: center;
 
   &.displayed {
-    height: 8vh;
+    height: 10vh;
   }
 
   .container {
@@ -231,7 +236,7 @@ nav {
 @media screen and (max-width: 480px) {
   .business-hero {
     justify-content: center;
-    max-height: 200px;
+    max-height: 13rem;
   }
 
   .business-logo {
@@ -276,7 +281,7 @@ section .customer-profile {
 
 #map {
   width: 100%;
-  height: 500px;
+  height: 25rem;
 }
 
 .customer-marker {
