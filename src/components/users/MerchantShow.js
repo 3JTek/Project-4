@@ -28,7 +28,7 @@ const MerchantShow = ({business_name, email, hero_image, location, logo, sales})
               <address>{location}</address>
             </div>
             <div className="column is-half">
-              <h1 className="title is-4">Current Sales</h1>
+              <h1 className="title is-4">current sales</h1>
               {currentSale.map( sale =>
                 <Link
                   key= {sale.id}
@@ -38,7 +38,7 @@ const MerchantShow = ({business_name, email, hero_image, location, logo, sales})
                 </Link>
               )}
               <hr />
-              <h1 className="title is-4">Sale History</h1>
+              <h1 className="title is-4">sale history</h1>
               {pastSale.map( sale =>
                 <Link
                   key= {sale.id}

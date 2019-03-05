@@ -11,7 +11,7 @@ import axios from 'axios'
 
 const Category = ({ id, type, logo, isSelected, onChange }) => (
   <>
-    <div className="checkbox-div column">
+    <div className="checkbox-div column is-one-fifth-desktop is-one-quarter-tablet is-one-third-mobile">
       <input
         id={id}
         name={id}
@@ -75,26 +75,9 @@ class CustomerShow extends React.Component {
     })
   }
 
-  selectAllcategories = isSelected => {
-    Object.keys(this.state.categories).forEach(id => {
-      this.setState(prevState => ({
-        categories: {
-          ...prevState.categories,
-          [id]: {
-            ...this.state.categories[id],
-            isSelected
-          }
-        }
-      }))
-    })
-  }
-
-  selectAll = () => this.selectAllcategories(true)
-  deselectAll = () => this.selectAllcategories(false)
-
   selectCategory = event => {
     const { name } = event.target
-    console.log('name', name)
+    console.log(this.state.user)
     this.setState(prevState => ({
       categories: {
         ...prevState.categories,
@@ -170,32 +153,32 @@ class CustomerShow extends React.Component {
 
   render() {
     if (!this.state) return <Loading />
+    console.log(this.state.user.categories)
     return (
-      <div className="container">
-        <div>
-          <div className="container">
-            <form
-              className="customer-update"
-              onSubmit={this.handleSubmit}>
+
+      <div className="section">
+        <div className="container">
+          <div className="section"><h1>your categories:</h1> </div>
+          <div className="my-categories">
+            {this.state.user.categories.map(category =>
+              <h4 key={category.id}>
+                {category.type}
+              </h4>)}
+          </div>
+          <form
+            className="customer-update"
+            onSubmit={this.handleSubmit}>
+            <div className="section">
+              <h1>
+              Which categories would you like to receive sale notifcations from?
+              </h1>
+            </div>
+            <div className="section columns is-mobile is-multiline">
               {this.createCategories()}
-              <div className="columns is-multiline">
-                <button
-                  type="button"
-                  className="button"
-                  onClick={this.selectAll}
-                >
-                  Select All
-                </button>
-                <button
-                  type="button"
-                  className="button"
-                  onClick={this.deselectAll}
-                >
-                  Deselect All
-                </button>
-              </div>
+            </div>
+            <div className="section">
               <div className="field">
-                <label className="label">Update your email</label>
+                <h1 className="label">update your email</h1>
                 <div className="control">
                   <input
                     className="input"
@@ -208,7 +191,7 @@ class CustomerShow extends React.Component {
                 </div>
               </div>
               <div className="field">
-                <label className="label">Update your location</label>
+                <h1 className="label">update your location</h1>
                 <div className="control is-expanded">
                   <MapboxAutocomplete
                     placeholder={this.state.user.location}
@@ -220,14 +203,14 @@ class CustomerShow extends React.Component {
                   />
                 </div>
               </div>
-              <button type="submit" className="button">
-                Save
-              </button>
-            </form>
-
-          </div>
+            </div>
+            <button type="submit" className="button is-info">
+            Save
+            </button>
+          </form>
         </div>
       </div>
+
     )
   }
 }

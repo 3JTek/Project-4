@@ -6,11 +6,13 @@ $input-border-color: none;
 $input-shadow: none;
 $input-hover-border-color: none;
 $input-focus-border-color: none;
+$input-focus-box-shadow-size: 0;
 $control-radius: 0;
 $danger: #802030;
 $success: #004225;
 $info: #171d22;
 @import "~bulma/bulma"; // ===================== MISC ==========
+$gather: #ff26e5;
 
 * {
   box-sizing: border-box;
@@ -20,6 +22,12 @@ $info: #171d22;
 
 h1 {
   font-family: 'Major Mono Display', monospace;
+}
+
+h4 {
+  font-family: 'Major Mono Display', monospace;
+  text-transform: lowercase;
+  color: $gather;
 }
 
 input,
@@ -52,10 +60,11 @@ html {
 
 body {
   min-height: 100vh;
+  background-color: #f9fbff;
 }
 
 nav {
-  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   background: black;
 
   #navbar-hero {
@@ -84,6 +93,10 @@ nav {
       font-size: 2rem;
       font-weight: 300;
       color: white;
+
+      &:hover {
+        border-bottom: 2px solid white;
+      }
     }
   }
 
@@ -192,6 +205,11 @@ nav {
 }
 //======================= Customer Show page ============
 
+.my-categories {
+  display: flex;
+  justify-content: space-around;
+}
+
 section .customer-profile {
   height: 100vh;
 }
@@ -207,11 +225,15 @@ section .customer-profile {
 
 .customer-update input[type="checkbox"] + label img {
   height: 6rem;
+  margin: 2px;
 }
 
 .customer-update input[type="checkbox"]:checked + label img {
   height: 6rem;
-  border: 2px solid red;
+  margin: 2px;
+  padding: 0.3rem;
+  border: 4px solid $gather;
+  border-radius: 20%;
 }
 //================== MAP ====================
 
