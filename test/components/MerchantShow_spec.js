@@ -40,7 +40,7 @@ describe('MerchantShow tests', () => {
     expect(wrapper.find('.business-name').length).to.eq(1)
     expect(wrapper.find('.email').length).to.eq(1)
     expect(wrapper.find('.address').length).to.eq(1)
-    expect(wrapper.find('button').length).to.eq(1)
+    expect(wrapper.find('.new-sale-button').length).to.eq(1)
 
     done()
   })
@@ -54,7 +54,7 @@ describe('MerchantShow tests', () => {
     expect(wrapper.find({ to: '/sales/2/Winter-collection-50percent-Off'
     }).length).to.eq(1)
     expect(wrapper.find({ to: '/sales/3/Best-opportunity-to-meet-half-price-service-providers.' }).length).to.eq(1)
-    expect(wrapper.find('button').text()).to.eq('Create a New Sale')
+    expect(wrapper.find('.new-sale-button').text()).to.eq('Create a New Sale')
     done()
   })
 
