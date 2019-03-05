@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'test'
+
 require('@babel/register')()
 
 const { JSDOM } = require('jsdom')
@@ -18,6 +20,8 @@ const props = Object.getOwnPropertyNames(window)
   .map(prop => Object.getOwnPropertyDescriptor(window, prop))
 
 Object.defineProperties(global, props)
+
+global.navigator = window.navigator = {}
 
 global.window = window
 global.document = window.document

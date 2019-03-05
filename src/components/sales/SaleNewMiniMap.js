@@ -1,6 +1,6 @@
 import React from 'react'
 
-import mapboxgl from 'mapbox-gl'
+import mapboxgl from '../../lib/mapbox-gl'
 
 class SaleShowMiniMap extends React.Component {
   constructor(props){
@@ -83,7 +83,6 @@ class SaleShowMiniMap extends React.Component {
 
   createMap(){
     return new Promise(resolve => {
-      mapboxgl.accessToken = process.env.MAPBOX_KEY
       this.map = new mapboxgl.Map({
         container: this.mapDOMElement,
         style: 'mapbox://styles/mapbox/streets-v10',

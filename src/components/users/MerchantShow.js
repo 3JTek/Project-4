@@ -23,14 +23,14 @@ const MerchantShow = (props) => {
         <div className="container">
           <div className="columns">
             <div className="column is-half">
-              <h1 className="title is-4">{business_name/*eslint-disable-line*/}</h1>
+              <h1 className="title is-4 business-name">{business_name/*eslint-disable-line*/}</h1>
               <hr />
-              <p>{email}</p>
+              <p className="email">{email}</p>
               <hr />
-              <address>{location}</address>
+              <address className="address">{location}</address>
             </div>
             <div className="column is-half">
-              <h1 className="title is-4">Current Sales</h1>
+              <h1 className="title is-4 active-sales">Current Sales</h1>
               {currentSale.map( sale =>
                 <Link
                   key= {sale.id}
@@ -39,7 +39,7 @@ const MerchantShow = (props) => {
                 </Link>
               )}
               <hr />
-              <h1 className="title is-4">Sale History</h1>
+              <h1 className="title is-4 past-sales">Sale History</h1>
               {pastSale.map( sale =>
                 <Link
                   key= {sale.id}
