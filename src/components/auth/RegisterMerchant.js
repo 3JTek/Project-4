@@ -139,7 +139,7 @@ class RegisterMerchant extends React.Component {
               <input
                 className="input"
                 name="logo"
-                placeholder="Add a logo"
+                placeholder="Add your logo"
                 value={logo}
                 onChange={this.handleChange}
               />

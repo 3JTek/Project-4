@@ -127,6 +127,7 @@ class RegisterCustomer extends React.Component {
             <div className="mapbox-field field">
               <div className="control is-expanded">
                 <MapboxAutocomplete
+                  placeholder="Please enter your location of interest"
                   publicKey={process.env.MAPBOX_KEY}
                   inputClass='input form-control search'
                   onSuggestionSelect={this.suggestionSelect}
