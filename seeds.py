@@ -68,7 +68,7 @@ with app.app_context():
         'lng': '-0.118092',
         'lat': '51.509865',
         'logo': 'https://s2.qwant.com/thumbr/0x380/e/0/50f0bf00c902968003bb1bac8cc9e9b68304fe9ec8288ffd757385af1d4de9/joe_and_the_juice.jpg?u=http%3A%2F%2Fmollyinadomi.files.wordpress.com%2F2011%2F12%2Fjoe_and_the_juice.jpg&q=0&b=1&p=0&a=1',
-        'hero_image': 'https://s1.qwant.com/thumbr/0x380/2/d/ba333ce18be0b1fe4daf65b39eb2814bfb250dc9cfb0711d364ec345cd520c/171025-joe-and-the-juice-london.jpg?u=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2017%2F10%2F171025-joe-and-the-juice-london.jpg&q=0&b=1&p=0&a=1',
+        'hero_image': 'https://s2.qwant.com/thumbr/0x380/d/0/6181666fa0316130aeb1591ca556e80cb99b3c5f8c0507c0d6a63c88fd39c7/img_3546-1.jpg?u=https%3A%2F%2Fwww.joejuice.com%2Fmedia%2F2196%2Fimg_3546-1.jpg&q=0&b=1&p=0&a=1',
         'is_merchant': 'True'
     })
     if errors:
