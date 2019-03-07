@@ -71,6 +71,7 @@ class SaleShowMiniMap extends React.Component {
 
   createMarkups(){
     this.props.customers.map( (customer, index) => {
+      console.log('markers',customer,  index)
       const {lat, lng} = customer
       const markerDOM = document.createElement('div')
       markerDOM.className = 'customer-marker'

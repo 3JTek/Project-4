@@ -415,23 +415,6 @@ if errors:
 
 test_user20.save()
 
-test_user21, errors = user_schema.load({
-    'email': 'test21@test.com',
-    'password': 'password',
-    'password_confirmation': 'password',
-    'location': '5 test avenue, Test, SW5 1GA',
-    'lat': '51.4681248467',
-    'lng': '-020758515625',
-    'phone_number': '+447 123454322',
-    'categories': [{'id':4}],
-
-    'is_merchant': 'False'
-})
-if errors:
-    raise Exception(errors)
-
-test_user21.save()
-
 test_user22, errors = user_schema.load({
     'email': 'test22@test.com',
     'password': 'password',

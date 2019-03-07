@@ -118,6 +118,7 @@ class SaleNew extends React.Component{
   }
 
   render(){
+    console.log('1')
     if(!this.state.categories || !this.state.customers) return <Loading/>
     const { title, content, expiry_date} = this.state.newSale // eslint-disable-line
     const saleFee = this.calculSalePrice()
