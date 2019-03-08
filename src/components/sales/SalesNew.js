@@ -206,7 +206,7 @@ class SaleNew extends React.Component{
                 </div>
                 <hr />
                 <div className="field">
-                  <h5 className="label">Sale Description</h5>
+                  <h5 className="label">Sale Reach</h5>
                   <SaleNewMiniMap
                     {...this.state}
                     customersDistance={this.customersDistance}

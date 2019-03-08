@@ -1,6 +1,6 @@
 # General Assembly Project 4 : Full Stack RESTful App React/Flask/PostgreSQL
 
-### Timeframe
+## Timeframe
 
 5 days in a group of 2 developers
 
@@ -8,7 +8,7 @@
 
 * Sytling: HTML5 / SCSS / Bulma
 * Front-end: React.js / Webpack / Mapbox-GL / moment.js / react-datepicker
-Axios / Promise / FileStack React
+axios / promise
 * Unit Testing: Enzyme / Chai / Mocha
 * Server: Python / Flask / PostgreSQL / JWT
 * Database: PostgreSQL / SQLAlchemy / Marshmallow
@@ -28,15 +28,17 @@ You can find a hosted version here ----> [Heroku](https://project-4-gather.herok
 
 ### Overview
 
-This application has been designed to provide users with a customised and non spammy type of access to the latest flash sales around them.
+This application has been designed to provide users with a customised and non-spammy type of access to the latest flash sales around them.
 
-Businesses can register and generate temporary sale (flash sale) and choose which customers they want to reach based on the category selected for the sale (distance) and how far they want to reach customer.
+Businesses can register and then generate temporary sale (flash sale) and choose which customers they want to reach based on:
+* The category the sale has assigned to
+* The range (distance) the business wants to reach customers in.
 
-Users can also register and provide several categories of product they would be interested in receiving sales. They would also be able to define a location of interest (where they work, where they live) to ensure the sales received are from local businesses.
+Users can also register and provide several categories of product they would be interested in receiving flash sales. They would also be able to define a location of interest (where they work, where they live...) to ensure the sales received are from local businesses.
 
 The notification is received on the user's phone as a text message containing a link to the recently created flash sale. Sale description, address, expiry time... are described to give the user all the relevant information he needs.  
 
-![ezgif com-video-to-gif 2](https://user-images.githubusercontent.com/39668354/52919658-99809900-32fc-11e9-80f1-60f7f3031abf.gif)
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/39668354/54032934-e5f81f80-41aa-11e9-87d5-0499de2e4c22.gif)
 
 ---
 
@@ -44,17 +46,19 @@ The notification is received on the user's phone as a text message containing a 
 
 #### Communication
 
-Key point for this project and any project, we met every morning in a quiet room, broadcasting the latest version of the application and discussing about today's priority.
+Key point for this project and any project, we met every morning in a quiet room, broadcasting the latest version of the application and discussed about today's priorities.
 
 We also tend to work in a 'war zone' kind of mode where we could code next to each other. This allowed rapid decision making process when an issue came up or a design concern was raised.
 
 #### Task management
 
-Working in a group of 2 is a huge advantage as long as each other understand the work that needs to be done. We used Trello quite heavily to create tickets and assigned tasks. Until the MVP, we decided to assign 1 person to build the back-end while the other person would look at how to plug Twilio and other APIs. Once done, we divided the front-end pages between each other and start adding extra features after reaching MVP. We stop coding half a day before project presentation to ensure everything was deployed and working correctly.
+Working in a group of 2 is a huge advantage as long as each other understand the work that needs to be done. We used Trello quite heavily to create tickets and assigned tasks. Until the MVP, we decided to assign 1 person to build the back-end while the other person would look at how to plug Twilio and other APIs.
+Once done, we divided the front-end pages between each others and start adding extra features.
+IMPORTANT: we stopped coding half a day before project presentation to ensure everything was deployed and working correctly.
 
 #### Branching and Conflict resolution
 
-We use a simplified version of the GitFlow branching system where we basically used 3 different type of branches:
+We used a simplified version of the GitFlow branching system where we basically used 3 different type of branches:
 
 1. Development: this is the main branch where anyone could create feature branches from and merge their work back in. No broken code should never be merged in development since it will affect everyone's code.
 2. <feature-branch>: those branches were created by any member of the group in order to develop new features. The branches needed to be named according to the feature developed (i.e. <login-route>).
@@ -64,90 +68,102 @@ Conflicts were mitigated by making sure that everyone pulled everyone's changes 
 
 ---
 
-### Architecture
+### Tech Solution
 
-Our application is following as much as it can the RESTful paradigm, let's have a look at what is happening when an user is navigating to the index page of the places (destination):
+Our application is following as much as it can the RESTful paradigm, let's have a look at what is happening when the "new sale" page is loaded:
 
-![image](https://user-images.githubusercontent.com/39668354/52906087-31b74900-323d-11e9-83e2-60a596050677.png)
+![image](https://user-images.githubusercontent.com/39668354/54035135-8ac92b80-41b0-11e9-9299-dfb567925726.png)
 
-1. An axios request will be sent to our back-end API requesting all the places to be sent back to the front-end:
+1. Two axios requests will be sent within a Promise to our back-end API requesting all existing categories and all our database customers:
 
 ```
-componentDidMount() {
-  //If user is logged in, the response will contain only the places
-  //that the user doesn't have already in his dashboard
-  axios.get('/api/places', {
-    headers: Auth.isAuthenticated() ?
-      { Authorization: `Bearer ${Auth.getToken()}`} : null
+componentDidMount(){
+  Promise.props({
+    categories: axios('/api/categories').then(res => res.data),
+    customers: axios('/api/users?customers_only=true').then(res => res.data)
   })
-    .then(res => this.setState({ places: res.data }))
-}
-```
-
-2. Our Express server is using Router to navigate the request toward the right controller.
-
-```
-router.route('/places')
-  .get((req, res, next) => {
-    if(req.headers.authorization) secureRoute(req, res, next)
-    else next()
-  },placesController.index)
-  .post(secureRoute, placesController.create)
-  ```
-
-3. The controller will then handle the request and do the logic to get the data from our database:
-
-```
-function indexRoute( req, res ){
-  Place
-    .find()
-    .then(places => places.filter(place => {
-      if(req.currentUser) {
-        //return false if user already added place to his trip
-        return !req.currentUser.places.some(userPlace => userPlace.equals(place._id))
-      } else return true
+    .then(data => {
+      this.calculDistanceFromBusiness(data.customers)
+      this.setState({...data})
     })
-    )
-    .then(places => res.status(200).json(places))
 }
 ```
 
-4. The model is created as a blueprint of our collection for the place:
+2. Our Flask server receives the GET request on the "users" endpoint and returns only the users that are customers not merchants (businesses).
 
 ```
-const placeSchema = new mongoose.Schema({
-  name: { type: String, required: 'Name required' },
-  country: { type: String, required: 'Country required' },
-  image: { type: String, required: 'Image url required' },
-  descriptLong: { type: String, required: 'Long description required' },
-  descriptShort: { type: String, required: 'Short description required'},
-  geog: { type: Array, required: 'Lat/lng required, in array form: [lat, lng]' },
-  budget1: { type: String },
-  budget2: { type: String },
-  budget3: { type: String },
-  comments: [ commentSchema ]
-})
+@api.route('/users', methods=['GET'])
+def user_index():
+
+    #Check if there is a query string to only return customers (not merchants)
+    parsed = urlparse(request.url)
+
+    if parse_qs(parsed.query) != {'customers_only':['true']}:
+        users = User.query.all()
+    else:
+        users = User.query.filter_by(is_merchant=False)
+
+    return users_schema.jsonify(users)
+```
+
+3. Once the data sent back to the front-end, the calculDistanceFromBusiness function will be called to calculate the distance from the business for each customers.  
+
+```
+calculDistanceFromBusiness(customers){
+  this.customersDistance = customers.map(customer => {
+    console.log(this.state)
+    const businessLat = this.state.newSale.user.lat
+    const businessLng = this.state.newSale.user.lng
+    const {lat, lng} = customer
+    const lngDiff = Math.abs(lng - businessLng)
+    const latDiff = Math.abs(lat - businessLat)
+    const kmX = lngDiff * (111.320*Math.cos(businessLat*Math.PI/180))
+    const kmY = latDiff * 110.574
+    return Math.sqrt(Math.pow(kmX,2) + Math.pow(kmY,2))
+  })
+}
+```
+
+4. Finally, a last function is called to defined what customers will be notified of the sale:
+
+```
+customersToContact(){
+  return this.customersDistance.reduce((newArray, distance, index) => {
+    if(distance <= this.state.saleRadius){
+      //Return an array of category ids for each customer
+      const customerCategoryIds = this.state.customers[index]
+        .categories.map(category => category.id)
+      //Compare the above array to the sale category
+      if(customerCategoryIds.includes(this.state.newSale.category.id)){
+        return newArray.concat(this.state.customers[index])
+      }
+    }
+    return newArray
+  },[])
+}
 ```
 
 ---
 
 ### Challenges
 
-* Testing the whole system with all part integrated was difficult since everything changes needed to be deployed in Heroku for the notification URL to point to a web domain (and not localhost).
-* Also the sale new page has quite a lot of interconnected elements (map range change will change the price, categories will change the map and the price...) that can update each other which tend to complexify the react lifecycle of this particular page.
+* Testing the whole system with all parts integrated was complex since everything change needed to be deployed in Heroku for the notification URL to point to a web domain (and not localhost).
+
+* Also the sale new page has quite a lot of interconnected elements (map range changes will impact the price, categories will change map and pricing...) which tends to complexify the react lifecycle of this particular page.
 
 ---
 
 ### Wins
 
-1. 
+1. We managed to keep the database architecture as simple as possible with only 3 models (users, categories and sale).
+2. We also combined merchant (business) accounts and customer accounts within the same model and add a flag "is_merchant" to differentiate them.
 
 ---
 
 ### Future Features / Enhancements
 
-* Allow manual verification of the merchant each time a new merchant signs-in in order to ensure of the quality of the sale generated by those businesses.
+* Allow manual verification each time a new merchant signs-in in order to ensure the quality of the sale generated by those businesses.
 
-* Restrict businesses to lower number of sale categories (1 or 2).
+* Restrict businesses to lower number of categories they can raise against (1 or 2).
 
-* Send a QR code to along with the notifications to allow the users to redeem their offer.
+* Send a QR code along with the notification to allow the users to redeem their offer.
