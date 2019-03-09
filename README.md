@@ -7,7 +7,7 @@
 ## Technologies used
 
 * Sytling: HTML5 / SCSS / Bulma
-* Front-end: React.js / Webpack / Mapbox-GL / moment.js / react-datepicker
+* Front-End: React.js / Webpack / Mapbox-GL / moment.js / react-datepicker /
 axios / promise
 * Unit Testing: Enzyme / Chai / Mocha
 * Server: Python / Flask / PostgreSQL / JWT
@@ -24,6 +24,7 @@ axios / promise
 
 ![image](https://user-images.githubusercontent.com/39668354/53995320-996dff00-412c-11e9-8b88-b0bc218b4e78.png)
 
+
 You can find a hosted version here ----> [Heroku](https://project-4-gather.herokuapp.com/)
 
 ### Overview
@@ -31,14 +32,20 @@ You can find a hosted version here ----> [Heroku](https://project-4-gather.herok
 This application has been designed to provide users with a customised and non-spammy type of access to the latest flash sales around them.
 
 Businesses can register and then generate temporary sale (flash sale) and choose which customers they want to reach based on:
-* The category the sale has assigned to
+* The category the sale has been assigned to
 * The range (distance) the business wants to reach customers in.
+
+<div style="text-align:center">
+  <img src='https://user-images.githubusercontent.com/39668354/54032934-e5f81f80-41aa-11e9-87d5-0499de2e4c22.gif' width=500 />
+</div>
 
 Users can also register and provide several categories of product they would be interested in receiving flash sales. They would also be able to define a location of interest (where they work, where they live...) to ensure the sales received are from local businesses.
 
 The notification is received on the user's phone as a text message containing a link to the recently created flash sale. Sale description, address, expiry time... are described to give the user all the relevant information he needs.  
 
-![ezgif com-video-to-gif](https://user-images.githubusercontent.com/39668354/54032934-e5f81f80-41aa-11e9-87d5-0499de2e4c22.gif)
+<div style="text-align:center">
+  <img src='https://user-images.githubusercontent.com/39668354/54071492-ff5da200-4264-11e9-971f-edbfc0e7cb16.gif' width=200 />
+</div>
 
 ---
 
@@ -58,11 +65,11 @@ IMPORTANT: we stopped coding half a day before project presentation to ensure ev
 
 #### Branching and Conflict resolution
 
-We used a simplified version of the GitFlow branching system where we basically used 3 different type of branches:
+We used a simplified version of the GitFlow branching system where we basically used 3 different types of branches:
 
 1. Development: this is the main branch where anyone could create feature branches from and merge their work back in. No broken code should never be merged in development since it will affect everyone's code.
-2. <feature-branch>: those branches were created by any member of the group in order to develop new features. The branches needed to be named according to the feature developed (i.e. <login-route>).
-3. Master: this branch was dedicated to deployment. No commit should never happen in this branch. When a version of the app was ready to be deployed in production (in Heroku), the development branch was merged into master and then pushed ot Heroku.
+2. 'feature-branches': those branches were created by any member of the group in order to develop new features. The branches needed to be named according to the feature developed (i.e. 'login-route').
+3. Master: this branch was dedicated to deployment. No commit should never happen in this branch. When a version of the app was ready to be deployed in production (in Heroku), the development branch was merged into master and then pushed to Heroku.
 
 Conflicts were mitigated by making sure that everyone pulled everyone's changes every morning to avoid long divergent branches. Also, when a conflict occurred, discussion was made between the 2 developers in order to fix the conflict in a way that no information will be lost.
 
@@ -72,9 +79,13 @@ Conflicts were mitigated by making sure that everyone pulled everyone's changes 
 
 Our application is following as much as it can the RESTful paradigm, let's have a look at what is happening when the "new sale" page is loaded:
 
-![image](https://user-images.githubusercontent.com/39668354/54035135-8ac92b80-41b0-11e9-9299-dfb567925726.png)
+<div style="text-align:center">
+  <img src='https://user-images.githubusercontent.com/39668354/54035135-8ac92b80-41b0-11e9-9299-dfb567925726.png' width=500 />
+</div>
 
-1. Two axios requests will be sent within a Promise to our back-end API requesting all existing categories and all our database customers:
+---
+
+1. Two axios requests are sent within a Promise to our back-end API requesting all existing categories and customers from our databse:
 
 ```
 componentDidMount(){
@@ -106,7 +117,7 @@ def user_index():
     return users_schema.jsonify(users)
 ```
 
-3. Once the data sent back to the front-end, the calculDistanceFromBusiness function will be called to calculate the distance from the business for each customers.  
+3. Once the data sent back to the front-end, the calculDistanceFromBusiness function will be called to calculate the distance from the business for each customer.  
 
 ```
 calculDistanceFromBusiness(customers){
@@ -124,7 +135,7 @@ calculDistanceFromBusiness(customers){
 }
 ```
 
-4. Finally, a last function is called to defined what customers will be notified of the sale:
+4. Finally, a last function is called to defined which customers will be notified of the sale:
 
 ```
 customersToContact(){
@@ -147,7 +158,7 @@ customersToContact(){
 
 ### Challenges
 
-* Testing the whole system with all parts integrated was complex since everything change needed to be deployed in Heroku for the notification URL to point to a web domain (and not localhost).
+* Testing the message notification form a mobile phone was complex since any change needed to be deployed in Heroku for the notification URL to point to a web domain (and not localhost).
 
 * Also the sale new page has quite a lot of interconnected elements (map range changes will impact the price, categories will change map and pricing...) which tends to complexify the react lifecycle of this particular page.
 
@@ -156,14 +167,14 @@ customersToContact(){
 ### Wins
 
 1. We managed to keep the database architecture as simple as possible with only 3 models (users, categories and sale).
-2. We also combined merchant (business) accounts and customer accounts within the same model and add a flag "is_merchant" to differentiate them.
+2. We also combined merchant (business) and customer accounts within the same model simply adding a flag "is_merchant" to differentiate them.
 
 ---
 
 ### Future Features / Enhancements
 
-* Allow manual verification each time a new merchant signs-in in order to ensure the quality of the sale generated by those businesses.
+* Allow manual verification each time a new merchant signs-in in order to ensure the quality of the sales generated from those businesses.
 
-* Restrict businesses to lower number of categories they can raise against (1 or 2).
+* Restrict businesses to lower number of categories they can raise sales against (1 or 2).
 
 * Send a QR code along with the notification to allow the users to redeem their offer.
